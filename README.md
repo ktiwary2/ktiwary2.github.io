@@ -1,1 +1,4 @@
-This is the source code to Jon Barron's public academic website: https://jonbarron.info/. You are welcome to clone this code for your own personal use, just please attribute the source to the original website or to this repo. If you do clone this website, feel free to add an attribution link to your own downstream website in index.html if you want.
+My Website: https://ktiwary2.github.io/
+
+[References]
+1. The template is taken from Jon Barron's website. Please refer to this: https://jonbarron.info/.
