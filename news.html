@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>News – Kushagra Tiwary</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .tag {
+      display: inline-block;
+      padding: 0.35em 0.9em;
+      margin: 0.3em 0.4em 0.3em 0;
+      border-radius: 12px;
+      font-size: 0.75em;
+      font-weight: 600;
+      color: #333;
+      background-color: #ddd;
+    }
+    .media-tag { background-color: #FFA8D8; }
+    .talk-tag { background-color: #D8A8FF; }
+    .paper-tag { background-color: #A8D8FF; }
+    .award-tag { background-color: #FFE3A8; }
+    .workshop-tag { background-color: #A8FFD8; }
+    .recent-tag { background-color: #FFD8A8; }
+
+    .filter-menu {
+      margin-bottom: 1.5em;
+    }
+
+    .filter-menu span {
+      display: inline-block;
+      margin: 0.3em 0.4em 0.3em 0;
+      padding: 0.45em 1em;
+      border-radius: 14px;
+      font-size: 0.85em;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      color: #333;
+    }
+
+    .filter-all { background-color: #ddd; }
+    .filter-talk { background-color: #D8A8FF; }
+    .filter-media { background-color: #FFA8D8; }
+    .filter-paper { background-color: #A8D8FF; }
+    .filter-award { background-color: #FFE3A8; }
+    .filter-workshop { background-color: #A8FFD8; }
+    .filter-recent { background-color: #FFD8A8; }
+
+    .news-item:nth-child(-n+6) .news-status {
+      position: relative;
+    }
+
+    .news-item:nth-child(-n+6) .news-status::after {
+      content: 'Recent';
+      background-color: #FFD8A8;
+      padding: 0.35em 0.9em;
+      border-radius: 12px;
+      font-size: 0.75em;
+      font-weight: 600;
+      color: #333;
+      margin-left: 0.4em;
+      display: inline-block;
+    }
+
+    .news-divider {
+      border-top: 1px solid var(--border-color);
+      margin: 10px 0;
+    }
+  </style>
+  <script>
+    (function () {
+      const resolveTheme = () => {
+        const savedTheme = localStorage.getItem('preferred-theme');
+        if (savedTheme) {
+          return savedTheme;
+        }
+        return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      };
+
+      const applyTheme = (theme) => {
+        const body = document.body;
+        if (!body) {
+          return;
+        }
+        body.classList.toggle('dark-mode', theme === 'dark');
+      };
+
+      const setInitialTheme = () => applyTheme(resolveTheme());
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setInitialTheme, { once: true });
+      } else {
+        setInitialTheme();
+      }
+
+      window.addEventListener('storage', (event) => {
+        if (event.key === 'preferred-theme') {
+          const nextTheme = event.newValue ? event.newValue : resolveTheme();
+          applyTheme(nextTheme);
+        }
+      });
+    })();
+  </script>
+  <script src="evolving_cursor.js" defer></script>
+</head>
+<body>
+  <div class="news-container">
+
+    <div class="filter-menu">
+      <span class="filter-all" onclick="filterNews('all')">All</span>
+      <span class="filter-talk" onclick="filterNews('talk-tag')">Talks</span>
+      <span class="filter-media" onclick="filterNews('media-tag')">Media</span>
+      <span class="filter-paper" onclick="filterNews('paper-tag')">Papers</span>
+      <span class="filter-award" onclick="filterNews('award-tag')">Awards</span>
+      <span class="filter-workshop" onclick="filterNews('workshop-tag')">Workshops</span>
+      <span class="filter-recent" onclick="filterNews('recent-news')">Recent</span>
+    </div>
+
+
+    <div class="news-archive">
+
+      <div class="news-item recent-news">
+        <div class="news-name"><em>December 2025: </em><strong>Invited Talk at Kempner Institute at Harvard</strong>
+          <span class="tag talk-tag">#Talk</span>
+        </div>
+        </div>
+
+      <div class="news-item recent-news">
+        <div class="news-name"><em>December 2025: </em><strong>Paper published in Science Advances </strong>
+          <span class="tag paper-tag">#Paper</span>
+          <br>
+            [<a href="https://www.science.org/doi/epdf/10.1126/sciadv.ady2888" target="_blank">Paper</a>, 
+            <a href="https://news.mit.edu/2025/scientific-sandbox-lets-researchers-explore-evolution-vision-systems-1217" target="_blank">MIT News</a>, 
+            <a href="https://www.science.org/content/article/why-have-so-many-different-eyes-evolved-gamelike-simulation-could-provide-answers" target="_blank">Science News</a>,
+            <a href="https://eyes.mit.edu" target="_blank">Website</a>, <a href="https://news.ycombinator.com/item?id=43043063" target="_blank">Hacker News</a>]
+          </div>
+          <div class="news-divider"></div>
+        </div>
+
+        <div class="news-item recent-news">
+          <div class="news-name"><em>June 2025: </em><strong>Attending this year's CBMM Summer Course at Woods Hole</strong>
+            [<a href="https://bmm.mit.edu/2025-2/" target="_blank">CBMM Website</a>]
+            <span class="tag workshop-tag">#Workshop</span>
+          </div>
+        </div>
+
+        <div class="news-item recent-news">
+        <div class="news-name"><em>June 2025: </em><strong>Invited Talk at Caltech Vision Seminar</strong>
+          <span class="tag talk-tag">#Talk</span>
+        </div>
+        <div class="news-divider"></div>
+        </div>
+
+
+        <div class="news-item recent-news">
+        <div class="news-name"><em>June 2025: </em><strong> 
+          <a href="https://redwood.berkeley.edu/seminars/kushagra-tiwary-june-2025/" target="_blank">Invited Talk</a> at UC Berkeley Redwood Center</strong>: 
+          [<a href="https://redwood.berkeley.edu/seminars/kushagra-tiwary-june-2025/">Website</a>]
+          <span class="tag talk-tag">#Talk</span>        
+        </div>
+        </div>
+        
+        <div class="news-item recent-news">
+        <div class="news-name"><em>April 2025: </em><strong><a href="https://www.youtube.com/watch?v=sUkcgYKBTr8" target="_blank">Invited Talk</a> at MIT Imagination in Action</strong>: <em>How can AI aid scientific discovery?</em>
+          [<a href="https://www.youtube.com/watch?v=sUkcgYKBTr8" target="_blank">Youtube Link</a>]
+          <span class="tag talk-tag">#Talk</span>
+        </div>
+        <div class="news-divider"></div>
+        </div>
+
+        <div class="news-item recent-news">
+        <div class="news-name"><em>March 2025: </em><strong>Invited Talk at Harvard Medical School</strong>
+          <span class="tag talk-tag">#Talk</span>
+        </div>
+        <div class="news-divider"></div>
+        </div>
+
+        <div class="news-item">
+        <div class="news-name"><em>February 2025: </em><strong>Invited Talk at CSAIL Vision Seminar</strong>: <em>What if Eye...? Computationally Recreating Vision Evolution</em></div>
+        <div class="news-status">
+            <span class="tag talk-tag">#Talk</span>
+        </div>
+        <div class="news-divider"></div>
+        </div>
+
+        <div class="news-item recent-news">
+        <div class="news-name"><em>December 2024: </em><strong>Featured in MIT Technology Review</strong>: <em>Article on our work on the origin of data used to build AI models was featured in the MIT Technology Review.</em></div>
+        <div class="news-status">
+            [<a href="https://www.technologyreview.com/2024/12/18/1108796/this-is-where-the-data-to-build-ai-comes-from/" target="_blank">MIT Technology Review</a>]
+            <span class="tag media-tag">#Media</span>
+        </div>
+        <div class="news-divider"></div>
+        </div>
+
+        <div class="news-item">
+        <div class="news-name"><em>November 2024: </em><strong>Oral Talk at New England Computer Vision Conference</strong>: <em>Talk on Eye paper</em></div>
+        <div class="news-status">
+            [<a href="https://necv2024.github.io/" target="_blank">Website</a>]
+            <span class="tag talk-tag">#Talk</span>
+        </div>
+        <div class="news-divider"></div>
+        </div>
+
+        <div class="news-item">
+        <div class="news-name"><em>September 2024: </em><strong>Co-organizing Neural Fields Workshop at ECCV</strong>: <em>Co-organizing "Neural Fields Beyond Conventional Cameras" at ECCV 2024</em></div>
+        <div class="news-status">
+            [<a href="https://neural-fields-beyond-cams.github.io/" target="_blank">Workshop Website</a>]
+            <span class="tag workshop-tag">#Workshop</span>
+        </div>
+        <div class="news-divider"></div>
+        </div>
+
+        <div class="news-item">
+        <div class="news-name"><em>December 2024: </em><strong>Interview for Globe and Mail</strong>: <em>“This is where the data to build AI comes from”</em></div>
+        <div class="news-status">
+            [<a href="https://www.theglobeandmail.com/business/article-ai-generated-video-has-come-a-long-way-can-you-spot-the-difference/" target="_blank">The Globe and Mail</a>]
+            <span class="tag media-tag">#Media</span>
+        </div>
+        <div class="news-divider"></div>
+        </div>
+
+        <div class="news-item">
+        <div class="news-name"><em>January 2025: </em><strong>Co-organizing Accelerating Discovery Workshop at MIT</strong></div>
+        <div class="news-status">
+            [<a href="https://discovery.media.mit.edu/" target="_blank">Workshop Website</a>]
+            <span class="tag workshop-tag">#Workshop</span>
+        </div>
+        <div class="news-divider"></div>
+        </div>
+        
+        <div class="news-item">
+        <div class="news-name"><em>September 2024: </em><strong>TEDx Talk</strong>: <em>Can AI Recreate 500 Million Years of Vision Evolution?</em></div>
+        <div class="news-status">
+            [<a href="https://www.youtube.com/watch?v=OuPwGkzh6nM" target="_blank">Watch Talk</a>]
+            <span class="tag talk-tag">#Talk</span>
+            <span class="tag media-tag">#Media</span>
+        </div>
+        <div class="news-divider"></div>
+        </div>
+
+        <div class="news-item">
+        <div class="news-name"><em>August 2024: </em><strong>Featured in NYT, 404 Media, Vox, Yahoo! Finance</strong>: <em>Consent in Crisis Coverage</em></div>
+        <div class="news-status">
+            [<a href="https://arxiv.org/pdf/2407.14933" target="_blank">Paper</a>, <a href="https://www.nytimes.com/2024/07/19/technology/ai-data-restrictions.html" target="_blank">NYT</a>, 
+            <a href="https://www.404media.co/the-backlash-against-ai-scraping-is-real-and-measurable/" target="_blank">404 Media</a>, 
+            <a href="https://www.vox.com/future-perfect/364384/its-practically-impossible-to-run-a-big-ai-company-ethically" target="_blank">Vox</a>, 
+            <a href="https://finance.yahoo.com/video/data-train-ai-models-becoming-220005477.html" target="_blank">Yahoo</a>]
+            <span class="tag media-tag">#Media</span>
+        </div>
+        <div class="news-divider"></div>
+        </div>
+
+        <div class="news-item">
+        <div class="news-name"><em>June 2024: </em><strong>Accepted at ECCV 2024</strong>: <em>"DecentNeRFs"</em></div>
+        <div class="news-status">
+            [<a href="https://arxiv.org/abs/2403.13199" target="_blank">Paper</a>]
+            <span class="tag paper-tag">#Paper</span>
+        </div>
+        <div class="news-divider"></div>
+        </div>
+
+        <div class="news-item">
+        <div class="news-name"><em>April 2024: </em><strong>Panelist at MIT Imagination in Action</strong>: <em>Panelist on "Frontiers of AI Research from Current MIT PhDs"</em></div>
+        <div class="news-status">
+            [<a href="https://www.youtube.com/watch?v=EyHIzwwI9Uc" target="_blank">Watch Panel</a>]
+            <span class="tag talk-tag">#Talk</span>
+            <span class="tag media-tag">#Media</span>
+        </div>
+        <div class="news-divider"></div>
+        </div>
+
+        <div class="news-item">
+        <div class="news-name"><em>February 2024: </em><strong>UROP Admitted to PhD</strong>: <em>One of my UROPs (<em>Bhavya Agrawalla</em>) got admitted to CMU for his PhD- follow his work for more exciting new ideas!</em></div>
+        <div class="news-status">
+            [<a href="https://bhavyaagrawalla.github.io/" target="_blank">Bhavya's Website</a>]
+            <span class="tag media-tag">#Media</span>
+        </div>
+        <div class="news-divider"></div>
+        </div>
+
+        <div class="news-item">
+        <div class="news-name"><em>January 2024: </em><strong>Awarded MIT Generative AI Grant</strong>: <em>Awarded grant for "Artificial Cambrian Intelligence"</em></div>
+        <div class="news-status">
+            [<a href="https://news.mit.edu/2024/mit-scholars-awarded-second-round-seed-grants-generative-ai-0328" target="_blank">MIT News</a>]
+            <span class="tag award-tag">#Award</span>
+        </div>
+        <div class="news-divider"></div>
+        </div>
+
+        <div class="news-item">
+        <div class="news-name"><em>September 2023: </em><strong>Invited Talk at CSAIL Graphics Seminar</strong>: <em>Talk in CSAIL Graphics Seminar Neural Rendering and Secondary Cues: Learning Hidden Neural Radiance Fields using Reflections and Shadows. (<a href="#">slides</a>)</em></div>
+        <div class="news-status">
+            [<a href="#">slides</a>]
+            <span class="tag talk-tag">#Talk</span>
+        </div>
+        <div class="news-divider"></div>
+        </div>
+
+        <div class="news-item">
+        <div class="news-name"><em>August 2023: </em><strong>Presented at Hyundai Vision Conference</strong>: <em>Work on 3D reconstruction with Visual Cues was presented at the Hyundai Vision Conference in South Korea!</em></div>
+        <div class="news-status">
+            [<a href="#">Press</a>, <a href="#">QIF List</a>]
+            <span class="tag award-tag">#Award</span>
+        </div>
+        <div class="news-divider"></div>
+        </div>
+
+        <div class="news-item">
+        <div class="news-name"><em>July 2023: </em><strong>Awarded Qualcomm Innovation Fellowship</strong>: <em>Recipient of the Qualcomm Innovation Fellowship.</em></div>
+        <div class="news-status">
+            [<a href="https://www.eecs.mit.edu/four-mit-students-selected-for-qualcomm-innovation-fellowship-2023/" target="_blank">EECS News</a>, 
+            <a href="https://www.media.mit.edu/posts/two-media-lab-students-selected-for-qualcomm-innovation-fellowship-2023/" target="_blank">MIT Media Lab News</a>,
+            <a href="https://www.qualcomm.com/research/university-relations/innovation-fellowship/2023-north-america" target="_blank">QIF List</a>]
+            <span class="tag award-tag">#Award</span>
+        </div>
+        <div class="news-divider"></div>
+        </div>
+
+        <div class="news-item">
+        <div class="news-name"><em>July 2023: </em><strong>Accepted at ICCV'23 DiSer</strong>: <em>Designing Imaging Systems through Reinforcement Learning, is accepted at ICCV.</em></div>
+        <div class="news-status">
+            [<a href="https://tzoi.github.io/diser/" target="_blank">website</a>]
+            <span class="tag paper-tag">#Paper</span>
+        </div>
+        <div class="news-divider"></div>
+        </div>
+
+        <div class="news-item">
+        <div class="news-name"><em>May 2023: </em><strong>Graduated from MIT</strong></div>
+        <div class="news-status">
+            [<a href="#">thesis</a>]
+            <span class="tag media-tag">#Media</span>
+        </div>
+        <div class="news-divider"></div>
+        </div>
+
+        <div class="news-item">
+        <div class="news-name"><em>May 2023: </em><strong>Featured in MIT News</strong>: <em>Our Project on using household objects as cameras has been featured on the front page of mit.edu!</em></div>
+        <div class="news-status">
+            [<a href="#">Project Page</a>, <a href="#">Screenshot</a>, <a href="#">MIT News</a>]
+            <span class="tag media-tag">#Media</span>
+        </div>
+        <div class="news-divider"></div>
+        </div>
+
+    </div>
+
+    <script>
+        function filterNews(tag) {
+          const items = document.querySelectorAll('.news-item');
+          items.forEach(item => {
+            const tags = item.querySelectorAll('.tag');
+            const hasTag = item.classList.contains(tag) ||
+                           [...tags].some(t => t.classList.contains(tag));
+            item.style.display = (tag === 'all' || hasTag) ? 'block' : 'none';
+          });
+        }
+      
+        // Show recent by default
+        document.addEventListener("DOMContentLoaded", () => {
+          filterNews('recent-news');
+        });
+      </script>
+      
+
+</body>
+</html>

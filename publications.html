@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Publications – Kushagra Tiwary</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Tags -->
+  <style>
+    :root {
+      --pastel-blue: #A8D8FF;
+      --pastel-green: #A8FFD8;
+      --pastel-purple: #D8A8FF;
+      --pastel-pink: #FFA8D8;
+      --pastel-yellow: #FFE3A8;
+      --pastel-orange: #FFD8A8;
+    }
+  
+    .tag {
+      display: inline-block;
+      padding: 0.35em 0.9em;
+      margin: 0.3em 0.4em 0.3em 0;
+      border-radius: 12px;
+      font-size: 0.75em;
+      font-weight: 600;
+      color: #333;
+      background-color: #ddd;
+    }
+  
+    .cv-tag { background-color: var(--pastel-blue); }
+    .ai-tag { background-color: var(--pastel-purple); }
+    .perspective-tag { background-color: var(--pastel-pink); }
+    .exhibition-tag { background-color: var(--pastel-yellow); }
+    .patent-tag { background-color: #f9d3b4; }
+    .sim-tag { background-color: #d4f1f9; }
+    .workshop-tag { background-color: #A8FFD8; }
+    .recent-tag { background-color: var(--pastel-orange); }
+  
+    .filter-menu {
+      margin-bottom: 1.5em;
+    }
+  
+    .filter-menu span {
+      display: inline-block;
+      margin: 0.3em 0.4em 0.3em 0;
+      padding: 0.45em 1em;
+      border-radius: 14px;
+      font-size: 0.85em;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      color: #333;
+    }
+  
+    .filter-all { background-color: #ddd; }
+    .filter-cv { background-color: var(--pastel-blue); }
+    .filter-ml { background-color: var(--pastel-green); }
+    .filter-ai { background-color: var(--pastel-purple); }
+    .filter-perspective { background-color: var(--pastel-pink); }
+    .filter-exhibition { background-color: var(--pastel-yellow); }
+    .filter-patent { background-color: #f9d3b4; }
+    .filter-sim { background-color: #d4f1f9; }
+    .filter-workshop { background-color: #A8FFD8; }
+    .filter-recent { background-color: var(--pastel-orange); }
+
+    .publication-divider {
+      border-top: 1px solid var(--border-color);
+      margin: 20px 0;
+    }
+  </style>
+  <script>
+    (function () {
+      const resolveTheme = () => {
+        const savedTheme = localStorage.getItem('preferred-theme');
+        if (savedTheme) {
+          return savedTheme;
+        }
+        return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      };
+
+      const applyTheme = (theme) => {
+        const body = document.body;
+        if (!body) {
+          return;
+        }
+        body.classList.toggle('dark-mode', theme === 'dark');
+      };
+
+      const setInitialTheme = () => applyTheme(resolveTheme());
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setInitialTheme, { once: true });
+      } else {
+        setInitialTheme();
+      }
+
+      window.addEventListener('storage', (event) => {
+        if (event.key === 'preferred-theme') {
+          const nextTheme = event.newValue ? event.newValue : resolveTheme();
+          applyTheme(nextTheme);
+        }
+      });
+    })();
+  </script>
+  <script src="evolving_cursor.js" defer></script>
+</head>
+<body>
+  <div class="publications-container">
+
+    <div class="filter-menu">
+      <span class="filter-recent" onclick="filterByTag('recent')">Recent</span>
+      <span class="filter-all" onclick="showAll()">All</span>
+      <span class="filter-cv" onclick="filterByTag('cv-tag')">CV/ML</span>
+      <span class="filter-ai" onclick="filterByTag('ai-tag')">AI for Discovery</span>
+      <span class="filter-patent" onclick="filterByTag('patent-tag')">Patents</span>
+      <span class="filter-perspective" onclick="filterByTag('perspective-tag')">Perspective</span>
+      <span class="filter-workshop" onclick="filterByTag('workshop-tag')">Workshops</span>
+      <span class="filter-sim" onclick="filterByTag('sim-tag')">Open Source</span>
+      <span class="filter-exhibition" onclick="filterByTag('exhibition-tag')">Exhibitions</span>
+    </div>
+    
+
+    <div class="publication-entry">
+      <div class="paper-name"><strong><a href="https://scholar.google.com/citations?hl=en&user=XNiV8qIAAAAJ&view_op=list_works&sortby=pubdate" target="_blank">See full list on Google Scholar</a></strong></div>
+    </div>
+
+    <!-- #### PAPERS #### -->
+    <div class="publication-entry">
+      <div class="paper-name"><strong>What if Eye...? Computational Recreating the Evolution of Vision</strong></div>
+      <div class="publication-tldr"><em>We created a virtual petri dish where digital creatures evolve eyes from scratch, replaying millions of years of evolution to understand vision.</em></div>
+      <p>with Aaron Young*, Dan-Eric Nilsson, Tomaso Poggio, Brian Cheung, Ramesh Raskar</p>
+      <div class="paper-status">
+
+        
+        [<a href="https://www.science.org/doi/epdf/10.1126/sciadv.ady2888" target="_blank">Paper</a>, 
+        <a href="https://news.mit.edu/2025/scientific-sandbox-lets-researchers-explore-evolution-vision-systems-1217" target="_blank">MIT News</a>, 
+        <a href="https://www.science.org/content/article/why-have-so-many-different-eyes-evolved-gamelike-simulation-could-provide-answers" target="_blank">Science News</a>,
+        <a href="https://news.ycombinator.com/item?id=43043063" target="_blank">Hacker News</a>,
+        <a href="https://www.forbes.com/sites/johnwerner/2025/07/02/beyond-computer-vision-brains-in-jars-and-how-they-see/" target="_blank">Forbes</a>,
+        <a href="https://www.youtube.com/watch?v=OuPwGkzh6nM" target="_blank">Tedx Boston</a>]
+        <em>(Science Advances, 2025)</em>
+        <span class="tag ai-tag">#AI For Discovery</span>
+      </div>
+      <div class="publication-divider"></div>
+    </div>
+
+    <div class="publication-entry">
+      <div class="paper-name"><strong>Designing Visual Intelligence for Science and Engineering</strong></div>
+      <div class="publication-tldr"><em>Perspective: How biological principles can guide the creation of new forms of artificial visual intelligence.</em></div>
+      <p>with Aaron Young, Brian Cheung, Dan-Eric Nilsson, Tomaso Poggio, Ramesh Raskar</p>
+      <div class="paper-status">
+        [<a href="https://mit-genai.pubpub.org/pub/bcfcb6lu/release/3" target="_blank">MIT Press</a>,
+         <em>(Impacts of Generative AI, MIT Press, 2024)</em>]
+        <span class="tag perspective-tag">#Perspective</span>
+        <span class="tag ai-tag">#AI For Discovery</span>
+      </div>
+      <div class="publication-divider"></div>
+    </div>
+
+    <div class="publication-entry">
+      <div class="paper-name"><strong>Bridging the Data Provenance Gap Across Text, Speech, and Video</strong></div>
+      <div class="publication-tldr"><em>Largest and first-of-its-kind longitudinal audit of text, speech, and video datasets used to train AI models.</em></div>
+      <p>with Shayne Longpre, Nikhil Singh, Manuel Cherep, Joanna Materzynska, Sara Hooker, Jad Kabbara</p>
+      <div class="paper-status">
+        [<a href="https://arxiv.org/pdf/2412.17847" target="_blank">Paper</a>,
+         <a href="https://www.technologyreview.com/2024/12/18/1108796/this-is-where-the-data-to-build-ai-comes-from/" target="_blank">MIT Tech Review</a>,
+         <a href="https://www.theglobeandmail.com/business/article-ai-generated-video-has-come-a-long-way-can-you-spot-the-difference/" target="_blank">Globe and Mail</a>, 
+         <em>(ICLR 2024)</em>]
+        <span class="tag cv-tag">#CV/ML</span>
+      </div>
+      <div class="publication-divider"></div>
+
+    </div>
+
+    <div class="publication-entry">
+      <div class="paper-name"><strong>Consent in Crisis: The Rapid Decline of the AI Data Commons</strong></div>
+      <div class="publication-tldr"><em>A critical examination of the legal, ethical, and infrastructural unraveling of the AI data commons.</em></div>
+      <p>Collaborative publication across interdisciplinary researchers.</p>
+      <div class="paper-status">
+        [<a href="https://arxiv.org/pdf/2407.14933" target="_blank">Paper</a>
+        <a href="https://www.nytimes.com/2024/07/19/technology/ai-data-restrictions.html" target="_blank">The New York Times</a>, 
+        <a href="https://www.404media.co/the-backlash-against-ai-scraping-is-real-and-measurable/" target="_blank">404 Media</a>, 
+        <a href="https://www.vox.com/future-perfect/364384/its-practically-impossible-to-run-a-big-ai-company-ethically" target="_blank">Vox</a>, 
+        <a href="https://finance.yahoo.com/video/data-train-ai-models-becoming-220005477.html" target="_blank">Yahoo! Finance</a>,
+        <em>(Neuips, 2024)</em>]
+        <span class="tag cv-tag">#CV/ML</span>
+        <span class="tag perspective-tag">#Perspective</span>
+      </div>
+      <div class="publication-divider"></div>
+    </div>
+
+    <div class="publication-entry">
+      <div class="paper-name"><strong>DecentNeRFs: Decentralized Neural Radiance Fields from Crowdsourced Images</strong></div>
+      <div class="publication-tldr"><em>Can we use crowdsourced images to create 3D models of the world?</em></div>
+      <p>with Zaid Tasneem, Akshat Dave, Ashok Veeraraghavan, Ramesh Raskar</p>
+      <div class="paper-status">
+        [<a href="https://zaidtas.github.io/decentnerfs/" target="_blank">Website</a>, <a href="https://arxiv.org/abs/2403.13199" target="_blank">Paper</a>, 
+        <em>(CVPR 2024)</em>]
+        <span class="tag cv-tag">#Computer Vision</span>
+      </div>
+      <div class="publication-divider"></div>
+    </div>
+
+    <div class="publication-entry">
+      <div class="paper-name"><strong>SUNDIAL: 3D Satellite Understanding through Direct Ambient and Complex Lighting Decomposition</strong></div>
+      <div class="publication-tldr"><em>Can we use complex lighting to understand 3D objects?</em></div>
+      <p>with Nikhil Behari, Akshat Dave, Kushagra Tiwary, ..., Ramesh Raskar</p>
+      <div class="paper-status">
+        [<a href="https://openaccess.thecvf.com/content/CVPR2024W/EarthVision/papers/Behari_SUNDIAL_3D_Satellite_Understanding_through_Direct_Ambient_and_Complex_Lighting_CVPRW_2024_paper.pdf" target="_blank">Paper</a>,
+         <em>(CVPR'W 2024)</em>]
+        <span class="tag cv-tag">#Computer Vision</span>
+      </div>
+      <div class="publication-divider"></div>
+    </div>
+
+    <div class="publication-entry">
+      <div class="paper-name"><strong>DISeR: Designing Imaging Systems with Reinforcement Learning</strong></div>
+      <div class="publication-tldr"><em>Can we use reinforcement learning to design new imaging systems?</em></div>
+      <p>with Tzofi Klinghoffer*, Nikhil Behari, Bhavya Agrawalla, Ramesh Raskar</p>
+      <div class="paper-status">
+        [<a href="https://tzofi.github.io/diser/" target="_blank">Website</a>, <a href="https://tzofi.github.io/diser/assets/tzofi2023diser.pdf" target="_blank">Paper</a>, 
+        <em>(ICCV 2023)</em>]
+        <span class="tag ai-tag">#AI For Discovery</span>
+      </div>
+      <div class="publication-divider"></div>
+    </div>
+
+    <div class="publication-entry">
+      <div class="paper-name"><strong>Objects as Radiance Field Cameras</strong></div>
+      <div class="publication-tldr"><em>Can we convert arbitrary objects into cameras to recover 3D?</em></div>
+      <p>with Akshat Dave, Nikhil Behari, Ramesh Raskar</p>
+      <div class="paper-status">
+        [<a href="https://ktiwary2.github.io/objectsascam/" target="_blank">Website</a>, <a href="https://arxiv.org/pdf/2212.04531" target="_blank">Paper</a>,
+         <a href="https://web.mit.edu/archive/spotlight/reflection-based-camera/" target="_blank">MIT Spotlight</a>,
+         <a href="https://web.media.mit.edu/~ktiwary/talks/csail_vision_seminar_talk.pdf" target="_blank">Slides</a>,
+         <a href="https://news.mit.edu/2023/using-reflections-shiny-objects-camera-0510" target="_blank">MIT News</a>,
+         <a href="https://www.youtube.com/watch?v=jloeVqQh9zE" target="_blank">Video</a>,
+         <em>(CVPR 2023)</em>]
+        <span class="tag cv-tag">#Computer Vision</span>
+      </div>
+      <div class="publication-divider"></div>
+    </div>
+
+    <div class="publication-entry">
+      <div class="paper-name"><strong>Towards Learning Neural Representations from Shadow</strong></div>
+      <div class="publication-tldr"><em>Can we learn hidden neural representations from binary shadow images?</em></div>
+      <p>with Kushagra Tiwary, Tzofi Klinghoffer, Ramesh Raskar</p>
+      <div class="paper-status">
+        [<a href="https://tzofi.github.io/NeuralShadowFields/" target="_blank">Website</a>, <a href="https://arxiv.org/pdf/2203.15946" target="_blank">Paper</a>, 
+        <em>(ECCV 2022)</em>]
+        <span class="tag cv-tag">#Computer Vision</span>
+      </div>
+      <div class="publication-divider"></div>
+    </div>
+
+    <!-- #### EXHIBITIONS #### -->  
+    <div class="publication-entry">
+      <div class="paper-name"><strong>MIT Museum</strong></div>
+      <div class="publication-tldr"><em>Experience First Signs of Vision during this special adults-only evening event featuring ocean-themed exhibits and activities.</em></div>
+      <p><strong>When:</strong> Thursday, April 10, 2025, 6:00pm - 9:00pm<br>
+        <strong>Where:</strong> MIT Museum, 75 Amherst Street, Cambridge, MA<br>
+        <strong>Tickets:</strong> $20 General, $10 MIT ID Holders</p>
+      <div class="paper-status">
+        [<a href="https://eyes.mit.edu/exhibitions/mit-museum/" target="_blank">View Exhibition</a>,
+        <em>(MIT Museum, 2025)</em>]
+        <span class="tag exhibition-tag">#Exhibitions</span>
+      </div>
+      <div class="publication-divider"></div>
+    </div>
+
+  <div class="publication-entry">
+    <div class="paper-name"><strong>Museum of Science Boston</strong></div>
+    <div class="publication-tldr"><em>Explore the First Signs of Vision exhibit at the Museum of Science Boston, perfect for all ages to discover the evolutionary history of sight.</em></div>
+    <p><strong>When:</strong> Wednesday, April 2, 2025, 1:00pm - 4:00pm<br>
+       <strong>Where:</strong> Museum of Science, Boston<br>
+       <strong>Tickets:</strong> Included with museum admission</p>
+    <div class="paper-status">
+      [<a href="https://www.eyes.mit.edu/exhibitions/mos/" target="_blank">View Exhibition</a>,
+       <em>(Museum of Science, 2025)</em>]
+      <span class="tag exhibition-tag">#Exhibitions</span>
+    </div>
+    <div class="publication-divider"></div>
+  </div>
+
+    <!-- #### PERSPECTIVE PAPERS #### -->  
+    <div class="publication-entry">
+    <div class="paper-name"><strong>A Perspective on Decentralizing AI</strong></div>
+    <div class="publication-tldr"><em>Discusses emerging approaches and motivations behind building decentralized AI systems and infrastructure.</em></div>
+    <p>with Abhishek Singh, Charles Lu, Gauri Gupta, A Chopra, J Blanc, T Klinghoffer, K Tiwary, R Raskar</p>
+    <div class="paper-status">
+      [<a href="https://decai-resources.s3.us-east-1.amazonaws.com/decentralized_AI_perspective_paper.pdf" target="_blank">MIT Media Lab, 2024</a>,
+       <em>(Decentralized AI, MIT Media Lab, 2024)</em>]
+      <span class="tag perspective-tag">#Perspective</span>
+    </div>
+    <div class="publication-divider"></div>
+  </div>
+
+  <div class="publication-entry">
+    <div class="paper-name"><strong>Physics vs. Learned Priors: Rethinking Camera and Algorithm Design for Task-Specific Imaging</strong></div>
+    <div class="publication-tldr"><em>Perspective paper contrasting physics-based priors with data-driven methods in imaging system design.</em></div>
+    <p>with Tzofi Klinghoffer*, Siddharth Somasundaram*, Kushagra Tiwary*, Ramesh Raskar<br><em>Presented at ICCP 2022</em></p>
+    <div class="paper-status">
+      [<a href="https://arxiv.org/pdf/2204.09871" target="_blank">Paper</a>,
+      <em>(ICCP 2022)</em>]
+      <span class="tag perspective-tag">#Perspective</span>
+      <span class="tag cv-tag">#Computer Vision</span>
+    </div>
+    <div class="publication-divider"></div>
+  </div>
+
+
+  <!-- #### PATENTS #### -->
+  <div class="publication-entry">
+    <div class="paper-name"><strong>Decentralized Neural Radiance Fields from Crowdsourced Images</strong></div>
+    <div class="publication-tldr"><em>Patent for a Software 2.0 system design at Optimus Ride (self-driving car company).</em></div>
+    <p>Inventors: Zaid Tasneem, Akshat Dave, Abhishek Singh, Kushagra Tiwary, Ashok Veeraraghavan, Ramesh Raskar</p>
+    <div class="paper-status">
+      [Patent Pending (2024)]
+      <span class="tag patent-tag">#Patent</span>
+      <span class="tag cv-tag">#Computer Vision</span>
+    </div>
+    <div class="publication-divider"></div>
+  </div>
+
+
+  <div class="publication-entry">
+    <div class="paper-name"><strong>Efficient detection of structure and status of traffic lights</strong></div>
+    <div class="publication-tldr"><em>Patent for a Software 2.0 system design at Optimus Ride (self-driving car company).</em></div>
+    <p>Inventors: Kushagra Tiwary, Nuno Sucena Almeida</p>
+    <div class="paper-status">
+      [<a href="https://patents.google.com/patent/WO2022246412A1/en" target="_blank">Patent No. WO2022246412A1</a>,
+       <em>(US Patent Office, 2021)</em>]
+      <span class="tag patent-tag">#Patent</span>
+      <span class="tag cv-tag">#Computer Vision</span>
+    </div>
+    <div class="publication-divider"></div>
+  </div>
+
+  <!-- #### WORKSHOPS #### -->
+
+  <div class="publication-entry">
+    <div class="paper-name"><strong>Neural Fields Beyond Conventional Cameras</strong></div>
+    <div class="publication-tldr"><em>Workshop on novel neural field architectures for unconventional imaging systems.</em></div>
+    <p>Organizers: Kushagra Tiwary, Zaid Tasneem, Akshat Dave, Ramesh Raskar</p>
+    <div class="paper-status">
+      [<a href="https://sites.google.com/view/neural-fields-beyond-cameras" target="_blank">Website</a>,
+       <em>(ECCV 2024)</em>]
+      <span class="tag workshop-tag">#Workshop</span>
+      <span class="tag cv-tag">#Computer Vision</span>
+    </div>
+    <div class="publication-divider"></div>
+  </div>
+
+  <div class="publication-entry">
+    <div class="paper-name"><strong>Accelerating Discovery</strong></div>
+    <div class="publication-tldr"><em>Workshop at MIT Member's Week on AI systems for accelerating scientific discovery.</em></div>
+    <p>Organizers: Kushagra Tiwary, Tzofi Klinghoffer, Aaron Young, Ramesh Raskar</p>
+    <div class="paper-status">
+      [<em>(MIT Member's Week 2023)</em>]
+      <span class="tag workshop-tag">#Workshop</span>
+    </div>
+    <div class="publication-divider"></div>
+  </div>
+
+  <!-- #### OPEN SOURCE CODE #### -->
+  <div class="publication-entry">
+    <div class="paper-name"><strong>Artificial Cambrian Intelligence (ACI)</strong></div>
+    <div class="publication-tldr"><em>Open source code for evolving artificial visual systems.</em></div>
+    <p>with Aaron Young*, Kushagra Tiwary*</p>
+    <div class="paper-status">
+      [<a href="https://eyes.mit.edu/ACI" target="_blank">GitHub</a>]
+      <span class="tag sim-tag">#Open Source</span>
+      <span class="tag ai-tag">#AI For Discovery</span>
+    </div>
+    <div class="publication-divider"></div>
+  </div>
+</div>
+
+<script>
+  function filterByTag(tag) {
+    const entries = document.querySelectorAll('.publication-entry');
+    entries.forEach(entry => {
+      const tags = entry.querySelectorAll('.tag');
+      const hasTag = tag === 'recent'
+        ? [...tags].some(t => ['ai-tag', 'exhibition-tag'].includes(t.classList[1]))
+        : [...tags].some(t => t.classList.contains(tag));
+      entry.style.display = hasTag ? 'block' : 'none';
+    });
+  }
+
+  function showAll() {
+    document.querySelectorAll('.publication-entry').forEach(entry => {
+      entry.style.display = 'block';
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    filterByTag('recent');
+  });
+</script>
+
+</body>
+</html>

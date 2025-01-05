@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id=GTM-PNX89M4H';f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PNX89M4H');</script>
+    <!-- End Google Tag Manager -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kushagra "Kush" Tiwary</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function toggleContent(id, iconId) {
+            const content = document.getElementById(id);
+            const icon = document.getElementById(iconId);
+            const isHidden = content.style.display === "none" || content.style.display === "";
+            content.style.display = isHidden ? "block" : "none";
+            icon.textContent = isHidden ? "−" : "+";
+        }
+
+        function openPublications() {
+            const content = document.getElementById('papers-content');
+            const icon = document.getElementById('papers-icon');
+            if (content && (content.style.display === "none" || content.style.display === "")) {
+                content.style.display = "block";
+            }
+            if (icon) {
+                icon.textContent = "−";
+            }
+        }
+
+        function applyTheme(theme) {
+            document.body.classList.toggle('dark-mode', theme === 'dark');
+            const toggleButtons = document.querySelectorAll('.theme-toggle');
+            toggleButtons.forEach(function(btn) {
+                btn.textContent = theme === 'dark' ? 'Light Mode' : 'Dark Mode';
+                btn.setAttribute('aria-pressed', theme === 'dark');
+            });
+        }
+
+        function toggleTheme() {
+            const nextTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+            localStorage.setItem('preferred-theme', nextTheme);
+            applyTheme(nextTheme);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('preferred-theme');
+            let preferredTheme = savedTheme;
+
+            if (!preferredTheme) {
+                const currentHour = new Date().getHours();
+                if (currentHour >= 19) {
+                    preferredTheme = 'dark';
+                } else {
+                    preferredTheme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+                }
+            }
+
+            applyTheme(preferredTheme);
+
+            const themeToggleButtons = document.querySelectorAll('.theme-toggle');
+            themeToggleButtons.forEach(function(btn) { btn.addEventListener('click', toggleTheme); });
+
+            // Show highlighted papers by default
+            if (typeof showHighlighted === 'function') {
+                showHighlighted();
+            }
+        });
+    </script>
+    <script src="evolving_cursor.js" defer></script>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PNX89M4H" 
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->    
+    <nav class="top-nav" aria-label="Top navigation">
+        <a href="index.html">Home</a>
+        <span class="divider">•</span>
+        <a href="#publications-section" onclick="openPublications()">Research</a>
+        <span class="divider">•</span>
+        <a href="#news-section">News</a>
+        <span class="divider">•</span>
+        <a href="personal.html">About</a>
+        <span class="divider">•</span>
+        <a href="mailto:ktiwary@mit.edu">Contact</a>
+    </nav>
+    <div class="cursor-controls">
+        <div class="cursor-control-stack">
+            <button id="cursor-toggle" class="cursor-toggle" aria-pressed="true" type="button">Evolve Cursor: On</button>
+            <button class="cursor-toggle theme-toggle" type="button" aria-pressed="false">Dark Mode</button>
+        </div>
+        <div id="cursor-info" class="cursor-info" role="dialog" aria-modal="false" aria-labelledby="cursor-info-title">
+            <div class="cursor-info-content">
+                <h3 id="cursor-info-title">Evolving Cursor Genome</h3>
+                <p class="cursor-info-intro">The flock responds to your motion using a lightweight evolutionary loop:</p>
+                <dl>
+                    <dt>Mutations</dt>
+                    <dd>Speed-triggered shape morphs (circle → triangle → spikes → polygons), random orbital satellites, and jitter tweaks seeded by noise.</dd>
+                    <dt>Fitness</dt>
+                    <dd>Instantaneous pointer speed and recent hover activity; faster, engaged movement keeps traits alive while idle time culls the flock.</dd>
+                    <dt>Selection Pressure</dt>
+                    <dd>Manual toggle, inactivity gravity drop, and max flock limits keep the swarm bounded and let only the most active trails persist.</dd>
+                </dl>
+                <p class="cursor-info-note">Move again to re-seed the flock—every burst of motion spawns a fresh lineage.</p>
+            </div>
+        </div>
+    </div>
+    <canvas id="cursor-canvas" class="cursor-canvas" aria-hidden="true"></canvas>
+    <div class="container">
+
+        <div class="profile-image-container">
+            <img src="images/kush.jpeg" alt="Kushagra Tiwary" class="profile-image original-image">
+            <div class="hover-image-container">
+                <img src="images/art.jpg" alt="Indian miniature painting style transfer" class="profile-image hover-image">
+            </div>
+        </div>
+        <h1>Kushagra "Kush" Tiwary</h1>
+        <h4>
+            <!-- <p>  -->
+                Office: <a href="https://maps.app.goo.gl/2EmGMdxBhsBurqK76" target="_blank">E14-374H, 75 Amherst St, Cambridge, MA 02139</a>
+                <br>
+                <a href="mailto:ktiwary@mit.edu" target="_blank">ktiwary [at] mit [dot] edu</a> | 
+                <!-- <br> -->
+                <a href="https://www.linkedin.com/in/ktiwary-mit/" target="_blank">LinkedIn</a> |
+                <a href="https://github.com/ktiwary" target="_blank">GitHub</a> |
+                <a href="https://x.com/ktiwarylab" target="_blank">X</a> |
+                <a href="https://scholar.google.com/citations?user=XNiV8qIAAAAJ&hl=en" target="_blank">Google Scholar</a> |
+                <a href="files/2_page_CV.pdf" target="_blank">CV</a> |
+                <a href="images/kush.jpeg" download="kush.jpeg" target="_blank">Download Image</a>
+        </h4>
+        <hr style="border-top: 1px solid var(--primary-color); width: 100%; margin: 2rem 0;">
+        
+        <p> I am a 3rd year PhD student in the Camera Culture group at the MIT Media Lab, advised by <a href="https://web.media.mit.edu/~raskar/" target="_blank">Ramesh Raskar</a>. 
+            I also work with <a href="https://briancheung.github.io/" target="_blank">Brian Cheung</a> and <a href="https://poggio-lab.mit.edu/people/tomaso-poggio/" target="_blank">Tomaso Poggio's</a> group.
+            I received my S.M. in 2023 from MIT, where I worked on 3D vision and imaging, specifically on incorporating realistic physics of light propagation to improve neural rendering.
+            I received my B.S.'19 ECE from University of Illinois at Urbana-Champaign. 
+            Prior to MIT, I worked on vision and robotics and built the <a href="https://karpathy.medium.com/software-2-0-a64152b37c35" target="_blank">Software 2.0</a> stack at a self driving startup called <a href="https://techcrunch.com/2022/01/11/magna-acquires-autonomous-vehicle-startup-optimus-ride/" target="_blank">Optimus Ride</a>. 
+        </p><br>
+
+        <p>
+            <strong>My current research creates rich, physics-grounded worlds where AI agents interact and evolve, discovering visual strategies that give rise to intelligent behavior.</strong>
+            The goal is to understand and design intelligence in both science and AI by letting it emerge through embodiment and interaction. 
+            Thus I am broadly interested in artificial intelligence, computer vision (and science), evolution, and reinforcement learning. 
+        <br>
+        <br>
+        I’m also passionate about public engagement and science advocacy. 
+        Recently, I wanted to show how AI can be more than just a tool for automation but also used to understand human and animal perception.
+        I've exhibited works at the <a href="https://www.eyes.mit.edu/exhibitions/mit-museum/" target="_blank">MIT Museum</a> and 
+        the <a href="https://www.eyes.mit.edu/exhibitions/mos/" target="_blank">Museum of Science</a>.
+        </p>
+    <br>
+    <p>
+        I am grateful to be the first in my extended family to be in a PhD program.
+        To learn more about how to apply to PhD programs, please look at the
+        <a href="https://www.media.mit.edu/posts/sos-grad-school-mentoring-program/" target="_blank">Media Lab’s SOS Program</a> and the
+        <a href="https://eecs-phd-gaap.mit.edu/" target="_blank">EECS Graduate Application Assistance Program (GAAP)</a>.
+        Reach out to chat or collaborate.
+        </p>
+        
+
+        <div class="working-papers">
+            <h2 style="color: var(--highlight-color-2);">Working Snapshots<sup>1</sup></h2>
+
+            <div class="paper-entry" style="display: flex; gap: 1rem; align-items: center; margin-bottom: 2rem;">
+              <div style="flex: 1;">
+                <div class="paper-name">Embodied Eyes For Scientific Discovery: Generation and Verification Loops to ask the "why" questions in vision</div>
+                <div class="paper-authors">Redwood Center for Theoretical Neuroscience, UC Berkeley</div>
+                <div class="paper-status">
+                  [<a href="https://redwood.berkeley.edu/seminars/kushagra-tiwary-june-2025/" target="_blank">Seminar Page</a>]
+                </div>
+              </div>
+              <iframe src="https://archive.org/embed/Redwood_Center_2025_06_25_Kushagra_Tiwary" width="320" height="240" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen></iframe>
+            </div>
+
+            <div class="paper-entry" style="display: flex; gap: 1rem; align-items: center; margin-bottom: 2rem;">
+              <div style="flex: 1;">
+                <div class="paper-name">What-If Machines for Vision: Evolving Eyes and Brains with AI</div>
+                <div class="paper-authors">AI For Science: Imagination in Action @ MIT</div>
+                <div class="paper-status">
+                  [<a href="https://www.youtube.com/watch?v=sUkcgYKBTr8" target="_blank">Youtube Link</a>]
+                </div>
+              </div>
+              <iframe width="320" height="180" src="https://www.youtube.com/embed/sUkcgYKBTr8" frameborder="0" allowfullscreen></iframe>
+            </div>
+          
+            <div class="paper-entry" style="display: flex; gap: 1rem; align-items: center; margin-top: 2rem;">
+              <div style="flex: 1;">
+                <div class="paper-name">Tedx Boston: Can AI Recreate 500 Million Years of Vision Evolution?</div>
+                <div class="paper-status">
+                  [<a href="https://www.youtube.com/watch?v=OuPwGkzh6nM" target="_blank">Youtube Link</a>]
+                </div>
+              </div>
+              <iframe width="320" height="180" src="https://www.youtube.com/embed/OuPwGkzh6nM" frameborder="0" allowfullscreen></iframe>
+            </div>
+          </div>                    
+        
+        <div id="news-section" class="section">
+            <h2 class="section-toggle" onclick="toggleContent('news-content', 'news-icon')">
+                NEWS <span id="news-icon">-</span>
+            </h2>
+            <div id="news-content">
+                <iframe src="news.html" name="news-frame" style="width: 100%; height: 54vh; border: none; overflow: auto;"></iframe>
+            </div>
+        </div>
+
+        <div id="publications-section" class="section">
+            <h2 class="section-toggle" onclick="toggleContent('papers-content', 'papers-icon')">
+                PUBLICATIONS <span id="papers-icon">+</span>
+            </h2>
+            <div id="papers-content" class="hidden-content">
+                <iframe src="publications.html" name="publications-frame" style="width: 100%; height: 100vh; border: none; overflow: auto;"></iframe>
+            </div>
+        </div>
+
+        <h2 class="section-toggle" onclick="toggleContent('my-blogs-content', 'my-blogs-icon')">
+            MY BLOGS <span id="my-blogs-icon">+</span>
+        </h2>
+        <div id="my-blogs-content" class="hidden-content">
+            <!-- My blogs content will go here -->
+            <div class="blog-item">
+                <strong>July 24, 2025:</strong> <a href="https://x.com/ktiwarylab/status/1934353061201199171" target="_blank">Generators vs. Verifiers for Scientific Discovery (tweet)</a> 
+            </div>
+            <div class="blog-item">
+                <strong>November 15, 2023:</strong> <a href="blogs/cv2_0.html">Computer Vision 2.0: The Next Evolution of Computer Vision</a> 
+            </div>
+            <div class="blog-item">
+                <strong>January 7, 2023:</strong> <a href="https://perceptive.substack.com/p/ingredients-of-modern-perception" target="_blank">Ingredients of Modern Perception</a> 
+            </div>
+            <div class="blog-item">
+                <strong>April 4, 2020:</strong> <a href="https://perceptive.substack.com/p/the-perception-problem-165c169b00af" target="_blank">The Perception Problem</a>
+            </div>
+            <div class="blog-item">
+                <strong>June 26, 2018:</strong> <a href="https://perceptive.substack.com/p/generating-fake-data-density-estimation-and-generative-adversarial-networks-3606a37fa95" target="_blank">Generating Fake Data- Density Estimation and Generative Adversarial Networks</a>
+            </div>
+            <div class="blog-item">
+                <strong>November 8, 2017:</strong> <a href="https://perceptive.substack.com/p/scattered-thoughts-on-ml-68d30f44da19" target="_blank">Histograms Of Oriented Gradients for Human Detection, N. Dalal & B. Triggs</a> 
+            </div>
+        </div>
+
+        <h2 class="section-toggle" onclick="toggleContent('personal-content', 'personal-icon')">
+            PERSONAL <span id="personal-icon">+</span>
+        </h2>
+        <div id="personal-content" class="hidden-content">
+            <!-- Personal content will go here -->
+        <div class="personal-item">
+            <a href="personal.html" target="_blank">Learn more about me</a>
+        </div>
+        </div>
+        <div style="height: 3vh; background-color: var(--background-color);"></div>
+    </div>
+</body>
+</html>
