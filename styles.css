@@ -1,0 +1,462 @@
+@font-face {
+    font-family: 'Linux Biolinum';
+    src: url('https://fonts.cdnfonts.com/s/10313/Linux-Biolinum.woff') format('woff');
+}
+
+:root {
+    --primary-color: #2f2f2e;
+    --secondary-color: #276b0d;
+    --background-color: #ffffff;
+    --surface-color: var(--background-color);
+    --text-color: #3f3d3d;
+    --paper-bg: var(--background-color);
+    --border-color: #999999;
+    --muted-color: #666666;
+    --link-bg: rgba(64, 12, 170, 0.872);
+    --link-hover-bg: rgba(64, 12, 170, 0.26);
+    --highlight-color: #228B22;
+    --highlight-color-2: #df4f1b;
+    --highlight-color-3: #74A2B9;
+}
+
+body.dark-mode {
+    --primary-color: #bdbebf;
+    --secondary-color: #e6a573;
+    --background-color: #17222e;
+    --surface-color: var(--background-color);
+    --text-color: #c5def6;
+    --paper-bg: var(--background-color);
+    --border-color: rgb(111, 130, 147);
+    --muted-color: #2667a7;
+    --link-bg: rgba(123, 79, 46, 0.18);
+    --link-hover-bg: rgba(241, 122, 30, 0.28);
+    --highlight-color: #5fcf71;
+    --highlight-color-2: #7cb5ff;
+    --highlight-color-3: #8bb6c7;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Warnock Pro', Warnock, Georgia, 'Times New Roman', Times, serif;
+    font-style: normal;
+    line-height: 1.6;
+    color: var(--text-color);
+    position: relative;
+    background-color: var(--background-color);
+    font-size: 0.98rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.background-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('images/life_viz.webp');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    z-index: 0;
+}
+
+.container {
+    position: relative;
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    background-color: var(--surface-color);
+    z-index: 1;
+    transition: background-color 0.3s ease;
+}
+
+.profile-section {
+    margin-bottom: 2rem;
+}
+
+.profile-section img {
+    display: block;
+    margin: 0 auto 1.5rem auto;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-weight: normal;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin: 2rem 0 1rem;
+    font-weight: normal;
+    color: var(--primary-color);
+}
+
+p {
+    margin-bottom: 0.1rem;
+}
+
+a {
+    color: var(--secondary-color);
+    transition: color 0.2s ease;
+}
+
+a:hover,
+a:focus {
+    color: var(--highlight-color-2);
+}
+
+.working-papers {
+    margin: 2rem 0;
+}
+
+.paper-entry {
+    margin-bottom: 1rem;
+}
+
+.paper-name {
+    font-weight: normal;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    text-decoration: underline;
+    font-size: 1.1rem;
+}
+
+.paper-authors {
+    font-style: italic;
+    margin: 0.2rem 0;
+}
+
+.paper-status {
+    color: var(--muted-color);
+    margin-bottom: 1rem;
+}
+
+.research-areas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.research-box {
+    background: var(--paper-bg);
+    padding: 1.5rem;
+    border-radius: 4px;
+    transition: transform 0.2s;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.research-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.research-box h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-weight: normal;
+}
+
+.paper {
+    background: var(--paper-bg);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+body.dark-mode .research-box,
+body.dark-mode .paper {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.45);
+}
+
+.footnote-bar {
+    background-color: var(--paper-bg);
+    padding: 1.5rem;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.footnote-bar h3 {
+    color: var(--primary-color);
+    font-weight: normal;
+    margin-bottom: 0.75rem;
+}
+
+.footnote-bar p {
+    color: var(--text-color);
+}
+
+body.dark-mode .footnote-bar {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.45);
+}
+
+.paper-title {
+    font-weight: normal;
+    margin-bottom: 0.5rem;
+}
+
+.links {
+    margin-top: 0.5rem;
+}
+
+.links a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    margin-right: 1rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background-color: var(--link-bg);
+    transition: background-color 0.2s;
+}
+
+.links a:hover {
+    background-color: var(--link-hover-bg);
+    text-decoration: none;
+}
+
+.theme-toggle {
+    margin-left: 0.5rem;
+    padding: 4px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: transparent;
+    color: var(--text-color);
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus {
+    background-color: var(--link-hover-bg);
+    outline: none;
+}
+
+.theme-toggle:focus-visible {
+    outline: 2px solid var(--secondary-color);
+    outline-offset: 2px;
+}
+
+.section-toggle {
+    cursor: pointer;
+    user-select: none;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.section-toggle span {
+    float: right;
+    font-size: 1.2rem;
+}
+
+.hidden-content {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .research-areas {
+        grid-template-columns: 1fr;
+    }
+}
+
+.profile-image-container {
+    position: relative;
+    width: 350px;
+    height: 350px;
+    margin: 0 auto 1.5rem auto;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.hover-image-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.profile-image-container:hover .hover-image-container {
+    opacity: 1;
+}
+
+/* Top-right navigation */
+.top-nav {
+    position: static;
+    display: flex;
+    justify-content: flex-end;
+    z-index: 1;
+    background: transparent;
+    backdrop-filter: none;
+    border: none;
+    border-radius: 0;
+    padding: 6px 10px;
+    margin: 8px 16px;
+}
+
+body.dark-mode .top-nav {
+    background: transparent;
+}
+
+.top-nav a {
+    color: var(--primary-color);
+    text-decoration: none;
+    padding: 0 4px;
+}
+
+.top-nav a:hover,
+.top-nav a:focus {
+    color: var(--highlight-color-2);
+}
+
+.top-nav .divider {
+    color: var(--muted-color);
+    padding: 0 2px;
+}
+
+.top-nav .theme-toggle {
+    margin-left: 6px;
+    padding: 3px 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: transparent;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.top-nav .theme-toggle:hover,
+.top-nav .theme-toggle:focus {
+    background-color: var(--link-hover-bg);
+}
+
+.cursor-controls {
+    margin: 0 16px 12px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+}
+
+.cursor-control-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.45rem;
+}
+
+.cursor-toggle {
+    padding: 6px 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.cursor-toggle:hover,
+.cursor-toggle:focus {
+    background-color: var(--link-hover-bg);
+}
+
+.cursor-toggle[aria-pressed="false"] {
+    background-color: transparent;
+    color: var(--muted-color);
+    border-color: var(--muted-color);
+}
+
+.cursor-info {
+    position: absolute;
+    top: 110%;
+    right: 0;
+    max-width: 320px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+    padding: 14px 16px;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    display: none;
+    z-index: 2100;
+}
+
+.cursor-info.visible {
+    display: block;
+}
+
+.cursor-info-content h3 {
+    margin: 0 0 0.35rem;
+    font-size: 0.95rem;
+    color: var(--highlight-color-2);
+}
+
+.cursor-info-intro,
+.cursor-info-note {
+    margin: 0 0 0.5rem;
+}
+
+.cursor-info dl {
+    margin: 0;
+}
+
+.cursor-info dt {
+    font-weight: 600;
+    margin-top: 0.45rem;
+}
+
+.cursor-info dd {
+    margin-left: 0;
+}
+
+/* Custom evolving cursor */
+body.custom-cursor-enabled {
+    cursor: none;
+}
+
+.cursor-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 2000;
+}
+
+/* Avoid hiding cursor over editable inputs */
+input, textarea, button, a {
+    cursor: inherit;
+}

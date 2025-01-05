@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Vision 2.0: The Next Evolution - Kushagra "Kush" Tiwary</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="blog_styles.css">
+</head>
+<body>
+    <div class="container">
+        <p><a href="../index.html">← Back to homepage</a></p>
+        
+        <article class="blog-post">
+            <h1>Computer Vision 2.0: The Next Evolution</h1>
+            <div class="blog-date">November 15, 2023</div>
+            
+            <div class="blog-content">
+                <p>With thousands of open-source datasets for almost every task, and millions of dollars spent on annotating the longest of long-tail cases, Computer Vision has grown to become ubiquitous in our rumbas, vehicles, and phones. Enabled by advances in AI- specifically how instead of creating hand-crafted logic to detect pedestrians, it specifies the behavior of the overall program leaving the logic to a trainable neural network. In such a paradigm, large datasets of pixels serve as first-class citizens enabling training of large neural networks.</p>
+
+                <p>However, computer vision on these pixels are suboptimal: they are a low-dimensional projection of the complex behavior of the path that light actually takes in the scene. With the ubiquity of simulation and decreasing marginal cost of simulation, a major shift is underway: namely light, instead of pixels, is finally being treated as a first-class citizen.</p>
+
+                <h2>Light as a First-Class Citizen</h2>
+                <p>The key insight of Computer Vision 2.0 is treating light as the fundamental unit of visual understanding. Instead of learning patterns in pixels, we model how light interacts with the environment. This shift has become viable due to three recent developments:</p>
+
+                <ol>
+                    <li>GPU compute costs have dropped below $0.50 per hour for high-end cards</li>
+                    <li>Physics engines can now simulate complex light interactions in real-time</li>
+                    <li>Neural networks can efficiently learn from simulated data</li>
+                </ol>
+
+                <p>This approach solves fundamental problems that pixel-based systems can't address. For example, a traditional system needs thousands of images to learn how reflections work on different surfaces. A physics-based system understands reflection from first principles, requiring only the material properties and lighting conditions.</p>
+
+                <h2>Computation over Memory: From Datasets to Simulations</h2>
+                <p>When you treat light as a first class citizen you must now simulate light and how it interacts with the world. You can think of pixel information as the simulation that existed before. Now because you have access to individual photons you can play with photons directly to simulate whatever you want. Thankfully the physics of light-matter interactions are well known and the marginal cost per ray for most scenes are almost at 0. So this means instead of going to collect data with a specific sensor, we can simulate it with physics engines and simulate it more realistically with AI-based physics engines.</p>
+
+                <blockquote>
+                    In my opinion, the transition to simulation represents the largest paradigm shift in computer vision since deep learning. Note that this was never possible- the simulation to reality gap was too large for CV researchers a decade or so ago.
+                </blockquote>
+
+                <p>CV 2.0 now can integrate these simulation more deeply into the CV stack as opposed to simulations being a tool to bolster performance in reality. Instead of storing terabytes of real-world data, we generate scenarios through computation with a simulation engine. The transition represents both a technical and philosophical transformation in computer vision.</p>
+
+                <p>The "bitter lesson" while doesnt apply exactly here but I think in some ways echos this change: we must now move from memorized datasets that are tediously collected and scenarios thought of by humans to an automatic generation of scenarios through computation. An accurate simulation is a general purpose method for dataset collection as it can adapt and improve as computational resources increase. Here we are expanding on the notion of letting AI learn from data but now it learns from "infinite" data thanks to simulations.</p>
+
+                <h3>Quantifiable Advantages:</h3>
+                <ol>
+                    <li>Storage efficiency: A 1 trillion parameter Vision Model can generate more unique scenarios than all the data collected in the history of the world. 
+                        (obviously this is a gross simplification but the point is that we can generate more data than we can collect and all we have to do is just ask)</li>
+                    <li>Edge case coverage: Simulation can generate millions of rare scenarios that might occur once in years of real-world data collection</li>
+                    <li>Cost reduction: Generating 1 million synthetic images of rain would cost approximately $1000, compared to $10,000+ for collecting and annotating real images</li>
+                </ol>
+
+                <h2>Practical Implementation</h2>
+                <p>The transition to Computer Vision 2.0 demands a complete reimagining of team structures and organizational dynamics. The traditional computer vision team of —split across data collection, sensing, annotation, and ML—is being replaced by a leaner, more specialized team of probably 30-40% of the original size.</p>
+
+                <h3>The New Team Structure</h3>
+                <p>The core team transformation is dramatic. Instead of large data collection and annotation teams, CV 2.0 organizations are built around three key groups:</p>
+
+                <h4>1. Simulation Engineering</h4>
+                <p>This team is further divided into three specialized units:</p>
+                <ul>
+                    <li><strong>Physics Accuracy Team:</strong> Focuses on n-th order light simulation, develops advanced rendering models, and optimizes computational efficiency. You can think of these guys as those creating data + physically-based realistic (but primarily ML driven) simulation engine using black AI-magic.</li>
+                    <li><strong>Event Simulation Team:</strong> Creates comprehensive test scenarios (not modelling of light), handles edge cases, and develops validation frameworks for the simulations. These can be powered by LLMs as well since they are high-level scenarios (eg. unprotected left turn under specific foggy conditions at Harvard Square) than light-matter interactions (eg. scattering of light due to fog).</li>
+                    <li><strong>Data Engineering Team:</strong> Validates against real-world data, and maintains simulation quality metrics. Also talks to ML Engineering Teams.</li>
+                </ul>
+
+                <h4>2. Operations Team</h4>
+                <p>This lean team identifies critical real-world scenarios that need simulation, effectively replacing traditional data collection teams. They serve as the bridge between real-world requirements and simulation capabilities. Someone needs to go out there and figure out what is the event that the current simulation + event team doesn't have.</p>
+
+                <h4>3. ML Engineering</h4>
+                <p>These engineers work across both simulated environments and real-world applications, ensuring that models transfer effectively between the two domains. This would be structured more like the current CV teams. These guys will be highly focused on creating accurate real time ML systems.</p>
+
+                <h2>Future Implications</h2>
+                <p>The shift to Computer Vision 2.0 isn't just an efficiency improvement—it's a fundamental rethinking of how we build visual systems. Organizations that embrace this simulation-first approach will build more reliable systems at a fraction of the current cost and time. The question isn't whether this transition will happen, but who will lead it.</p>
+
+                <p>For those building computer vision systems today, I see the following path forward is clear: start integrating simulations as a way to accelerate how you build you CV stack in your company. The difference could be launching a product in 2 months vs. 12 months.</p>
+            </div>
+        </article>
+    </div>
+</body>
+</html>
