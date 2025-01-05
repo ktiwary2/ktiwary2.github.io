@@ -1,0 +1,184 @@
+@font-face {
+    font-family: 'Linux Biolinum';
+    src: url('https://fonts.cdnfonts.com/s/10313/Linux-Biolinum.woff') format('woff');
+}
+
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --background-color: #ffffff;
+    --text-color: #333333;
+    --paper-bg: #f8f9fa;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Linux Biolinum', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    position: relative;
+    background-color: #ffffff;
+}
+
+.background-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('images/life_viz.webp');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    z-index: 0;
+}
+
+.container {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    z-index: 1;
+}
+
+.profile-section {
+    margin-bottom: 2rem;
+}
+
+.profile-section img {
+    display: block;
+    margin: 0 auto 1.5rem auto;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-weight: normal;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin: 2rem 0 1rem;
+    font-weight: normal;
+    color: var(--primary-color);
+}
+
+p {
+    margin-bottom: 1rem;
+}
+
+.working-papers {
+    margin: 2rem 0;
+}
+
+.paper-entry {
+    margin-bottom: 1rem;
+}
+
+.paper-name {
+    font-weight: normal;
+}
+
+.paper-authors {
+    font-style: italic;
+    margin: 0.2rem 0;
+}
+
+.paper-status {
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.research-areas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.research-box {
+    background: var(--paper-bg);
+    padding: 1.5rem;
+    border-radius: 4px;
+    transition: transform 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.research-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.research-box h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-weight: normal;
+}
+
+.paper {
+    background: var(--paper-bg);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.paper-title {
+    font-weight: normal;
+    margin-bottom: 0.5rem;
+}
+
+.links {
+    margin-top: 0.5rem;
+}
+
+.links a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    margin-right: 1rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background-color: rgba(52, 152, 219, 0.1);
+    transition: background-color 0.2s;
+}
+
+.links a:hover {
+    background-color: rgba(52, 152, 219, 0.2);
+    text-decoration: none;
+}
+
+.section-toggle {
+    cursor: pointer;
+    user-select: none;
+    border-bottom: 1px solid #999;
+}
+
+.section-toggle span {
+    float: right;
+    font-size: 1.2rem;
+}
+
+.hidden-content {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .research-areas {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kushagra "Kush" Tiwary</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function toggleContent(id, iconId) {
+            const content = document.getElementById(id);
+            const icon = document.getElementById(iconId);
+            const isHidden = content.style.display === "none" || content.style.display === "";
+            content.style.display = isHidden ? "block" : "none";
+            icon.textContent = isHidden ? "−" : "+";
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="profile-section">
+            <img src="images/kush.jpg" alt="Kushagra Tiwary" class="profile-image">
+            <h1>Kushagra "Kush" Tiwary</h1>
+            <!-- <p>75 Amherst St, Cambridge, MA 02139</p> -->
+            <p> Email: <a href="mailto:ktiwary@mit.edu">ktiwary@mit.edu</a>, LinkedIn: <a href="https://www.linkedin.com/in/ktiwary-mit/">ktiwary</a></p>
+<!-- 
+            <p> <a href="mailto:ktiwary@mit.edu">Email</a>, <a href="https://scholar.google.com/citations?user=XNiV8qIAAAAJ&hl=en">Google Scholar</a>, 
+                <a href="https://www.linkedin.com/in/kushagra-tiwary/">LinkedIn</a>, <a href="https://github.com/ktiwary2">GitHub</a>, <a href="https://perceptive.substack.com/">Perceptive, Substack</a></p> -->
+        </div>
+        
+        <p> I am a PhD student in the Camera Culture group at the MIT Media Lab advised by Ramesh Raskar.</p>
+
+        <p> My research uses AI to automatically design and discover new ways of seeing. Currently, I find myself mostly thinking about AI-based computational discovery specifically in the context of vision. My CV is available <a href="files/2_page_CV.pdf">here</a>.</p>
+
+
+        <div class="working-papers">
+            <h2>Working Snapshots</h2>
+            
+            <div class="paper-entry">
+                <div class="paper-name">Generative Design of Visual Intelligence</div>
+                <div class="paper-authors">Can we use biological principles (natural evolution) to 1) Study Evolution of Vision and 2) Design new forms of vision?</div>
+                <div class="paper-status">[<a href="https://mit-genai.pubpub.org/pub/bcfcb6lu/release/3">MIT Press: Impacts of Generative AI</a>, 
+                                           <a href="https://news.mit.edu/2024/mit-scholars-awarded-second-round-seed-grants-generative-ai-0328">MIT News</a>]</div>
+            </div>
+
+            <div class="paper-entry">
+                <div class="paper-name">Tedx Boston: Can AI Recreate 500 Million Years of Vision Evolution?</div>
+                <div class="paper-authors"></div>
+                <div class="paper-status">[<a href="https://www.youtube.com/watch?v=OuPwGkzh6nM">Tedx Boston</a>]</div>
+            </div>
+        </div>
+
+        <h2 class="section-toggle" onclick="toggleContent('themes-content', 'themes-icon')">
+            RESEARCH THEMES <span id="themes-icon">+</span>
+        </h2>
+        <div id="themes-content" class="hidden-content">
+            <div class="research-areas">
+                <div class="research-box">
+                    <h3>AI-based Computational Discovery of Visual Intelligence</h3>
+                    <p>Can we use discover principles of natural visual intelligence using artifical lifeforms and create new forms of vision for scientific and engineering applications?</p>
+                </div>
+                <div class="research-box">
+                    <h3>3D Computer Vision</h3>
+                    <p>Can we exploit visual cues to see hidden 3D information in the world? Can we use physics-based rendering and models to improve 3D computer vision?</p>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-toggle" onclick="toggleContent('papers-content', 'papers-icon')">
+            PUBLICATIONS <span id="papers-icon">+</span>
+        </h2>
+        <div id="papers-content" class="hidden-content">
+            <div class="paper-entry">
+                <div class="paper-name">Generative Design of Visual Intelligence</div>
+                <div class="paper-authors">with Aaron Young, Brian Cheung, Dan-Eric Nilsson, Tomaso Poggio, Ramesh Raskar</div>
+                <div class="paper-status">[<a href="https://mit-genai.pubpub.org/pub/bcfcb6lu/release/3">MIT Press: Impacts of Generative AI</a>, 
+                                           <a href="https://news.mit.edu/2024/mit-scholars-awarded-second-round-seed-grants-generative-ai-0328">MIT News</a>]</div>
+            </div>
+            <div class="paper-entry">
+                <div class="paper-name">DecentNeRFs: Decentralized Neural Radiance Fields from Crowdsourced Images</div>
+                <div class="paper-authors">with Zaid Tasneem, Akshat Dave, Ashok Veeraraghavan, Ramesh Raskar</div>
+                <div class="paper-status">[<a href="https://zaidtas.github.io/decentnerfs/">Website</a>, 
+                                           <a href="https://arxiv.org/abs/2403.13199">Paper</a>]</div>
+            </div>
+            <div class="paper-entry">
+                <div class="paper-name">DISeR: Designing Imaging Systems with Reinforcement Learning</div>
+                <div class="paper-authors">with Tzofi Klinghoffer*, Nikhil Behari, Bhavya Agrawalla, Ramesh Raskar</div>
+                <div class="paper-status">[<a href="https://tzofi.github.io/diser/">Website</a>, 
+                                           <a href="https://tzofi.github.io/diser/assets/tzofi2023diser.pdf">Paper</a>]</div>
+            </div>
+            <div class="paper-entry">
+                <div class="paper-name">Objects as Cameras</div>
+                <div class="paper-authors">with Akshat Dave*, Nikhil Behari, Ramesh Raskar</div>
+                <div class="paper-status">[<a href="https://ktiwary2.github.io/objectsascam/">Website</a>, 
+                                           <a href="https://arxiv.org/pdf/2212.04531">Paper</a>, 
+                                           <a href="https://web.media.mit.edu/~ktiwary/talks/csail_vision_seminar_talk.pdf">Slides</a>,
+                                           <a href="https://news.mit.edu/2023/using-reflections-shiny-objects-camera-0510">MIT News</a>,
+                                           <a href="https://www.youtube.com/watch?v=jloeVqQh9zE">Video</a>]</div>
+            </div>
+            <div class="news-item">
+                <strong><a href="https://scholar.google.com/citations?user=XNiV8qIAAAAJ&hl=en" class="Google Scholar">(view all)</a></a>
+            </div>
+
+        </div>
+
+        <h2 class="section-toggle" onclick="toggleContent('news-content', 'news-icon')">
+            NEWS  <span id="news-icon">+</span>
+        </h2>
+        <div id="news-content" class="hidden-content">
+            <div class="news-item">
+                <strong>Sep 2024:</strong> Co-organizing the <a href="https://neural-fields-beyond-cams.github.io/">Neural Fields Beyond Conventional Cameras workshop</a> at ECCV in Milan, Italy.
+            </div>
+            <div class="news-item">
+                <strong>Sep 2024:</strong> Gave a <a href="https://www.youtube.com/watch?v=OuPwGkzh6nM">TEDx Boston talk</a> on the topic of <em>Can AI Recreate 500 Million Years of Vision Evolution?</em>.
+            </div>
+            <div class="news-item">
+                <strong>Aug 2024:</strong> <a href="https://www.theglobeandmail.com/business/article-ai-generated-video-has-come-a-long-way-can-you-spot-the-difference/">Interview at The Globe and Mail</a> on the topic of <em>AI Generated Video</em>.
+            </div>
+
+            <div class="news-item">
+                <strong>Aug 2024:</strong> Contributed to the paper: <a href="https://arxiv.org/pdf/2407.14933"><em>Consent in Crisis</em></a> covered by <a href="https://www.nytimes.com/2024/07/19/technology/ai-data-restrictions.html">The New York Times</a>, <a href="https://www.404media.co/the-backlash-against-ai-scraping-is-real-and-measurable/">404 Media</a>, <a href="https://www.vox.com/future-perfect/364384/its-practically-impossible-to-run-a-big-ai-company-ethically">Vox</a>, and <a href="https://finance.yahoo.com/video/data-train-ai-models-becoming-220005477.html">Yahoo! Finance</a>.
+            </div>
+            <div class="news-item">
+                <strong>Jun 2024:</strong> Our paper "DecentNeRFs: Decentralized Neural Radiance Fields from Crowdsourced Images" was accepted at ECCV 2024.
+            </div>
+            <div class="news-item">
+                <strong>Apr 2024:</strong> Participated in the panel discussion <em>"Frontiers of AI Research from Current MIT PhDs"</em> at the Imagination in Action event at MIT, available on <a href="https://www.youtube.com/watch?v=EyHIzwwI9Uc">YouTube</a>.
+            </div>
+            <div class="news-item">
+                <strong>Mar 2024:</strong> On the student search committee for the AI & Human Experience Faculty Search.
+            </div>
+            <div class="news-item">
+                <strong>Jan. 2024:</strong> Awarded an MIT Generative AI grant to research <em>Generating New Forms of Visual Intelligence</em>, as featured in <a href="https://news.mit.edu/2024/mit-scholars-awarded-second-round-seed-grants-generative-ai-0328">MIT News</a>.
+            </div>
+            <div class="news-item">
+                <strong><a href="news.html" class="view-all">(view all)</a></a>
+            </div>
+        </div>
+
+
+        <!-- <h2 class="section-toggle" onclick="toggleContent('third-person-bio-content', 'third-person-bio-icon')">
+            THIRD PERSON BIO <span id="third-person-bio-icon">+</span>
+        </h2>
+        <div id="third-person-bio-content" class="hidden-content">
+            Kush is a PhD student in the Camera Culture group at the MIT Media Lab advised by Ramesh ​Raskar. 
+            He received his S.M at MIT Media lab in 2023 and BS from the University of Illinois ​Urbana-Champaign. 
+            His research focuses AI-based computational discovery tools to automatically design and discover new ways of seeing.
+        </div> -->
+
+        <h2 class="section-toggle" onclick="toggleContent('my-blogs-content', 'my-blogs-icon')">
+            MY BLOGS <span id="my-blogs-icon">+</span>
+        </h2>
+        <div id="my-blogs-content" class="hidden-content">
+            <!-- My blogs content will go here -->
+        </div>
+
+        <h2 class="section-toggle" onclick="toggleContent('personal-content', 'personal-icon')">
+            PERSONAL <span id="personal-icon">+</span>
+        </h2>
+        <div id="personal-content" class="hidden-content">
+            <!-- Personal content will go here -->
+        </div>
+        <div class="footnote-bar">
+            <h3>Footnotes</h3>
+            <p>1. Peer review should be about improving papers, not just deciding accept/reject. Working Snapshots is a snapshot of my current research direction vectors that I am actively exploring.</p>
+            <!-- <p>2. Another footnote with additional information.</p> -->
+        </div>
+    </div>
+</body>
+</html>
