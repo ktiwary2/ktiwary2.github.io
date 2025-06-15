@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <title>Publications – Kushagra Tiwary</title>
   <link rel="stylesheet" href="styles.css">
+
+  <!-- Tags -->
   <style>
     :root {
       --pastel-blue: #A8D8FF;
@@ -11,8 +13,9 @@
       --pastel-purple: #D8A8FF;
       --pastel-pink: #FFA8D8;
       --pastel-yellow: #FFE3A8;
+      --pastel-orange: #FFD8A8;
     }
-
+  
     .tag {
       display: inline-block;
       padding: 0.35em 0.9em;
@@ -23,68 +26,65 @@
       color: #333;
       background-color: #ddd;
     }
-
+  
     .cv-tag { background-color: var(--pastel-blue); }
     .ml-tag { background-color: var(--pastel-green); }
     .ai-tag { background-color: var(--pastel-purple); }
     .perspective-tag { background-color: var(--pastel-pink); }
     .exhibition-tag { background-color: var(--pastel-yellow); }
-
+    .patent-tag { background-color: #f9d3b4; }
+    .sim-tag { background-color: #d4f1f9; }
+    .workshop-tag { background-color: #A8FFD8; }
+    .recent-tag { background-color: var(--pastel-orange); }
+  
     .filter-menu {
-      margin-bottom: 1em;
-      font-size: 0.95em;
-      font-weight: 500;
-      color: #0077cc;
+      margin-bottom: 1.5em;
     }
-
+  
     .filter-menu span {
-      margin-right: 14px;
+      display: inline-block;
+      margin: 0.3em 0.4em 0.3em 0;
+      padding: 0.45em 1em;
+      border-radius: 14px;
+      font-size: 0.85em;
+      font-weight: 600;
       cursor: pointer;
-      text-decoration: underline;
+      border: none;
+      color: #333;
     }
+  
+    .filter-all { background-color: #ddd; }
+    .filter-cv { background-color: var(--pastel-blue); }
+    .filter-ml { background-color: var(--pastel-green); }
+    .filter-ai { background-color: var(--pastel-purple); }
+    .filter-perspective { background-color: var(--pastel-pink); }
+    .filter-exhibition { background-color: var(--pastel-yellow); }
+    .filter-patent { background-color: #f9d3b4; }
+    .filter-sim { background-color: #d4f1f9; }
+    .filter-workshop { background-color: #A8FFD8; }
+    .filter-recent { background-color: var(--pastel-orange); }
   </style>
-  <script>
-    function filterByTag(tag) {
-      const entries = document.querySelectorAll('.publication-entry');
-      entries.forEach(entry => {
-        const match = entry.querySelector(`.tag.${tag}`);
-        entry.style.display = match ? 'block' : 'none';
-      });
-    }
-
-    function showAll() {
-      document.querySelectorAll('.publication-entry').forEach(entry => {
-        entry.style.display = 'block';
-      });
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-      const defaultTags = ['ai-tag', 'exhibition-tag'];
-      document.querySelectorAll('.publication-entry').forEach(entry => {
-        const hasDefaultTag = defaultTags.some(tag => entry.querySelector(`.tag.${tag}`));
-        entry.style.display = hasDefaultTag ? 'block' : 'none';
-      });
-    });
-</script>
 </head>
 <body>
   <div class="publications-container">
 
     <div class="filter-menu">
-      (<span onclick="showAll()">show all</span>
-      / <span onclick="filterByTag('cv-tag')">CV/ML</span>  
-      / <span onclick="filterByTag('ai-tag')">AI For Scientific Discovery & Engineering</span>
-      / <span onclick="filterByTag('patent-tag')">Patents</span>
-      / <span onclick="filterByTag('perspective-tag')">Perspective/Impact Papers</span>
-      / <span onclick="filterByTag('workshop-tag')">Workshops</span>
-      / <span onclick="filterByTag('sim-tag')">Open Source Code</span>
-      / <span onclick="filterByTag('exhibition-tag')">Exhibitions</span>)
+      <span class="filter-recent" onclick="filterByTag('recent')">Recent</span>
+      <span class="filter-all" onclick="showAll()">All</span>
+      <span class="filter-cv" onclick="filterByTag('cv-tag')">CV/ML</span>
+      <span class="filter-ml" onclick="filterByTag('ml-tag')">ML</span>
+      <span class="filter-ai" onclick="filterByTag('ai-tag')">AI for Discovery</span>
+      <span class="filter-patent" onclick="filterByTag('patent-tag')">Patents</span>
+      <span class="filter-perspective" onclick="filterByTag('perspective-tag')">Perspective</span>
+      <span class="filter-workshop" onclick="filterByTag('workshop-tag')">Workshops</span>
+      <span class="filter-sim" onclick="filterByTag('sim-tag')">Open Source</span>
+      <span class="filter-exhibition" onclick="filterByTag('exhibition-tag')">Exhibitions</span>
     </div>
+    
 
     <div class="publication-entry">
       <div class="paper-name"><strong><a href="https://scholar.google.com/citations?hl=en&user=XNiV8qIAAAAJ&view_op=list_works&sortby=pubdate">See full list on Google Scholar</a></strong></div>
     </div>
-
 
     <!-- #### PAPERS #### -->
     <div class="publication-entry">
@@ -99,6 +99,7 @@
         <em>(Under Review, Science Magazine)</em>
         <span class="tag ai-tag">#AI For Discovery</span>
       </div>
+      <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
     </div>
 
     <div class="publication-entry">
@@ -111,6 +112,7 @@
         <span class="tag perspective-tag">#Perspective</span>
         <span class="tag ai-tag">#AI For Discovery</span>
       </div>
+      <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
     </div>
 
     <div class="publication-entry">
@@ -124,6 +126,8 @@
          <em>(ICLR 2024)</em>]
         <span class="tag ml-tag">#ML</span>
       </div>
+      <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
+
     </div>
 
     <div class="publication-entry">
@@ -140,6 +144,7 @@
         <span class="tag cv-tag">#CV/ML</span>
         <span class="tag perspective-tag">#Perspective</span>
       </div>
+      <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
     </div>
 
     <div class="publication-entry">
@@ -151,6 +156,7 @@
         <em>(CVPR 2024)</em>]
         <span class="tag cv-tag">#Computer Vision</span>
       </div>
+      <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
     </div>
 
     <div class="publication-entry">
@@ -162,6 +168,7 @@
          <em>(CVPR'W 2024)</em>]
         <span class="tag cv-tag">#Computer Vision</span>
       </div>
+      <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
     </div>
 
     <div class="publication-entry">
@@ -173,6 +180,7 @@
         <em>(ICCV 2023)</em>]
         <span class="tag ai-tag">#AI For Discovery</span>
       </div>
+      <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
     </div>
 
     <div class="publication-entry">
@@ -188,6 +196,7 @@
          <em>(CVPR 2023)</em>]
         <span class="tag cv-tag">#Computer Vision</span>
       </div>
+      <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
     </div>
 
     <div class="publication-entry">
@@ -199,8 +208,8 @@
         <em>(ECCV 2022)</em>]
         <span class="tag cv-tag">#Computer Vision</span>
       </div>
+      <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
     </div>
-
 
     <!-- #### EXHIBITIONS #### -->  
     <div class="publication-entry">
@@ -213,8 +222,9 @@
         [<a href="https://eyes.mit.edu/exhibitions/mit-museum/">View Exhibition</a>,
         <em>(MIT Museum, 2025)</em>]
         <span class="tag exhibition-tag">#Exhibitions</span>
+      </div>
+      <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
     </div>
-  </div>
 
   <div class="publication-entry">
     <div class="paper-name"><strong>Museum of Science Boston</strong></div>
@@ -227,6 +237,7 @@
        <em>(Museum of Science, 2025)</em>]
       <span class="tag exhibition-tag">#Exhibitions</span>
     </div>
+    <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
   </div>
 
     <!-- #### PERSPECTIVE PAPERS #### -->  
@@ -239,6 +250,7 @@
        <em>(Decentralized AI, MIT Media Lab, 2024)</em>]
       <span class="tag perspective-tag">#Perspective</span>
     </div>
+    <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
   </div>
 
   <div class="publication-entry">
@@ -251,6 +263,7 @@
       <span class="tag perspective-tag">#Perspective</span>
       <span class="tag cv-tag">#Computer Vision</span>
     </div>
+    <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
   </div>
 
 
@@ -264,6 +277,7 @@
       <span class="tag patent-tag">#Patent</span>
       <span class="tag cv-tag">#Computer Vision</span>
     </div>
+    <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
   </div>
 
 
@@ -277,6 +291,7 @@
       <span class="tag patent-tag">#Patent</span>
       <span class="tag cv-tag">#Computer Vision</span>
     </div>
+    <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
   </div>
 
   <!-- #### WORKSHOPS #### -->
@@ -291,6 +306,7 @@
       <span class="tag workshop-tag">#Workshop</span>
       <span class="tag cv-tag">#Computer Vision</span>
     </div>
+    <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
   </div>
 
   <div class="publication-entry">
@@ -300,8 +316,8 @@
     <div class="paper-status">
       [<em>(MIT Member's Week 2023)</em>]
       <span class="tag workshop-tag">#Workshop</span>
-      <span class="tag ai-tag">#AI For Discovery</span>
     </div>
+    <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
   </div>
 
   <!-- #### OPEN SOURCE CODE #### -->
@@ -314,12 +330,32 @@
       <span class="tag sim-tag">#Open Source</span>
       <span class="tag ai-tag">#AI For Discovery</span>
     </div>
+    <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
   </div>
-
-
-
-
-
 </div>
+
+<script>
+  function filterByTag(tag) {
+    const entries = document.querySelectorAll('.publication-entry');
+    entries.forEach(entry => {
+      const tags = entry.querySelectorAll('.tag');
+      const hasTag = tag === 'recent'
+        ? [...tags].some(t => ['ai-tag', 'exhibition-tag'].includes(t.classList[1]))
+        : [...tags].some(t => t.classList.contains(tag));
+      entry.style.display = hasTag ? 'block' : 'none';
+    });
+  }
+
+  function showAll() {
+    document.querySelectorAll('.publication-entry').forEach(entry => {
+      entry.style.display = 'block';
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    filterByTag('recent');
+  });
+</script>
+
 </body>
 </html>
