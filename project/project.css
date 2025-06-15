@@ -8,6 +8,7 @@
     --text-primary: #24292e;
     --bg-light: #f6f8fa;
     --border-color: #e1e4e8;
+    --max-content-width: 1800px; /* Increased from 1600px */
 }
 
 * {
@@ -22,6 +23,8 @@ body {
     line-height: 1.6;
     background: white;
     padding-top: 50px; /* Add space at the top */
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 .hero-header {
@@ -33,10 +36,10 @@ body {
 }
 
 .hero-content {
-    max-width: 1600px;
+    max-width: var(--max-content-width);
     margin: 0 auto;
     padding: 2rem;
-    width: 90%;
+    width: 95%; /* Increased from 90% */
 }
 
 .title {
@@ -54,7 +57,7 @@ body {
 }
 
 .hero-image {
-    max-width: 1200px;
+    max-width: 1400px; /* Increased from 1200px */
     margin: 0 auto 2rem;
     display: block;
 }
@@ -65,7 +68,7 @@ body {
     grid-template-columns: repeat(4, 1fr);
     gap: 1rem;
     margin: 2rem auto;
-    max-width: 1200px;
+    max-width: 1400px; /* Increased from 1200px */
     text-align: center;
 }
 
@@ -94,6 +97,9 @@ body {
     border-top: 1px solid var(--border-color);
     border-bottom: 1px solid var(--border-color);
     flex-wrap: nowrap;
+    max-width: var(--max-content-width);
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .institution {
@@ -114,9 +120,10 @@ body {
 
 /* Rest of your existing styles */
 .container {
-    max-width: 1600px;
+    max-width: var(--max-content-width);
     margin: 0 auto;
     padding: 2rem;
+    width: 95%; /* Increased width */
 }
 
 .section {

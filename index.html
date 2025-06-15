@@ -21,6 +21,11 @@
             content.style.display = isHidden ? "block" : "none";
             icon.textContent = isHidden ? "−" : "+";
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show highlighted papers by default
+            showHighlighted();
+        });
     </script>
 </head>
 <body>
@@ -33,7 +38,7 @@
         <div class="profile-image-container">
             <img src="images/kush.jpg" alt="Kushagra Tiwary" class="profile-image original-image">
             <div class="hover-image-container">
-                <img src="images/indian-miniature-painting.png" alt="Indian miniature painting style transfer" class="profile-image hover-image">
+                <img src="images/art.jpg" alt="Indian miniature painting style transfer" class="profile-image hover-image">
             </div>
         </div>
         <h1>Kushagra "Kush" Tiwary</h1>
@@ -104,75 +109,26 @@
             </div>
         </div> -->
 
-        <h2 class="section-toggle" onclick="toggleContent('papers-content', 'papers-icon')">
-            PUBLICATIONS <span id="papers-icon">+</span>
-        </h2>
-        <div id="papers-content" class="hidden-content">
-
-            <h3 style="color: var(--highlight-color); margin-top: 2rem;">Computational Discovery</h3>
-
-            <div class="paper-entry">
-                <div class="paper-name"><strong>What if Eye...? Computational Recreating the Evolution of Vision</strong></div>
-                Tldr: <em> We created a virtual petri dish where digital creatures evolve eyes from scratch, replaying millions of years of evolution.</em>
-                <div class="paper-authors">with Aaron Young, Dan-Eric Nilsson, Tomaso Poggio, Brian Cheung, Ramesh Raskar</div>
-                <div class="paper-status">[<a href="https://arxiv.org/abs/2501.15001">Paper</a>, 
-                                           <a href="https://eyes.mit.edu">Website</a>]</div>
+        <div id="publications-section" class="section">
+            <h2 class="section-toggle" onclick="toggleContent('papers-content', 'papers-icon')">
+                PUBLICATIONS <span id="papers-icon">+</span>
+            </h2>
+            <div id="papers-content" class="hidden-content">
+                <iframe src="publications.html" style="width: 100%; height: 100vh; border: none; overflow: hidden;"></iframe>
             </div>
-
-            <div class="paper-entry">
-                <div class="paper-name"><strong>Generative Design of Visual Intelligence</strong></div>
-                Tldr: <em> Can we use biological principles (natural evolution) to 1) Study Vision Evolution and 2) Design new forms of vision?</em>
-                <div class="paper-authors">with Aaron Young, Brian Cheung, Dan-Eric Nilsson, Tomaso Poggio, Ramesh Raskar</div>
-                <div class="paper-status">[<a href="https://mit-genai.pubpub.org/pub/bcfcb6lu/release/3">MIT Press: Impacts of Generative AI</a>, 
-                                           <a href="https://news.mit.edu/2024/mit-scholars-awarded-second-round-seed-grants-generative-ai-0328">MIT News</a>]</div>
-            </div>
-
-            <div class="paper-entry">
-                <div class="paper-name"><strong>DISeR: Designing Imaging Systems with Reinforcement Learning</strong></div>
-                Tldr: <em> Can we use reinforcement learning to design new imaging systems?</em>
-                <div class="paper-authors">with Tzofi Klinghoffer*, Nikhil Behari, Bhavya Agrawalla, Ramesh Raskar</div>
-                <div class="paper-status">[<a href="https://tzofi.github.io/diser/">Website</a>, 
-                                           <a href="https://tzofi.github.io/diser/assets/tzofi2023diser.pdf">Paper</a>]</div>
-            </div>
-
-            <h3 style="color: var(--highlight-color); margin-top: 2rem;">Computer Vision & Machine Learning</h3>
-
-            <div class="paper-entry">
-                <div class="paper-name"><strong>Bridging the Data Provenance Gap Across Text, Speech, and Video</strong></div>
-                Tldr: <em> Largest and first-of-its-kind longitudinal audit of text, speech, and video datasets used to train AI models</em>
-                <div class="paper-authors">with Shayne Longpre, Nikhil Singh, Manuel Cherep, Joanna Materzynska, Sara Hooker, Jad Kabbara</div>
-                <div class="paper-status">[<a href="https://arxiv.org/pdf/2412.17847">Paper</a>, 
-                                           <a href="https://www.theglobeandmail.com/business/article-ai-generated-video-has-come-a-long-way-can-you-spot-the-difference/">Globe and Mail</a>, 
-                                           <a href="https://www.technologyreview.com/2024/12/18/1108796/this-is-where-the-data-to-build-ai-comes-from/">MIT Technology Review.</a>]</div>
-            </div>
-
-            <div class="paper-entry">
-                <div class="paper-name"><strong>DecentNeRFs: Decentralized Neural Radiance Fields from Crowdsourced Images</strong></div>
-                Tldr: <em> Can we use crowdsourced images to create 3D models of the world?</em>
-                <div class="paper-authors">with Zaid Tasneem, Akshat Dave, Ashok Veeraraghavan, Ramesh Raskar</div>
-                <div class="paper-status">[<a href="https://zaidtas.github.io/decentnerfs/">Website</a>, 
-                                           <a href="https://arxiv.org/abs/2403.13199">Paper</a>]</div>
-            </div>
-
-            <div class="paper-entry">
-                <div class="paper-name"><strong>Objects as Radiance Field Cameras</strong></div>
-                Tldr: <em> Can we convert arbitrary objects into cameras to recover 3D?</em>
-                <div class="paper-authors">with Akshat Dave, Nikhil Behari, Ramesh Raskar</div>
-                <div class="paper-status">[<a href="https://ktiwary2.github.io/objectsascam/">Website</a>, 
-                                           <a href="https://arxiv.org/pdf/2212.04531">Paper</a>, 
-                                           <a href="https://web.mit.edu/archive/spotlight/reflection-based-camera/">MIT Front Page Spotlight</a>,
-                                           <a href="https://web.media.mit.edu/~ktiwary/talks/csail_vision_seminar_talk.pdf">Slides</a>,
-                                           <a href="https://news.mit.edu/2023/using-reflections-shiny-objects-camera-0510">MIT News</a>,
-                                           <a href="https://www.youtube.com/watch?v=jloeVqQh9zE">Video</a>]</div>
-            </div>
-            
-            <div class="news-item">
-                <strong><a href="https://scholar.google.com/citations?user=XNiV8qIAAAAJ&hl=en" class="Google Scholar" style="color: var(--highlight-color);">Google Scholar (view all publications)</a></strong>
-            </div>
-
         </div>
 
-        <h2 class="section-toggle" onclick="toggleContent('news-content', 'news-icon')">
+        <div id="news-section" class="section">
+            <h2 class="section-toggle" onclick="toggleContent('news-content', 'news-icon')">
+                NEWS <span id="news-icon">+</span>
+            </h2>
+            <div id="news-content" class="hidden-content">
+                <iframe src="news.html" style="width: 100%; height: 100vh; border: none; overflow: hidden;"></iframe>
+            </div>
+        </div>
+
+
+        <!-- <h2 class="section-toggle" onclick="toggleContent('news-content', 'news-icon')">
             NEWS  <span id="news-icon">+</span>
         </h2>
         <div id="news-content" class="hidden-content">
@@ -211,7 +167,7 @@
                 <strong><a href="news.html" class="view-all">(view all)</a></a>
             </div>
         </div>
-
+ -->
         <h2 class="section-toggle" onclick="toggleContent('my-blogs-content', 'my-blogs-icon')">
             MY BLOGS <span id="my-blogs-icon">+</span>
         </h2>
