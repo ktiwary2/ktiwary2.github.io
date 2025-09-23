@@ -4,14 +4,35 @@
 }
 
 :root {
-    --primary-color: #2c3e50;
-    --secondary-color: #3498db;
-    --background-color: #ffffff;
-    --text-color: #333333;
-    --paper-bg: #f8f9fa;
+    --primary-color: #2f2f2e;
+    --secondary-color: #276b0d;
+    --background-color: #c4dfee;
+    --surface-color: var(--background-color);
+    --text-color: #3f3d3d;
+    --paper-bg: var(--background-color);
+    --border-color: #999999;
+    --muted-color: #666666;
+    --link-bg: rgba(64, 12, 170, 0.872);
+    --link-hover-bg: rgba(64, 12, 170, 0.26);
     --highlight-color: #228B22;
     --highlight-color-2: #df4f1b;
     --highlight-color-3: #74A2B9;
+}
+
+body.dark-mode {
+    --primary-color: #bdbebf;
+    --secondary-color: #e6a573;
+    --background-color: #17222e;
+    --surface-color: var(--background-color);
+    --text-color: #c5def6;
+    --paper-bg: var(--background-color);
+    --border-color: rgb(111, 130, 147);
+    --muted-color: #2667a7;
+    --link-bg: rgba(123, 79, 46, 0.18);
+    --link-hover-bg: rgba(241, 122, 30, 0.28);
+    --highlight-color: #5fcf71;
+    --highlight-color-2: #7cb5ff;
+    --highlight-color-3: #8bb6c7;
 }
 
 * {
@@ -25,7 +46,9 @@ body {
     line-height: 1.6;
     color: var(--text-color);
     position: relative;
-    background-color: #ffffff;
+    background-color: var(--background-color);
+    font-size: 1.07rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .background-cover {
@@ -47,8 +70,9 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
-    background-color: #ffffff;
+    background-color: var(--surface-color);
     z-index: 1;
+    transition: background-color 0.3s ease;
 }
 
 .profile-section {
@@ -81,6 +105,16 @@ p {
     margin-bottom: 0.1rem;
 }
 
+a {
+    color: var(--secondary-color);
+    transition: color 0.2s ease;
+}
+
+a:hover,
+a:focus {
+    color: var(--highlight-color-2);
+}
+
 .working-papers {
     margin: 2rem 0;
 }
@@ -104,7 +138,7 @@ p {
 }
 
 .paper-status {
-    color: #666;
+    color: var(--muted-color);
     margin-bottom: 1rem;
 }
 
@@ -120,6 +154,7 @@ p {
     padding: 1.5rem;
     border-radius: 4px;
     transition: transform 0.2s;
+    border: 1px solid var(--border-color);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
@@ -139,7 +174,36 @@ p {
     padding: 1.5rem;
     margin-bottom: 1.5rem;
     border-radius: 4px;
+    border: 1px solid var(--border-color);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+body.dark-mode .research-box,
+body.dark-mode .paper {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.45);
+}
+
+.footnote-bar {
+    background-color: var(--paper-bg);
+    padding: 1.5rem;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.footnote-bar h3 {
+    color: var(--primary-color);
+    font-weight: normal;
+    margin-bottom: 0.75rem;
+}
+
+.footnote-bar p {
+    color: var(--text-color);
+}
+
+body.dark-mode .footnote-bar {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.45);
 }
 
 .paper-title {
@@ -157,19 +221,42 @@ p {
     margin-right: 1rem;
     padding: 4px 8px;
     border-radius: 4px;
-    background-color: rgba(52, 152, 219, 0.1);
+    background-color: var(--link-bg);
     transition: background-color 0.2s;
 }
 
 .links a:hover {
-    background-color: rgba(52, 152, 219, 0.2);
+    background-color: var(--link-hover-bg);
     text-decoration: none;
+}
+
+.theme-toggle {
+    margin-left: 0.5rem;
+    padding: 4px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: transparent;
+    color: var(--text-color);
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus {
+    background-color: var(--link-hover-bg);
+    outline: none;
+}
+
+.theme-toggle:focus-visible {
+    outline: 2px solid var(--secondary-color);
+    outline-offset: 2px;
 }
 
 .section-toggle {
     cursor: pointer;
     user-select: none;
-    border-bottom: 1px solid #999;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .section-toggle span {

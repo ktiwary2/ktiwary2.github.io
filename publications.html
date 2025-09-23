@@ -62,7 +62,46 @@
     .filter-sim { background-color: #d4f1f9; }
     .filter-workshop { background-color: #A8FFD8; }
     .filter-recent { background-color: var(--pastel-orange); }
+
+    .publication-divider {
+      border-top: 1px solid var(--border-color);
+      margin: 20px 0;
+    }
   </style>
+  <script>
+    (function () {
+      const resolveTheme = () => {
+        const savedTheme = localStorage.getItem('preferred-theme');
+        if (savedTheme) {
+          return savedTheme;
+        }
+        return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      };
+
+      const applyTheme = (theme) => {
+        const body = document.body;
+        if (!body) {
+          return;
+        }
+        body.classList.toggle('dark-mode', theme === 'dark');
+      };
+
+      const setInitialTheme = () => applyTheme(resolveTheme());
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setInitialTheme, { once: true });
+      } else {
+        setInitialTheme();
+      }
+
+      window.addEventListener('storage', (event) => {
+        if (event.key === 'preferred-theme') {
+          const nextTheme = event.newValue ? event.newValue : resolveTheme();
+          applyTheme(nextTheme);
+        }
+      });
+    })();
+  </script>
 </head>
 <body>
   <div class="publications-container">
@@ -97,7 +136,7 @@
         <em>(Under Review, Science Magazine)</em>
         <span class="tag ai-tag">#AI For Discovery</span>
       </div>
-      <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
+      <div class="publication-divider"></div>
     </div>
 
     <div class="publication-entry">
@@ -110,7 +149,7 @@
         <span class="tag perspective-tag">#Perspective</span>
         <span class="tag ai-tag">#AI For Discovery</span>
       </div>
-      <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
+      <div class="publication-divider"></div>
     </div>
 
     <div class="publication-entry">
@@ -124,7 +163,7 @@
          <em>(ICLR 2024)</em>]
         <span class="tag cv-tag">#CV/ML</span>
       </div>
-      <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
+      <div class="publication-divider"></div>
 
     </div>
 
@@ -142,7 +181,7 @@
         <span class="tag cv-tag">#CV/ML</span>
         <span class="tag perspective-tag">#Perspective</span>
       </div>
-      <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
+      <div class="publication-divider"></div>
     </div>
 
     <div class="publication-entry">
@@ -154,7 +193,7 @@
         <em>(CVPR 2024)</em>]
         <span class="tag cv-tag">#Computer Vision</span>
       </div>
-      <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
+      <div class="publication-divider"></div>
     </div>
 
     <div class="publication-entry">
@@ -166,7 +205,7 @@
          <em>(CVPR'W 2024)</em>]
         <span class="tag cv-tag">#Computer Vision</span>
       </div>
-      <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
+      <div class="publication-divider"></div>
     </div>
 
     <div class="publication-entry">
@@ -178,7 +217,7 @@
         <em>(ICCV 2023)</em>]
         <span class="tag ai-tag">#AI For Discovery</span>
       </div>
-      <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
+      <div class="publication-divider"></div>
     </div>
 
     <div class="publication-entry">
@@ -194,7 +233,7 @@
          <em>(CVPR 2023)</em>]
         <span class="tag cv-tag">#Computer Vision</span>
       </div>
-      <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
+      <div class="publication-divider"></div>
     </div>
 
     <div class="publication-entry">
@@ -206,7 +245,7 @@
         <em>(ECCV 2022)</em>]
         <span class="tag cv-tag">#Computer Vision</span>
       </div>
-      <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
+      <div class="publication-divider"></div>
     </div>
 
     <!-- #### EXHIBITIONS #### -->  
@@ -221,7 +260,7 @@
         <em>(MIT Museum, 2025)</em>]
         <span class="tag exhibition-tag">#Exhibitions</span>
       </div>
-      <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
+      <div class="publication-divider"></div>
     </div>
 
   <div class="publication-entry">
@@ -235,7 +274,7 @@
        <em>(Museum of Science, 2025)</em>]
       <span class="tag exhibition-tag">#Exhibitions</span>
     </div>
-    <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
+    <div class="publication-divider"></div>
   </div>
 
     <!-- #### PERSPECTIVE PAPERS #### -->  
@@ -248,7 +287,7 @@
        <em>(Decentralized AI, MIT Media Lab, 2024)</em>]
       <span class="tag perspective-tag">#Perspective</span>
     </div>
-    <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
+    <div class="publication-divider"></div>
   </div>
 
   <div class="publication-entry">
@@ -261,7 +300,7 @@
       <span class="tag perspective-tag">#Perspective</span>
       <span class="tag cv-tag">#Computer Vision</span>
     </div>
-    <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
+    <div class="publication-divider"></div>
   </div>
 
 
@@ -275,7 +314,7 @@
       <span class="tag patent-tag">#Patent</span>
       <span class="tag cv-tag">#Computer Vision</span>
     </div>
-    <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
+    <div class="publication-divider"></div>
   </div>
 
 
@@ -289,7 +328,7 @@
       <span class="tag patent-tag">#Patent</span>
       <span class="tag cv-tag">#Computer Vision</span>
     </div>
-    <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
+    <div class="publication-divider"></div>
   </div>
 
   <!-- #### WORKSHOPS #### -->
@@ -304,7 +343,7 @@
       <span class="tag workshop-tag">#Workshop</span>
       <span class="tag cv-tag">#Computer Vision</span>
     </div>
-    <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
+    <div class="publication-divider"></div>
   </div>
 
   <div class="publication-entry">
@@ -315,7 +354,7 @@
       [<em>(MIT Member's Week 2023)</em>]
       <span class="tag workshop-tag">#Workshop</span>
     </div>
-    <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
+    <div class="publication-divider"></div>
   </div>
 
   <!-- #### OPEN SOURCE CODE #### -->
@@ -328,7 +367,7 @@
       <span class="tag sim-tag">#Open Source</span>
       <span class="tag ai-tag">#AI For Discovery</span>
     </div>
-    <div style="border-top: 1px solid #ccc; margin: 20px 0;"></div>
+    <div class="publication-divider"></div>
   </div>
 </div>
 
