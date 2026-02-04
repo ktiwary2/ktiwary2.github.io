@@ -355,11 +355,18 @@
                            [...tags].some(t => t.classList.contains(tag));
             item.style.display = (tag === 'all' || hasTag) ? 'block' : 'none';
           });
+          requestAnimationFrame(notifyParentHeight);
         }
       
+        function notifyParentHeight() {
+          const height = document.documentElement.scrollHeight;
+          window.parent.postMessage({ type: 'news-resize', height: height }, '*');
+        }
+
         // Show recent by default
         document.addEventListener("DOMContentLoaded", () => {
           filterNews('recent-news');
+          notifyParentHeight();
         });
       </script>
       

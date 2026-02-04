@@ -386,16 +386,24 @@
         : [...tags].some(t => t.classList.contains(tag));
       entry.style.display = hasTag ? 'block' : 'none';
     });
+    requestAnimationFrame(notifyParentHeight);
   }
 
   function showAll() {
     document.querySelectorAll('.publication-entry').forEach(entry => {
       entry.style.display = 'block';
     });
+    requestAnimationFrame(notifyParentHeight);
+  }
+
+  function notifyParentHeight() {
+    const height = document.documentElement.scrollHeight;
+    window.parent.postMessage({ type: 'publications-resize', height: height }, '*');
   }
 
   document.addEventListener('DOMContentLoaded', () => {
     filterByTag('recent');
+    notifyParentHeight();
   });
 </script>
 
