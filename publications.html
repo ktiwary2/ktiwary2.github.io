@@ -69,38 +69,31 @@
     }
   </style>
   <script>
-    (function () {
-      const resolveTheme = () => {
-        const savedTheme = localStorage.getItem('preferred-theme');
-        if (savedTheme) {
-          return savedTheme;
-        }
-        return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      };
+    function resolveTheme() {
+      const savedTheme = localStorage.getItem('preferred-theme');
+      if (savedTheme) return savedTheme;
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
 
-      const applyTheme = (theme) => {
-        const body = document.body;
-        if (!body) {
-          return;
-        }
-        body.classList.toggle('dark-mode', theme === 'dark');
-      };
+    function applyTheme(theme) {
+      var body = document.body;
+      if (!body) return;
+      body.classList.toggle('dark-mode', theme === 'dark');
+    }
 
-      const setInitialTheme = () => applyTheme(resolveTheme());
+    function syncTheme() { applyTheme(resolveTheme()); }
 
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', setInitialTheme, { once: true });
-      } else {
-        setInitialTheme();
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', syncTheme, { once: true });
+    } else {
+      syncTheme();
+    }
+
+    window.addEventListener('storage', function(event) {
+      if (event.key === 'preferred-theme') {
+        applyTheme(event.newValue || resolveTheme());
       }
-
-      window.addEventListener('storage', (event) => {
-        if (event.key === 'preferred-theme') {
-          const nextTheme = event.newValue ? event.newValue : resolveTheme();
-          applyTheme(nextTheme);
-        }
-      });
-    })();
+    });
   </script>
   <script src="evolving_cursor.js" defer></script>
 </head>
@@ -397,13 +390,21 @@
   }
 
   function notifyParentHeight() {
-    const height = document.documentElement.scrollHeight;
+    const container = document.querySelector('.publications-container');
+    const height = container ? container.offsetHeight : document.documentElement.scrollHeight;
     window.parent.postMessage({ type: 'publications-resize', height: height }, '*');
   }
 
   document.addEventListener('DOMContentLoaded', () => {
     filterByTag('recent');
     notifyParentHeight();
+  });
+
+  window.addEventListener('message', (e) => {
+    if (e.data && e.data.type === 'recalc-height') {
+      syncTheme();
+      requestAnimationFrame(notifyParentHeight);
+    }
   });
 </script>
 

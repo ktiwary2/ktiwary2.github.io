@@ -359,7 +359,8 @@
         }
       
         function notifyParentHeight() {
-          const height = document.documentElement.scrollHeight;
+          const container = document.querySelector('.news-container');
+          const height = container ? container.offsetHeight : document.documentElement.scrollHeight;
           window.parent.postMessage({ type: 'news-resize', height: height }, '*');
         }
 
@@ -367,6 +368,12 @@
         document.addEventListener("DOMContentLoaded", () => {
           filterNews('recent-news');
           notifyParentHeight();
+        });
+
+        window.addEventListener('message', (e) => {
+          if (e.data && e.data.type === 'recalc-height') {
+            requestAnimationFrame(notifyParentHeight);
+          }
         });
       </script>
       

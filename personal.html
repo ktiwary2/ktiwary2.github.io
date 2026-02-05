@@ -5,6 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Me - Kushagra "Kush" Tiwary</title>
     <link rel="stylesheet" href="styles.css">
+    <script>
+        function applyTheme(theme) {
+            document.body.classList.toggle('dark-mode', theme === 'dark');
+            const toggleButtons = document.querySelectorAll('.theme-toggle');
+            toggleButtons.forEach(function(btn) {
+                btn.textContent = theme === 'dark' ? 'Light Mode' : 'Dark Mode';
+                btn.setAttribute('aria-pressed', theme === 'dark');
+            });
+        }
+
+        function toggleTheme() {
+            const nextTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+            localStorage.setItem('preferred-theme', nextTheme);
+            applyTheme(nextTheme);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const darkQuery = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+            const savedTheme = localStorage.getItem('preferred-theme');
+            const preferredTheme = savedTheme || (darkQuery && darkQuery.matches ? 'dark' : 'light');
+            applyTheme(preferredTheme);
+
+            if (darkQuery) {
+                darkQuery.addEventListener('change', function(e) {
+                    if (!localStorage.getItem('preferred-theme')) {
+                        applyTheme(e.matches ? 'dark' : 'light');
+                    }
+                });
+            }
+
+            const themeToggleButtons = document.querySelectorAll('.theme-toggle');
+            themeToggleButtons.forEach(function(btn) { btn.addEventListener('click', toggleTheme); });
+        });
+    </script>
     <style>
         .media-grid {
             display: grid;
@@ -46,9 +80,24 @@
     </style>
 </head>
 <body>
+    <nav class="top-nav" aria-label="Top navigation">
+        <a href="index.html">Home</a>
+        <span class="divider">•</span>
+        <a href="index.html#publications-section">Research</a>
+        <span class="divider">•</span>
+        <a href="index.html#news-section">News</a>
+        <span class="divider">•</span>
+        <a href="personal.html">About</a>
+        <span class="divider">•</span>
+        <a href="mailto:ktiwary@mit.edu">Contact</a>
+    </nav>
+    <div class="cursor-controls">
+        <div class="cursor-control-stack">
+            <button class="cursor-toggle theme-toggle" type="button" aria-pressed="false">Dark Mode</button>
+        </div>
+    </div>
     <div class="container">
         <h1>Personal</h1>
-        <p><a href="index.html">← Back to homepage</a></p>
 
         
         <div class="media-grid">

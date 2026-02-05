@@ -20,6 +20,13 @@
             const isHidden = content.style.display === "none" || content.style.display === "";
             content.style.display = isHidden ? "block" : "none";
             icon.textContent = isHidden ? "−" : "+";
+            // Tell any iframes inside to re-measure their height now that they're visible
+            if (isHidden) {
+                var iframes = content.querySelectorAll('iframe');
+                iframes.forEach(function(f) {
+                    f.contentWindow.postMessage({ type: 'recalc-height' }, '*');
+                });
+            }
         }
 
         function openPublications() {
@@ -133,6 +140,7 @@
                 <img src="images/art.jpg" alt="Indian miniature painting style transfer" class="profile-image hover-image">
             </div>
         </div>
+        <p class="download-photo"><a href="images/kush.jpeg" download>Download Photo</a></p>
         <h1>Kushagra "Kush" Tiwary</h1>
         <h4>
             <!-- <p>  -->
@@ -144,44 +152,46 @@
                 <a href="https://github.com/ktiwary" target="_blank">GitHub</a> |
                 <a href="https://x.com/ktiwarylab" target="_blank">X</a> |
                 <a href="https://scholar.google.com/citations?user=XNiV8qIAAAAJ&hl=en" target="_blank">Google Scholar</a> |
-                <a href="files/2_page_CV.pdf" target="_blank">CV</a> |
-                <a href="images/kush.jpeg" download="kush.jpeg" target="_blank">Download Image</a>
+                <a href="files/2_page_CV.pdf" target="_blank">CV</a>
         </h4>
         <hr style="border-top: 1px solid var(--primary-color); width: 100%; margin: 2rem 0;">
         
-        <p> I'm a 3rd year PhD Student at MIT co-advised by <a href="https://people.csail.mit.edu/boris/boris.html" target="_blank">Boris Katz</a>, <a href="https://poggio-lab.mit.edu/people/tomaso-poggio/" target="_blank">Tomaso Poggio</a>, and <a href="https://web.media.mit.edu/~raskar/" target="_blank">Ramesh Raskar</a>. 
+        <div class="bio">
+        <p> I'm a 3rd year PhD Student at MIT co-advised by <a href="https://people.csail.mit.edu/boris/boris.html" target="_blank">Boris Katz</a>, <a href="https://poggio-lab.mit.edu/people/tomaso-poggio/" target="_blank">Tomaso Poggio</a>, and <a href="https://web.media.mit.edu/~raskar/" target="_blank">Ramesh Raskar</a>.
             I also work closely with <a href="https://briancheung.github.io/" target="_blank">Brian Cheung</a>.
             I received my S.M. in 2023 from MIT, where I worked on 3D vision and imaging, specifically on incorporating realistic physics of light propagation to improve neural rendering.
-            I received my B.S.'19 ECE from University of Illinois at Urbana-Champaign. 
-            Prior to MIT, I worked on vision and robotics and built the <a href="https://karpathy.medium.com/software-2-0-a64152b37c35" target="_blank">Software 2.0</a> stack at a self driving startup called <a href="https://techcrunch.com/2022/01/11/magna-acquires-autonomous-vehicle-startup-optimus-ride/" target="_blank">Optimus Ride</a>. 
-        </p><br>
+            I received my B.S.'19 ECE from University of Illinois at Urbana-Champaign.
+            Prior to MIT, I worked on vision and robotics and built the <a href="https://karpathy.medium.com/software-2-0-a64152b37c35" target="_blank">Software 2.0</a> stack at a self driving startup called <a href="https://techcrunch.com/2022/01/11/magna-acquires-autonomous-vehicle-startup-optimus-ride/" target="_blank">Optimus Ride</a>.
+        </p>
 
         <p>
             <strong>My research builds artificial intelligence that can discover new scientific phenomena and designs.</strong>
-            I let AI agents interact and evolve inside simulated worlds grounded by physical law;
+            I let AI agents interact and evolve inside simulated worlds grounded by physical laws;
             intelligence emerges through embodiment and interaction, and with it, discovery.
             Among the phenomena I study is intelligence itself — what gives rise to its emergence
             and diversity, and how those principles can inform the design of new artificial intelligence.
-            I am broadly interested in AI, AI for science, simulation and modeling, science of intelligence, neuroevolution.
-            <br>
-            <br>
-        I’m also passionate about public engagement and science advocacy. 
+            I am broadly interested in AI, AI for science, simulation and modeling, science of intelligence, and neuroevolution.
+        </p>
+
+        <p>
+        I'm also passionate about public engagement and science advocacy.
         Recently, I wanted to show how AI can be more than just a tool for automation but also used to understand human and animal perception.
-        I've exhibited works at the <a href="https://www.eyes.mit.edu/exhibitions/mit-museum/" target="_blank">MIT Museum</a> and 
+        I've exhibited works at the <a href="https://www.eyes.mit.edu/exhibitions/mit-museum/" target="_blank">MIT Museum</a> and
         the <a href="https://www.eyes.mit.edu/exhibitions/mos/" target="_blank">Museum of Science</a>.
         </p>
-    <br>
-    <p>
+
+        <p>
         I am grateful to be the first in my extended family to be in a PhD program.
         To learn more about how to apply to PhD programs, please look at the
-        <a href="https://www.media.mit.edu/posts/sos-grad-school-mentoring-program/" target="_blank">Media Lab’s SOS Program</a> and the
+        <a href="https://www.media.mit.edu/posts/sos-grad-school-mentoring-program/" target="_blank">Media Lab's SOS Program</a> and the
         <a href="https://eecs-phd-gaap.mit.edu/" target="_blank">EECS Graduate Application Assistance Program (GAAP)</a>.
         Reach out to chat or collaborate.
         </p>
+        </div>
         
 
         <div class="working-papers">
-            <h2 style="color: var(--highlight-color-2);">Working Snapshots<sup>1</sup></h2>
+            <h2 style="color: var(--highlight-color-2);">Working Snapshots</h2>
 
             <div class="paper-entry" style="display: flex; gap: 1rem; align-items: center; margin-bottom: 2rem;">
               <div style="flex: 1;">
@@ -191,7 +201,9 @@
                   [<a href="https://redwood.berkeley.edu/seminars/kushagra-tiwary-june-2025/" target="_blank">Seminar Page</a>]
                 </div>
               </div>
-              <iframe src="https://archive.org/embed/Redwood_Center_2025_06_25_Kushagra_Tiwary" width="320" height="240" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen></iframe>
+              <div class="video-facade" style="width:320px;height:240px;background-image:url('https://archive.org/services/img/Redwood_Center_2025_06_25_Kushagra_Tiwary');" onclick="this.innerHTML='<iframe src=\'https://archive.org/embed/Redwood_Center_2025_06_25_Kushagra_Tiwary\' width=\'320\' height=\'240\' frameborder=\'0\' allowfullscreen><\/iframe>'">
+                <div class="video-play-btn"></div>
+              </div>
             </div>
 
             <div class="paper-entry" style="display: flex; gap: 1rem; align-items: center; margin-bottom: 2rem;">
@@ -202,7 +214,9 @@
                   [<a href="https://www.youtube.com/watch?v=sUkcgYKBTr8" target="_blank">Youtube Link</a>]
                 </div>
               </div>
-              <iframe width="320" height="180" src="https://www.youtube.com/embed/sUkcgYKBTr8" frameborder="0" allowfullscreen></iframe>
+              <div class="video-facade" style="width:320px;height:180px;background-image:url('https://img.youtube.com/vi/sUkcgYKBTr8/hqdefault.jpg');" onclick="this.innerHTML='<iframe width=\'320\' height=\'180\' src=\'https://www.youtube.com/embed/sUkcgYKBTr8?autoplay=1\' frameborder=\'0\' allowfullscreen><\/iframe>'">
+                <div class="video-play-btn"></div>
+              </div>
             </div>
           
             <div class="paper-entry" style="display: flex; gap: 1rem; align-items: center; margin-top: 2rem;">
@@ -212,7 +226,9 @@
                   [<a href="https://www.youtube.com/watch?v=OuPwGkzh6nM" target="_blank">Youtube Link</a>]
                 </div>
               </div>
-              <iframe width="320" height="180" src="https://www.youtube.com/embed/OuPwGkzh6nM" frameborder="0" allowfullscreen></iframe>
+              <div class="video-facade" style="width:320px;height:180px;background-image:url('https://img.youtube.com/vi/OuPwGkzh6nM/hqdefault.jpg');" onclick="this.innerHTML='<iframe width=\'320\' height=\'180\' src=\'https://www.youtube.com/embed/OuPwGkzh6nM?autoplay=1\' frameborder=\'0\' allowfullscreen><\/iframe>'">
+                <div class="video-play-btn"></div>
+              </div>
             </div>
           </div>                    
         
@@ -259,16 +275,9 @@
             </div>
         </div>
 
-        <h2 class="section-toggle" onclick="toggleContent('personal-content', 'personal-icon')">
-            PERSONAL <span id="personal-icon">+</span>
-        </h2>
-        <div id="personal-content" class="hidden-content">
-            <!-- Personal content will go here -->
-        <div class="personal-item">
-            <a href="personal.html" target="_blank">Learn more about me</a>
-        </div>
-        </div>
-        <div style="height: 3vh; background-color: var(--background-color);"></div>
+        <footer class="site-footer">
+            <a href="#">Back to top</a>
+        </footer>
     </div>
 </body>
 </html>
