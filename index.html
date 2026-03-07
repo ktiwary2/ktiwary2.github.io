@@ -29,23 +29,16 @@
             }
         }
 
-        function openPublications() {
-            const content = document.getElementById('papers-content');
-            const icon = document.getElementById('papers-icon');
-            if (content && (content.style.display === "none" || content.style.display === "")) {
-                content.style.display = "block";
-            }
-            if (icon) {
-                icon.textContent = "−";
-            }
-        }
-
         function applyTheme(theme) {
             document.body.classList.toggle('dark-mode', theme === 'dark');
             const toggleButtons = document.querySelectorAll('.theme-toggle');
             toggleButtons.forEach(function(btn) {
                 btn.textContent = theme === 'dark' ? 'Light Mode' : 'Dark Mode';
                 btn.setAttribute('aria-pressed', theme === 'dark');
+            });
+            // Notify iframes of theme change (storage events don't fire in same page)
+            document.querySelectorAll('iframe').forEach(function(iframe) {
+                try { iframe.contentWindow.postMessage({ type: 'theme-change', theme: theme }, '*'); } catch(e) {}
             });
         }
 
@@ -58,7 +51,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const darkQuery = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
             const savedTheme = localStorage.getItem('preferred-theme');
-            const preferredTheme = savedTheme || (darkQuery && darkQuery.matches ? 'dark' : 'light');
+            const preferredTheme = savedTheme || 'dark';
 
             applyTheme(preferredTheme);
 
@@ -79,22 +72,32 @@
                 showHighlighted();
             }
 
-            // Dynamically resize iframes to fit content
-            window.addEventListener('message', function(e) {
-                if (e.data && e.data.type === 'news-resize') {
-                    const frame = document.getElementById('news-frame');
-                    if (frame) frame.style.height = e.data.height + 'px';
-                }
-                if (e.data && e.data.type === 'publications-resize') {
-                    const frame = document.getElementById('publications-frame');
-                    if (frame) frame.style.height = e.data.height + 'px';
-                }
-            });
+        });
+
+        // Dynamically resize iframes to fit content (registered early to avoid race condition)
+        window.addEventListener('message', function(e) {
+            if (e.data && e.data.type === 'news-resize') {
+                var frame = document.getElementById('news-frame');
+                if (frame) frame.style.height = e.data.height + 'px';
+            }
+            if (e.data && e.data.type === 'publications-resize') {
+                var frame = document.getElementById('publications-frame');
+                if (frame) frame.style.height = e.data.height + 'px';
+            }
         });
     </script>
     <script src="evolving_cursor.js" defer></script>
 </head>
 <body>
+    <!-- SVG filter definitions for organic brushstroke dividers -->
+    <svg style="position:absolute;width:0;height:0" aria-hidden="true">
+        <defs>
+            <filter id="roughen" x="-5%" y="-5%" width="110%" height="110%">
+                <feTurbulence type="turbulence" baseFrequency="0.035" numOctaves="4" result="noise" seed="2"/>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+        </defs>
+    </svg>
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PNX89M4H" 
         height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -102,11 +105,9 @@
     <nav class="top-nav" aria-label="Top navigation">
         <a href="index.html">Home</a>
         <span class="divider">•</span>
-        <a href="#publications-section" onclick="openPublications()">Research</a>
-        <span class="divider">•</span>
         <a href="#news-section">News</a>
         <span class="divider">•</span>
-        <a href="personal.html">About</a>
+        <a href="personal.html">Personal</a>
         <span class="divider">•</span>
         <a href="mailto:ktiwary@mit.edu">Contact</a>
     </nav>
@@ -134,13 +135,16 @@
     <canvas id="cursor-canvas" class="cursor-canvas" aria-hidden="true"></canvas>
     <div class="container">
 
+        <div class="hero-canvas-wrap">
+            <img id="hero-painting" src="images/hero_painting.jpg" alt="" aria-hidden="true">
+        </div>
+
         <div class="profile-image-container">
             <img src="images/kush.jpeg" alt="Kushagra Tiwary" class="profile-image original-image">
             <div class="hover-image-container">
                 <img src="images/art.jpg" alt="Indian miniature painting style transfer" class="profile-image hover-image">
             </div>
         </div>
-        <p class="download-photo"><a href="images/kush.jpeg" download>Download Photo</a></p>
         <h1>Kushagra "Kush" Tiwary</h1>
         <h4>
             <!-- <p>  -->
@@ -152,103 +156,93 @@
                 <a href="https://github.com/ktiwary" target="_blank">GitHub</a> |
                 <a href="https://x.com/ktiwarylab" target="_blank">X</a> |
                 <a href="https://scholar.google.com/citations?user=XNiV8qIAAAAJ&hl=en" target="_blank">Google Scholar</a> |
-                <a href="files/2_page_CV.pdf" target="_blank">CV</a>
+                <a href="files/2_page_CV.pdf" target="_blank">CV</a> |
+                <a href="images/kush.jpeg" download>Photo</a>
         </h4>
-        <hr style="border-top: 1px solid var(--primary-color); width: 100%; margin: 2rem 0;">
-        
+
+        <svg class="brushstroke-divider" viewBox="0 0 800 18" preserveAspectRatio="none">
+            <path d="M0,8 C130,14 280,3 420,10 C560,17 690,5 800,9"/>
+        </svg>
+
         <div class="bio">
-        <p> I'm a 3rd year PhD Student at MIT co-advised by <a href="https://people.csail.mit.edu/boris/boris.html" target="_blank">Boris Katz</a>, <a href="https://poggio-lab.mit.edu/people/tomaso-poggio/" target="_blank">Tomaso Poggio</a>, and <a href="https://web.media.mit.edu/~raskar/" target="_blank">Ramesh Raskar</a>.
-            I also work closely with <a href="https://briancheung.github.io/" target="_blank">Brian Cheung</a>.
+        <p>I'm a 3rd year PhD Student at MIT co-advised by <a href="https://people.csail.mit.edu/boris/boris.html" target="_blank">Boris Katz</a>, <a href="https://poggio-lab.mit.edu/people/tomaso-poggio/" target="_blank">Tomaso Poggio</a>, and <a href="https://web.media.mit.edu/~raskar/" target="_blank">Ramesh Raskar</a>.
+            I also work closely with <a href="https://briancheung.github.io/" target="_blank">Brian Cheung</a>. 
+            <br>
+            <br>
+            My research builds machines that discover new scientific principles and designs. 
+            This includes building the intelligence that can discover new things and design worlds where discovery can happen, i.e. 
+            understanding what computational principles produce intelligence that can 
+            discover requires worlds for that intelligence to discover in, and those worlds must keep discovery honest.
+            <br>
+            <br>
             I received my S.M. in 2023 from MIT, where I worked on 3D vision and imaging, specifically on incorporating realistic physics of light propagation to improve neural rendering.
-            I received my B.S.'19 ECE from University of Illinois at Urbana-Champaign.
-            Prior to MIT, I worked on vision and robotics and built the <a href="https://karpathy.medium.com/software-2-0-a64152b37c35" target="_blank">Software 2.0</a> stack at a self driving startup called <a href="https://techcrunch.com/2022/01/11/magna-acquires-autonomous-vehicle-startup-optimus-ride/" target="_blank">Optimus Ride</a>.
+            I received my B.S.'19 in ECE from the University of Illinois at Urbana-Champaign where I worked on computer vision and robotics.
+            <!-- <br> -->
+            <!-- <br> -->
+            Prior to MIT, I worked on vision and robotics and built the <a href="https://karpathy.medium.com/software-2-0-a64152b37c35" target="_blank">Software 2.0</a> stack at a self-driving startup called <a href="https://techcrunch.com/2022/01/11/magna-acquires-autonomous-vehicle-startup-optimus-ride/" target="_blank">Optimus Ride</a>.
         </p>
 
-        <p>
-            <strong>My research builds artificial intelligence that can discover new scientific phenomena and designs.</strong>
-            I let AI agents interact and evolve inside simulated worlds grounded by physical laws;
-            intelligence emerges through embodiment and interaction, and with it, discovery.
-            Among the phenomena I study is intelligence itself — what gives rise to its emergence
-            and diversity, and how those principles can inform the design of new artificial intelligence.
-            I am broadly interested in AI, AI for science, simulation and modeling, science of intelligence, and neuroevolution.
-        </p>
-
-        <p>
-        I'm also passionate about public engagement and science advocacy.
-        Recently, I wanted to show how AI can be more than just a tool for automation but also used to understand human and animal perception.
-        I've exhibited works at the <a href="https://www.eyes.mit.edu/exhibitions/mit-museum/" target="_blank">MIT Museum</a> and
-        the <a href="https://www.eyes.mit.edu/exhibitions/mos/" target="_blank">Museum of Science</a>.
-        </p>
-
-        <p>
-        I am grateful to be the first in my extended family to be in a PhD program.
-        To learn more about how to apply to PhD programs, please look at the
-        <a href="https://www.media.mit.edu/posts/sos-grad-school-mentoring-program/" target="_blank">Media Lab's SOS Program</a> and the
-        <a href="https://eecs-phd-gaap.mit.edu/" target="_blank">EECS Graduate Application Assistance Program (GAAP)</a>.
-        Reach out to chat or collaborate.
-        </p>
+        <p>I've exhibited work at the <a href="https://www.eyes.mit.edu/exhibitions/mit-museum/" target="_blank">MIT Museum</a> and the <a href="https://www.eyes.mit.edu/exhibitions/mos/" target="_blank">Museum of Science</a>, and I'm grateful to be the first in my extended family to be in a PhD program. Reach out to chat or collaborate.</p>
         </div>
+
+        <div id="research-section">
+            <ul class="evidence-list">
+                <li>
+                    <div class="evidence-video">
+                        <div class="video-facade video-facade-sm" style="background-image:url('https://archive.org/services/img/Redwood_Center_2025_06_25_Kushagra_Tiwary');" onclick="this.innerHTML='<iframe src=\'https://archive.org/embed/Redwood_Center_2025_06_25_Kushagra_Tiwary\' width=\'140\' height=\'79\' frameborder=\'0\' allowfullscreen><\/iframe>'">
+                            <div class="video-play-btn video-play-btn-sm"></div>
+                        </div>
+                        <span><strong>Embodied Eyes For Scientific Discovery</strong> — Redwood Center, UC Berkeley [<a href="https://redwood.berkeley.edu/seminars/kushagra-tiwary-june-2025/" target="_blank">Seminar Page</a>]</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="evidence-video">
+                        <div class="video-facade video-facade-sm" style="background-image:url('https://img.youtube.com/vi/sUkcgYKBTr8/hqdefault.jpg');" onclick="this.innerHTML='<iframe width=\'140\' height=\'79\' src=\'https://www.youtube.com/embed/sUkcgYKBTr8?autoplay=1\' frameborder=\'0\' allowfullscreen><\/iframe>'">
+                            <div class="video-play-btn video-play-btn-sm"></div>
+                        </div>
+                        <span><strong>What-If Machines for Vision</strong> — MIT Imagination in Action [<a href="https://www.youtube.com/watch?v=sUkcgYKBTr8" target="_blank">Youtube</a>]</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="evidence-video">
+                        <div class="video-facade video-facade-sm" style="background-image:url('https://img.youtube.com/vi/OuPwGkzh6nM/hqdefault.jpg');" onclick="this.innerHTML='<iframe width=\'140\' height=\'79\' src=\'https://www.youtube.com/embed/OuPwGkzh6nM?autoplay=1\' frameborder=\'0\' allowfullscreen><\/iframe>'">
+                            <div class="video-play-btn video-play-btn-sm"></div>
+                        </div>
+                        <span><strong>TEDx Boston</strong> — Can AI Recreate 500 Million Years of Vision Evolution? [<a href="https://www.youtube.com/watch?v=OuPwGkzh6nM" target="_blank">Youtube</a>]</span>
+                    </div>
+                </li>
+            </ul>
+        </div>                    
         
+        <svg class="brushstroke-divider" viewBox="0 0 800 18" preserveAspectRatio="none">
+            <path d="M0,10 C120,3 300,16 450,7 C600,-1 700,14 800,8"/>
+        </svg>
 
-        <div class="working-papers">
-            <h2 style="color: var(--highlight-color-2);">Working Snapshots</h2>
-
-            <div class="paper-entry" style="display: flex; gap: 1rem; align-items: center; margin-bottom: 2rem;">
-              <div style="flex: 1;">
-                <div class="paper-name">Embodied Eyes For Scientific Discovery: Generation and Verification Loops to ask the "why" questions in vision</div>
-                <div class="paper-authors">Redwood Center for Theoretical Neuroscience, UC Berkeley</div>
-                <div class="paper-status">
-                  [<a href="https://redwood.berkeley.edu/seminars/kushagra-tiwary-june-2025/" target="_blank">Seminar Page</a>]
-                </div>
-              </div>
-              <div class="video-facade" style="width:320px;height:240px;background-image:url('https://archive.org/services/img/Redwood_Center_2025_06_25_Kushagra_Tiwary');" onclick="this.innerHTML='<iframe src=\'https://archive.org/embed/Redwood_Center_2025_06_25_Kushagra_Tiwary\' width=\'320\' height=\'240\' frameborder=\'0\' allowfullscreen><\/iframe>'">
-                <div class="video-play-btn"></div>
-              </div>
-            </div>
-
-            <div class="paper-entry" style="display: flex; gap: 1rem; align-items: center; margin-bottom: 2rem;">
-              <div style="flex: 1;">
-                <div class="paper-name">What-If Machines for Vision: Evolving Eyes and Brains with AI</div>
-                <div class="paper-authors">AI For Science: Imagination in Action @ MIT</div>
-                <div class="paper-status">
-                  [<a href="https://www.youtube.com/watch?v=sUkcgYKBTr8" target="_blank">Youtube Link</a>]
-                </div>
-              </div>
-              <div class="video-facade" style="width:320px;height:180px;background-image:url('https://img.youtube.com/vi/sUkcgYKBTr8/hqdefault.jpg');" onclick="this.innerHTML='<iframe width=\'320\' height=\'180\' src=\'https://www.youtube.com/embed/sUkcgYKBTr8?autoplay=1\' frameborder=\'0\' allowfullscreen><\/iframe>'">
-                <div class="video-play-btn"></div>
-              </div>
-            </div>
-          
-            <div class="paper-entry" style="display: flex; gap: 1rem; align-items: center; margin-top: 2rem;">
-              <div style="flex: 1;">
-                <div class="paper-name">Tedx Boston: Can AI Recreate 500 Million Years of Vision Evolution?</div>
-                <div class="paper-status">
-                  [<a href="https://www.youtube.com/watch?v=OuPwGkzh6nM" target="_blank">Youtube Link</a>]
-                </div>
-              </div>
-              <div class="video-facade" style="width:320px;height:180px;background-image:url('https://img.youtube.com/vi/OuPwGkzh6nM/hqdefault.jpg');" onclick="this.innerHTML='<iframe width=\'320\' height=\'180\' src=\'https://www.youtube.com/embed/OuPwGkzh6nM?autoplay=1\' frameborder=\'0\' allowfullscreen><\/iframe>'">
-                <div class="video-play-btn"></div>
-              </div>
-            </div>
-          </div>                    
-        
         <div id="news-section" class="section">
             <h2 class="section-toggle" onclick="toggleContent('news-content', 'news-icon')">
-                NEWS <span id="news-icon">-</span>
+                NEWS <span id="news-icon">+</span>
             </h2>
-            <div id="news-content">
-                <iframe src="news.html" name="news-frame" id="news-frame" style="width: 100%; border: none; overflow: hidden;"></iframe>
+            <div id="news-content" style="display: none;">
+                <iframe src="news.html" name="news-frame" id="news-frame" scrolling="no" style="width: 100%; border: none; overflow: hidden; height: 600px;"></iframe>
             </div>
         </div>
+
+        <svg class="brushstroke-divider" viewBox="0 0 800 18" preserveAspectRatio="none">
+            <path d="M0,7 C200,14 350,2 500,10 C650,18 750,4 800,9"/>
+        </svg>
 
         <div id="publications-section" class="section">
             <h2 class="section-toggle" onclick="toggleContent('papers-content', 'papers-icon')">
-                PUBLICATIONS <span id="papers-icon">+</span>
+                MY WORKS <span id="papers-icon">+</span>
             </h2>
-            <div id="papers-content" class="hidden-content">
-                <iframe src="publications.html" name="publications-frame" id="publications-frame" style="width: 100%; border: none; overflow: hidden;"></iframe>
+            <div id="papers-content" style="display: none;">
+                <iframe src="publications.html" name="publications-frame" id="publications-frame" scrolling="no" style="width: 100%; border: none; overflow: hidden; height: 800px;"></iframe>
             </div>
         </div>
+
+        <svg class="brushstroke-divider" viewBox="0 0 800 18" preserveAspectRatio="none">
+            <path d="M0,8 C180,15 320,3 480,11 C640,2 720,13 800,7"/>
+        </svg>
 
         <h2 class="section-toggle" onclick="toggleContent('my-blogs-content', 'my-blogs-icon')">
             MY BLOGS <span id="my-blogs-icon">+</span>
@@ -277,6 +271,7 @@
 
         <footer class="site-footer">
             <a href="#">Back to top</a>
+            <p>&copy; Kushagra Tiwary. All rights reserved.</p>
         </footer>
     </div>
 </body>

@@ -18,15 +18,14 @@
   
     .tag {
       display: inline-block;
-      padding: 0.35em 0.9em;
-      margin: 0.3em 0.4em 0.3em 0;
-      border-radius: 12px;
-      font-size: 0.75em;
+      padding: 0.15em 0.5em;
+      margin: 0 0 0 0.3em;
+      border-radius: 4px;
+      font-size: 0.7em;
       font-weight: 600;
       color: #333;
-      background-color: #ddd;
     }
-  
+
     .cv-tag { background-color: var(--pastel-blue); }
     .ai-tag { background-color: var(--pastel-purple); }
     .perspective-tag { background-color: var(--pastel-pink); }
@@ -35,23 +34,29 @@
     .sim-tag { background-color: #d4f1f9; }
     .workshop-tag { background-color: #A8FFD8; }
     .recent-tag { background-color: var(--pastel-orange); }
-  
+
+    .dark-mode .tag { color: #1a1a1a; }
+
     .filter-menu {
-      margin-bottom: 1.5em;
+      margin-bottom: 1em;
     }
-  
+
     .filter-menu span {
       display: inline-block;
-      margin: 0.3em 0.4em 0.3em 0;
-      padding: 0.45em 1em;
-      border-radius: 14px;
-      font-size: 0.85em;
+      margin: 0 0.3em 0.3em 0;
+      padding: 0.15em 0.5em;
+      border-radius: 4px;
+      font-size: 0.8em;
       font-weight: 600;
       cursor: pointer;
       border: none;
       color: #333;
     }
-  
+
+    .dark-mode .filter-menu span { color: #1a1a1a; }
+
+    .filter-menu span:hover { opacity: 0.8; }
+
     .filter-all { background-color: #ddd; }
     .filter-cv { background-color: var(--pastel-blue); }
     .filter-ml { background-color: var(--pastel-green); }
@@ -62,6 +67,10 @@
     .filter-sim { background-color: #d4f1f9; }
     .filter-workshop { background-color: #A8FFD8; }
     .filter-recent { background-color: var(--pastel-orange); }
+
+    .publications-container {
+      max-width: 680px;
+    }
 
     .publication-divider {
       border-top: 1px solid var(--border-color);
@@ -88,6 +97,12 @@
     } else {
       syncTheme();
     }
+
+    window.addEventListener('message', function(event) {
+      if (event.data && event.data.type === 'theme-change') {
+        applyTheme(event.data.theme);
+      }
+    });
 
     window.addEventListener('storage', function(event) {
       if (event.key === 'preferred-theme') {

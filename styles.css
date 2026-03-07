@@ -3,36 +3,37 @@
     src: url('https://fonts.cdnfonts.com/s/10313/Linux-Biolinum.woff') format('woff');
 }
 
+/* Deep Autumn palette */
 :root {
-    --primary-color: #2f2f2e;
-    --secondary-color: #c4541a;
-    --background-color: #ffffff;
+    --primary-color: #3B2314;          /* espresso */
+    --secondary-color: #722F37;        /* burgundy */
+    --background-color: #F5ECD7;       /* cream */
     --surface-color: var(--background-color);
-    --text-color: #3f3d3d;
+    --text-color: #3B2314;             /* espresso */
     --paper-bg: var(--background-color);
-    --border-color: #999999;
-    --muted-color: #666666;
-    --link-bg: rgba(64, 12, 170, 0.872);
-    --link-hover-bg: rgba(64, 12, 170, 0.26);
-    --highlight-color: #c4541a;
-    --highlight-color-2: #4a90bf;
-    --highlight-color-3: #74A2B9;
+    --border-color: #C4AD8A;           /* beige */
+    --muted-color: #8B6E4E;            /* pecan */
+    --link-bg: rgba(184, 115, 51, 0.12);
+    --link-hover-bg: rgba(184, 115, 51, 0.22);
+    --highlight-color: #A0522D;        /* cinnamon */
+    --highlight-color-2: #1A5276;      /* ocean */
+    --highlight-color-3: #2A7B6A;      /* aegean */
 }
 
 body.dark-mode {
-    --primary-color: #bdbebf;
-    --secondary-color: #e6a573;
-    --background-color: #17222e;
+    --primary-color: #F2E6CE;          /* cream */
+    --secondary-color: #D4952A;        /* butterscotch */
+    --background-color: #2C1810;       /* espresso */
     --surface-color: var(--background-color);
-    --text-color: #c5def6;
+    --text-color: #F2E6CE;             /* cream */
     --paper-bg: var(--background-color);
-    --border-color: rgb(111, 130, 147);
-    --muted-color: #2667a7;
-    --link-bg: rgba(123, 79, 46, 0.18);
-    --link-hover-bg: rgba(241, 122, 30, 0.28);
-    --highlight-color: #5fcf71;
-    --highlight-color-2: #7cb5ff;
-    --highlight-color-3: #8bb6c7;
+    --border-color: #6B4E3A;           /* dark pecan */
+    --muted-color: #A08060;            /* warm muted */
+    --link-bg: rgba(212, 149, 42, 0.15);
+    --link-hover-bg: rgba(212, 149, 42, 0.25);
+    --highlight-color: #D4952A;        /* butterscotch */
+    --highlight-color-2: #5AAFCF;      /* light ocean */
+    --highlight-color-3: #5ABFA0;      /* light aegean */
 }
 
 * {
@@ -48,8 +49,56 @@ body {
     color: var(--text-color);
     position: relative;
     background-color: var(--background-color);
+    background-image:
+        repeating-conic-gradient(rgba(120,100,80,0.03) 0% 25%, transparent 0% 50%),
+        radial-gradient(ellipse at 30% 20%, rgba(180,160,120,0.06), transparent 70%),
+        radial-gradient(ellipse at 70% 80%, rgba(160,140,110,0.05), transparent 70%);
+    background-size: 4px 4px, 100% 100%, 100% 100%;
     font-size: 0.98rem;
     transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode {
+    background-image:
+        repeating-conic-gradient(rgba(150,160,180,0.02) 0% 25%, transparent 0% 50%),
+        radial-gradient(ellipse at 30% 20%, rgba(40,50,70,0.08), transparent 70%),
+        radial-gradient(ellipse at 70% 80%, rgba(50,40,60,0.06), transparent 70%);
+}
+
+/* Hero painting */
+.hero-canvas-wrap {
+    width: 100%;
+    height: 400px;
+    position: relative;
+    margin-bottom: -200px;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.hero-canvas-wrap img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.4s ease;
+}
+
+/* Brushstroke dividers */
+.brushstroke-divider {
+    display: block;
+    width: 100%;
+    height: 18px;
+    margin: 2rem 0;
+    overflow: visible;
+}
+
+.brushstroke-divider path {
+    fill: none;
+    stroke: var(--border-color);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    filter: url(#roughen);
+    opacity: 0.55;
 }
 
 .background-cover {
@@ -71,9 +120,7 @@ body {
     max-width: 840px;
     margin: 0 auto;
     padding: 1.5rem;
-    background-color: var(--surface-color);
     z-index: 1;
-    transition: background-color 0.3s ease;
 }
 
 .profile-section {
@@ -93,7 +140,7 @@ h1 {
     font-size: 2rem;
     margin-bottom: 1rem;
     font-weight: normal;
-    color: var(--highlight-color-2);
+    color: var(--primary-color);
 }
 
 h2 {
@@ -109,6 +156,25 @@ p {
 
 .bio p {
     margin-bottom: 1rem;
+}
+
+.optimus-photo {
+    margin: 1.2rem 0 1.5rem;
+    text-align: center;
+}
+
+.optimus-photo img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.optimus-photo figcaption {
+    font-size: 0.82rem;
+    color: var(--muted-color);
+    font-style: italic;
+    margin-top: 0.4rem;
 }
 
 a {
@@ -158,9 +224,19 @@ a:focus {
     background: rgba(255, 0, 0, 0.75);
 }
 
-.working-papers {
-    margin: 2rem 0;
-}
+/* Research thrusts */
+.research-thrusts { margin: 2rem 0; }
+.research-opening { font-size: 1.05rem; line-height: 1.7; margin-bottom: 2rem; }
+.thrust { margin-bottom: 2rem; }
+.thrust h3 { color: var(--highlight-color-2); font-size: 1.15rem; font-weight: normal; margin-bottom: 0.5rem; }
+.thrust-description { margin-bottom: 0.75rem; line-height: 1.6; }
+.evidence-list { list-style: none; padding: 0; margin: 0 0 1rem; }
+.evidence-list li { padding: 0.35rem 0; border-bottom: 1px solid var(--border-color); font-size: 0.93rem; line-height: 1.5; }
+.evidence-list li:last-child { border-bottom: none; }
+.evidence-video { display: flex; align-items: center; gap: 0.75rem; }
+.video-facade-sm { width: 140px; height: 79px; flex-shrink: 0; }
+.video-play-btn-sm { width: 36px; height: 36px; }
+.video-play-btn-sm::after { border-width: 7px 0 7px 12px; }
 
 .paper-entry {
     margin-bottom: 1rem;
@@ -299,12 +375,14 @@ body.dark-mode .footnote-bar {
 .section-toggle {
     cursor: pointer;
     user-select: none;
-    border-bottom: 1px solid var(--border-color);
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
+    margin: 1rem 0 0.5rem;
 }
 
 .section-toggle span {
     float: right;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 .hidden-content {
@@ -314,6 +392,11 @@ body.dark-mode .footnote-bar {
 @media (max-width: 600px) {
     .container {
         padding: 1rem;
+    }
+
+    .hero-canvas-wrap {
+        height: 260px;
+        margin-bottom: -140px;
     }
 
     .research-areas {
@@ -338,6 +421,9 @@ body.dark-mode .footnote-bar {
         aspect-ratio: 16/9;
     }
 
+    .evidence-video { flex-direction: column; align-items: flex-start; }
+    .video-facade-sm { width: 100% !important; height: auto !important; aspect-ratio: 16/9; }
+
     .top-nav {
         flex-wrap: wrap;
         justify-content: center;
@@ -347,11 +433,12 @@ body.dark-mode .footnote-bar {
 
 .profile-image-container {
     position: relative;
-    width: 350px;
-    height: 350px;
+    width: 280px;
+    height: 280px;
     margin: 0 auto 1.5rem auto;
     border-radius: 50%;
     overflow: hidden;
+    z-index: 2;
 }
 
 .profile-image {
@@ -529,7 +616,7 @@ body.custom-cursor-enabled {
 .site-footer {
     text-align: center;
     padding: 2rem 0 1.5rem;
-    margin-top: 2rem;
+    margin-top: 3rem;
     border-top: 1px solid var(--border-color);
     color: var(--muted-color);
     font-size: 0.85rem;

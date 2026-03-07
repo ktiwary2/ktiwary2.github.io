@@ -8,13 +8,12 @@
   <style>
     .tag {
       display: inline-block;
-      padding: 0.35em 0.9em;
-      margin: 0.3em 0.4em 0.3em 0;
-      border-radius: 12px;
-      font-size: 0.75em;
+      padding: 0.15em 0.5em;
+      margin: 0 0 0 0.3em;
+      border-radius: 4px;
+      font-size: 0.7em;
       font-weight: 600;
       color: #333;
-      background-color: #ddd;
     }
     .media-tag { background-color: #FFA8D8; }
     .talk-tag { background-color: #D8A8FF; }
@@ -23,21 +22,25 @@
     .workshop-tag { background-color: #A8FFD8; }
     .recent-tag { background-color: #FFD8A8; }
 
+    .dark-mode .tag { color: #1a1a1a; }
+
     .filter-menu {
-      margin-bottom: 1.5em;
+      margin-bottom: 1em;
     }
 
     .filter-menu span {
       display: inline-block;
-      margin: 0.3em 0.4em 0.3em 0;
-      padding: 0.45em 1em;
-      border-radius: 14px;
-      font-size: 0.85em;
+      margin: 0 0.3em 0.3em 0;
+      padding: 0.15em 0.5em;
+      border-radius: 4px;
+      font-size: 0.8em;
       font-weight: 600;
       cursor: pointer;
       border: none;
       color: #333;
     }
+
+    .dark-mode .filter-menu span { color: #1a1a1a; }
 
     .filter-all { background-color: #ddd; }
     .filter-talk { background-color: #D8A8FF; }
@@ -47,6 +50,8 @@
     .filter-workshop { background-color: #A8FFD8; }
     .filter-recent { background-color: #FFD8A8; }
 
+    .filter-menu span:hover { opacity: 0.8; }
+
     .news-item:nth-child(-n+6) .news-status {
       position: relative;
     }
@@ -54,13 +59,17 @@
     .news-item:nth-child(-n+6) .news-status::after {
       content: 'Recent';
       background-color: #FFD8A8;
-      padding: 0.35em 0.9em;
-      border-radius: 12px;
-      font-size: 0.75em;
-      font-weight: 600;
       color: #333;
-      margin-left: 0.4em;
+      padding: 0.15em 0.5em;
+      border-radius: 4px;
+      font-size: 0.7em;
+      font-weight: 600;
+      margin-left: 0.3em;
       display: inline-block;
+    }
+
+    .news-container {
+      max-width: 680px;
     }
 
     .news-divider {
@@ -93,6 +102,12 @@
       } else {
         setInitialTheme();
       }
+
+      window.addEventListener('message', (event) => {
+        if (event.data && event.data.type === 'theme-change') {
+          applyTheme(event.data.theme);
+        }
+      });
 
       window.addEventListener('storage', (event) => {
         if (event.key === 'preferred-theme') {
