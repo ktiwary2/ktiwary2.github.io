@@ -1,0 +1,159 @@
+#life-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 2000;
+}
+
+body.custom-cursor-enabled,
+body.custom-cursor-enabled :is(a, button, input, label, .theme-toggle) {
+    cursor: none;
+}
+
+.life-cursor-controls {
+    box-sizing: border-box;
+    width: min(100% - 48px, 720px);
+    margin: 0 auto;
+    padding-bottom: 24px;
+    color: var(--text-color, #332b26);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.life-cursor-button {
+    display: inline;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--secondary-color, #704735);
+    font: inherit;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    cursor: pointer;
+}
+
+.life-cursor-button:hover {
+    color: var(--highlight-color-2, #704735);
+}
+
+.life-cursor-button:focus-visible {
+    outline: 2px solid var(--secondary-color, #704735);
+    outline-offset: 3px;
+}
+
+.life-cursor-menu {
+    display: inline-flex;
+    align-items: baseline;
+}
+
+.life-cursor-settings {
+    position: fixed;
+    z-index: 2001;
+    box-sizing: border-box;
+    width: 230px;
+    max-width: calc(100vw - 24px);
+    max-height: calc(100vh - 24px);
+    overflow-y: auto;
+    padding: 16px;
+    border: 1px solid var(--border-color, #ded8cf);
+    border-radius: 6px;
+    background: var(--background-color, #faf8f4);
+    color: var(--text-color, #332b26);
+    box-shadow: 0 6px 24px rgb(0 0 0 / 12%);
+    font: 14px/1.5 Georgia, 'Times New Roman', serif;
+    text-align: left;
+}
+
+.life-cursor-settings[hidden] {
+    display: none;
+}
+
+.life-cursor-settings fieldset {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.life-cursor-settings legend {
+    margin-bottom: 8px;
+    padding: 0;
+    font-weight: bold;
+}
+
+.life-cursor-settings label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.life-cursor-settings input {
+    width: auto;
+    margin: 0;
+    accent-color: var(--secondary-color, #704735);
+}
+
+.life-cursor-settings .life-preset-label {
+    margin-top: 12px;
+    margin-bottom: 4px;
+}
+
+.life-cursor-settings select {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid var(--border-color, #ded8cf);
+    border-radius: 3px;
+    color: inherit;
+    background: var(--background-color, #faf8f4);
+    font: inherit;
+}
+
+.life-cursor-settings .life-clear-button {
+    margin: 12px 0 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--secondary-color, #704735);
+    font: inherit;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.life-cursor-settings .life-clear-button:disabled {
+    opacity: 0.5;
+}
+
+.life-cursor-settings .life-rule-note {
+    margin-top: 8px;
+    color: var(--muted-color, #756b62);
+    font-size: 12px;
+}
+
+body.custom-cursor-enabled .life-cursor-settings,
+body.custom-cursor-enabled .life-cursor-settings * {
+    cursor: auto;
+}
+
+.life-cursor-settings :focus-visible {
+    outline: 2px solid var(--secondary-color, #704735);
+    outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+    .life-cursor-controls {
+        width: calc(100% - 40px);
+    }
+}
+
+@media print {
+    #life-canvas,
+    .life-cursor-controls,
+    .life-cursor-button,
+    .life-cursor-settings {
+        display: none;
+    }
+}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Generative Design of Visual Intelligence | Kushagra Tiwary</title>
+<meta name="description" content="Generative design of visual intelligence: evolve an eye and a brain together, in simulation, and keep the designs that work. A graphic summary of Tiwary et al., A Roadmap for Generative Design of Visual Intelligence (MIT Press, 2024).">
+<link rel="canonical" href="https://www.kushagratiwary.com/project/genvi.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&amp;family=IBM+Plex+Mono:wght@400&amp;display=swap">
+<style>
+  html, body { margin: 0; background: #fffff8; color: #111111; }
+  body { font-family: 'EB Garamond', Georgia, serif; }
+  a { color: #b3261e; }
+  a:hover { color: #7d1a15; }
+  .back-link { margin: 0; padding: 16px 24px 0; font-size: 1rem; }
+  .back-link a { color: #6b665d; text-decoration: none; }
+  .back-link a:hover, .back-link a:focus { text-decoration: underline; }
+  .artboard-wrap { width: 100%; max-width: 1600px; margin: 0 auto; overflow: hidden; }
+  .artboard { position: relative; width: 1600px; height: 1000px; transform-origin: top left; }
+  @media print { .back-link { display: none; } }
+</style>
+    <link rel="stylesheet" href="../cursor.css?v=20261019b">
+    <script src="../life_cursor.js?v=20261019b" defer></script>
+</head>
+<body>
+<p class="back-link"><a href="../index.html" onclick="if (history.length > 1) { history.back(); return false; }">&larr; Back</a></p>
+<div class="artboard-wrap">
+<div class="artboard" style="background: #fffff8; color: #111111; font-family: 'EB Garamond', Georgia, serif">
+
+
+<svg width="119" height="8" viewBox="0 0 119 8" preserveAspectRatio="none" style="position: absolute; left: 376px; top: 308px; width: 119px; height: 8px; overflow: visible; fill: none; stroke: #6b665d; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled-1" orient="auto" markerWidth="5" markerHeight="5" refX="2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#6b665d" stroke="none" style="stroke: none; fill: #6b665d; fill: context-stroke"></path></marker></defs><path d="M 0 4 L 116 4" marker-end="url(#dc-arrow-head-filled-1)"></path></svg>
+<svg width="119" height="8" viewBox="0 0 119 8" preserveAspectRatio="none" style="position: absolute; left: 776px; top: 308px; width: 119px; height: 8px; overflow: visible; fill: none; stroke: #6b665d; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled-2" orient="auto" markerWidth="5" markerHeight="5" refX="2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#6b665d" stroke="none" style="stroke: none; fill: #6b665d; fill: context-stroke"></path></marker></defs><path d="M 0 4 L 116 4" marker-end="url(#dc-arrow-head-filled-2)"></path></svg>
+
+<svg width="8" height="56" viewBox="0 0 8 56" preserveAspectRatio="none" style="position: absolute; left: 1032px; top: 520px; width: 8px; height: 56px; overflow: visible; fill: none; stroke: #b3261e; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round"><path d="M 4 0 L 4 56"></path></svg>
+<svg width="800" height="8" viewBox="0 0 800 8" preserveAspectRatio="none" style="position: absolute; left: 236px; top: 572px; width: 800px; height: 8px; overflow: visible; fill: none; stroke: #b3261e; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round"><path d="M 0 4 L 800 4"></path></svg>
+<svg width="8" height="55" viewBox="0 0 8 55" preserveAspectRatio="none" style="position: absolute; left: 232px; top: 521px; width: 8px; height: 55px; overflow: visible; fill: none; stroke: #b3261e; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round"><defs><marker id="dc-arrow-head-filled-3" orient="auto" markerWidth="5" markerHeight="5" refX="2" refY="2" overflow="visible"><path d="M0 0 L4 2 L0 4 Z" fill="#b3261e" stroke="none" style="stroke: none; fill: #b3261e; fill: context-stroke"></path></marker></defs><path d="M 4 55 L 4 3" marker-end="url(#dc-arrow-head-filled-3)"></path></svg>
+
+<h1 style="position: absolute; left: 96px; top: 72px; width: 1080px; margin: 0; font-weight: 400; font-size: 60px; line-height: 1.1">Generative design of visual intelligence</h1>
+<p style="position: absolute; left: 96px; top: 156px; width: 1080px; margin: 0; font-style: italic; font-size: 28px; line-height: 1.35; color: #4a4741">Evolve an eye and a brain together, in simulation, and keep the designs that work.</p>
+
+<div style="position: absolute; left: 96px; top: 288px; width: 280px; height: 232px; box-sizing: border-box; display: flex; flex-direction: column; align-items: flex-start; gap: 12px">
+<svg width="96" height="48" viewBox="0 0 96 48" fill="none" role="img" aria-label="An eye cup of photoreceptors and a small network of neurons"><path d="M4 8 C4 40, 40 40, 40 8" stroke="#111111" stroke-width="1.25" stroke-linecap="round"></path><circle cx="10" cy="22" r="2" fill="#111111"></circle><circle cx="17" cy="29" r="2" fill="#111111"></circle><circle cx="27" cy="29" r="2" fill="#111111"></circle><circle cx="34" cy="22" r="2" fill="#111111"></circle><path d="M62 10 L84 24 L62 38 M62 10 L62 38" stroke="#111111" stroke-width="1"></path><circle cx="62" cy="10" r="4" fill="#fffff8" stroke="#111111" stroke-width="1.25"></circle><circle cx="62" cy="38" r="4" fill="#fffff8" stroke="#111111" stroke-width="1.25"></circle><circle cx="84" cy="24" r="4" fill="#fffff8" stroke="#111111" stroke-width="1.25"></circle></svg>
+<span><span style="font-size: 36px; line-height: 1.1">Generate</span><br><span style="font-size: 20px; line-height: 1.4">Propose a visual system from two primitives: artificial photoreceptors for the eye and artificial neurons for the brain.<sup style="font-size: 13px">1, 2</sup></span></span>
+</div>
+
+<div style="position: absolute; left: 496px; top: 288px; width: 280px; height: 232px; box-sizing: border-box; display: flex; flex-direction: column; align-items: flex-start; gap: 12px">
+<svg width="96" height="48" viewBox="0 0 96 48" fill="none" role="img" aria-label="An agent looking across a simulated arena at an object"><ellipse cx="48" cy="38" rx="44" ry="8" stroke="#8a857c" stroke-width="1"></ellipse><path d="M26 30 L74 14 M26 30 L76 30" stroke="#8a857c" stroke-width="1" stroke-dasharray="2 3"></path><circle cx="20" cy="30" r="7" fill="#fffff8" stroke="#111111" stroke-width="1.25"></circle><circle cx="24" cy="29" r="2" fill="#111111"></circle><rect x="76" y="14" width="10" height="18" fill="none" stroke="#111111" stroke-width="1.25"></rect></svg>
+<span><span style="font-size: 36px; line-height: 1.1">Simulate</span><br><span style="font-size: 20px; line-height: 1.4">Place the agent in a physics‑based world. It sees through its own eye and learns a behavior: navigate, track prey, tell food from poison.</span></span>
+</div>
+
+<div style="position: absolute; left: 896px; top: 288px; width: 280px; height: 232px; box-sizing: border-box; display: flex; flex-direction: column; align-items: flex-start; gap: 12px">
+<svg width="96" height="48" viewBox="0 0 96 48" fill="none" role="img" aria-label="Five candidate designs, two of them selected"><circle cx="10" cy="24" r="6" stroke="#8a857c" stroke-width="1.25"></circle><circle cx="29" cy="24" r="6" fill="#111111"></circle><circle cx="48" cy="24" r="6" stroke="#8a857c" stroke-width="1.25"></circle><circle cx="67" cy="24" r="6" stroke="#8a857c" stroke-width="1.25"></circle><circle cx="86" cy="24" r="6" fill="#111111"></circle></svg>
+<span><span style="font-size: 36px; line-height: 1.1">Select</span><br><span style="font-size: 20px; line-height: 1.4">Score each eye–brain pair on the task and on size, weight, power and cost. A search method<sup style="font-size: 13px">3</sup> proposes the next designs.</span></span>
+</div>
+
+<div style="position: absolute; left: 406px; top: 590px; width: 460px; text-align: center; font-style: italic; font-size: 20px; line-height: 24px; color: #b3261e">the fittest designs seed the next generation</div>
+
+<div style="position: absolute; left: 1256px; top: 292px; width: 248px; font-size: 16px; line-height: 1.45; color: #4a4741"><sup style="font-size: 12px">1</sup> In nature, eyes and brains co‑evolved over millions of years. Simulation runs the same loop in parallel, in days.</div>
+<div style="position: absolute; left: 1256px; top: 404px; width: 248px; font-size: 16px; line-height: 1.45; color: #4a4741"><sup style="font-size: 12px">2</sup> The design space is written as a grammar of parts and rules: a lens may sit in front of a sensor, never behind it.</div>
+<div style="position: absolute; left: 1256px; top: 516px; width: 248px; font-size: 16px; line-height: 1.45; color: #4a4741"><sup style="font-size: 12px">3</sup> Evolutionary search, reinforcement learning, gradient descent or a generative model.</div>
+
+<div style="position: absolute; left: 96px; top: 680px; width: 500px; font-size: 26px; line-height: 1.2">For vision science: <span style="font-style: italic">rerun evolution</span></div>
+
+<div style="position: absolute; left: 96px; top: 728px; width: 96px; height: 80px; box-sizing: border-box; display: flex; flex-direction: column; align-items: flex-start; gap: 8px">
+<svg width="64" height="48" viewBox="0 0 64 48" fill="none" role="img" aria-label="Flat patch of photoreceptors"><path d="M6 36 H58" stroke="#111111" stroke-width="1.25" stroke-linecap="round"></path><circle cx="16" cy="31" r="2" fill="#111111"></circle><circle cx="27" cy="31" r="2" fill="#111111"></circle><circle cx="38" cy="31" r="2" fill="#111111"></circle><circle cx="49" cy="31" r="2" fill="#111111"></circle></svg>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #6b665d">patch</span>
+</div>
+<div style="position: absolute; left: 216px; top: 728px; width: 96px; height: 80px; box-sizing: border-box; display: flex; flex-direction: column; align-items: flex-start; gap: 8px">
+<svg width="64" height="48" viewBox="0 0 64 48" fill="none" role="img" aria-label="Cup eye"><path d="M10 8 C10 46, 54 46, 54 8" stroke="#111111" stroke-width="1.25" stroke-linecap="round"></path><circle cx="17" cy="27" r="2" fill="#111111"></circle><circle cx="26" cy="34" r="2" fill="#111111"></circle><circle cx="38" cy="34" r="2" fill="#111111"></circle><circle cx="47" cy="27" r="2" fill="#111111"></circle></svg>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #6b665d">cup</span>
+</div>
+<div style="position: absolute; left: 336px; top: 728px; width: 96px; height: 80px; box-sizing: border-box; display: flex; flex-direction: column; align-items: flex-start; gap: 8px">
+<svg width="64" height="48" viewBox="0 0 64 48" fill="none" role="img" aria-label="Pinhole eye"><path d="M28 5 A20 20 0 1 0 36 5" stroke="#111111" stroke-width="1.25" stroke-linecap="round"></path><circle cx="20" cy="36" r="2" fill="#111111"></circle><circle cx="32" cy="41" r="2" fill="#111111"></circle><circle cx="44" cy="36" r="2" fill="#111111"></circle></svg>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #6b665d">pinhole</span>
+</div>
+<div style="position: absolute; left: 456px; top: 728px; width: 96px; height: 80px; box-sizing: border-box; display: flex; flex-direction: column; align-items: flex-start; gap: 8px">
+<svg width="64" height="48" viewBox="0 0 64 48" fill="none" role="img" aria-label="Camera eye with a lens"><path d="M27 6 A20 20 0 1 0 37 6" stroke="#111111" stroke-width="1.25" stroke-linecap="round"></path><circle cx="32" cy="8" r="5" fill="#fffff8" stroke="#111111" stroke-width="1.25"></circle><circle cx="20" cy="36" r="2" fill="#111111"></circle><circle cx="32" cy="41" r="2" fill="#111111"></circle><circle cx="44" cy="36" r="2" fill="#111111"></circle></svg>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #6b665d">lens</span>
+</div>
+
+<p style="position: absolute; left: 96px; top: 824px; width: 500px; margin: 0; font-size: 18px; line-height: 1.45; color: #4a4741">Starting from one light‑sensitive cell, agents that navigate evolve compound‑type eyes; agents that tell food from poison evolve camera‑type eyes. Ask what nature never tried.</p>
+
+<div style="position: absolute; left: 656px; top: 680px; width: 520px; font-size: 26px; line-height: 1.2">For engineering: <span style="font-style: italic">invent new sensors</span></div>
+
+<div style="position: absolute; left: 656px; top: 732px; width: 520px; display: grid; grid-template-columns: 180px minmax(0, 1fr); column-gap: 24px; padding: 8px 0; border-top: 1px solid #d8d4cc; font-size: 18px; line-height: 1.35"><span>Self‑driving car</span><span style="color: #4a4741">camera rig + perception network</span></div>
+<div style="position: absolute; left: 656px; top: 772px; width: 520px; display: grid; grid-template-columns: 180px minmax(0, 1fr); column-gap: 24px; padding: 8px 0; border-top: 1px solid #d8d4cc; font-size: 18px; line-height: 1.35"><span>Microscope</span><span style="color: #4a4741">optics + image reconstruction</span></div>
+<div style="position: absolute; left: 656px; top: 812px; width: 520px; display: grid; grid-template-columns: 180px minmax(0, 1fr); column-gap: 24px; padding: 8px 0; border-top: 1px solid #d8d4cc; border-bottom: 1px solid #d8d4cc; font-size: 18px; line-height: 1.35"><span>Drone in a forest</span><span style="color: #4a4741">time‑of‑flight sensor + flight policy</span></div>
+
+<p style="position: absolute; left: 656px; top: 868px; width: 520px; margin: 0; font-size: 18px; line-height: 1.45; color: #4a4741">Each sensor is designed with the network that reads it.</p>
+
+<div style="position: absolute; left: 96px; top: 940px; width: 1408px; display: flex; justify-content: space-between; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #6b665d"><a href="https://doi.org/10.21428/e4baedd9.d2a03144" style="color: #6b665d">Tiwary et al. · A Roadmap for Generative Design of Visual Intelligence · An MIT Exploration of Generative AI, 2024</a></div>
+
+</div>
+</div>
+<script>
+  (function () {
+    var wrap = document.querySelector('.artboard-wrap');
+    var board = document.querySelector('.artboard');
+    function fit() {
+      var scale = Math.min(1, wrap.clientWidth / 1600);
+      board.style.transform = 'scale(' + scale + ')';
+      wrap.style.height = Math.ceil(1000 * scale) + 'px';
+    }
+    fit();
+    window.addEventListener('resize', fit);
+  })();
+</script>
+</body>
+</html>
