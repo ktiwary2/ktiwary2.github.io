@@ -1,0 +1,197 @@
+@font-face {
+    font-family: 'Linux Biolinum';
+    src: url('https://fonts.cdnfonts.com/s/10313/Linux-Biolinum.woff') format('woff');
+}
+
+:root {
+    --primary-blue: #1a73e8;
+    --text-primary: #24292e;
+    --bg-light: #f6f8fa;
+    --border-color: #e1e4e8;
+    --max-content-width: 1800px; /* Increased from 1600px */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Linux Biolinum', sans-serif;
+    color: var(--text-primary);
+    line-height: 1.6;
+    background: white;
+    padding-top: 50px; /* Add space at the top */
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.hero-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-content {
+    max-width: var(--max-content-width);
+    margin: 0 auto;
+    padding: 2rem;
+    width: 95%; /* Increased from 90% */
+}
+
+.title {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    font-weight: normal;
+}
+
+.subtitle {
+    font-size: 2rem;
+    color: #666;
+    margin-bottom: 2rem;
+    font-weight: normal;
+}
+
+.hero-image {
+    max-width: 1400px; /* Increased from 1200px */
+    margin: 0 auto 2rem;
+    display: block;
+}
+
+/* Authors Grid - Two Rows */
+.author-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin: 2rem auto;
+    max-width: 1400px; /* Increased from 1200px */
+    text-align: center;
+}
+
+.author-grid .author:nth-last-child(-n+5) {
+    grid-column: span 1;
+    grid-row: 2;
+}
+
+.author {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.author sup {
+    color: var(--primary-blue);
+}
+
+/* Institutions in one row */
+.institution-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin: 2rem 0;
+    padding: 2rem 0;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    flex-wrap: nowrap;
+    max-width: var(--max-content-width);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.institution {
+    text-align: center;
+    flex: 0 0 auto;
+}
+
+.institution img {
+    height: 60px; /* Smaller fixed height */
+    width: auto;
+    object-fit: contain;
+}
+
+.institution p {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}
+
+/* Rest of your existing styles */
+.container {
+    max-width: var(--max-content-width);
+    margin: 0 auto;
+    padding: 2rem;
+    width: 95%; /* Increased width */
+}
+
+.section {
+    margin: 4rem 0;
+    padding: 2rem;
+    background: var(--bg-light);
+    border-radius: 8px;
+}
+
+.section h2 {
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    font-weight: normal;
+    font-size: 1.8rem;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+.button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--bg-light);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    transition: all 0.2s ease;
+}
+
+.button:hover {
+    background: #eaecef;
+    transform: translateY(-1px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .author-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .institution-grid {
+        flex-wrap: wrap;
+    }
+    
+    .institution img {
+        height: 50px;
+    }
+}
+
+@media (max-width: 768px) {
+    .author-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .title {
+        font-size: 3rem;
+    }
+    
+    .subtitle {
+        font-size: 1.6rem;
+    }
+}

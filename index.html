@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id=GTM-PNX89M4H';f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-PNX89M4H');</script>
+    <!-- End Google Tag Manager -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kushagra "Kush" Tiwary</title>
+    <link rel="stylesheet" href="styles.css?v=20260921b">
+    <script>
+        function applyTheme(theme) {
+            document.body.classList.toggle('dark-mode', theme === 'dark');
+            const toggleButtons = document.querySelectorAll('.theme-toggle');
+            toggleButtons.forEach(function(btn) {
+                btn.textContent = theme === 'dark' ? 'Light Mode' : 'Dark Mode';
+                btn.setAttribute('aria-pressed', theme === 'dark');
+            });
+            // Notify iframes of theme change (storage events don't fire in same page)
+            document.querySelectorAll('iframe').forEach(function(iframe) {
+                try { iframe.contentWindow.postMessage({ type: 'theme-change', theme: theme }, '*'); } catch(e) {}
+            });
+        }
+
+        function toggleTheme() {
+            const nextTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+            localStorage.setItem('preferred-theme', nextTheme);
+            applyTheme(nextTheme);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const darkQuery = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+            const savedTheme = localStorage.getItem('preferred-theme');
+            const preferredTheme = savedTheme || 'dark';
+
+            applyTheme(preferredTheme);
+
+            // Follow OS theme changes in real-time (only when user hasn't manually toggled)
+            if (darkQuery) {
+                darkQuery.addEventListener('change', function(e) {
+                    if (!localStorage.getItem('preferred-theme')) {
+                        applyTheme(e.matches ? 'dark' : 'light');
+                    }
+                });
+            }
+
+            const themeToggleButtons = document.querySelectorAll('.theme-toggle');
+            themeToggleButtons.forEach(function(btn) { btn.addEventListener('click', toggleTheme); });
+
+            // Show highlighted papers by default
+            if (typeof showHighlighted === 'function') {
+                showHighlighted();
+            }
+
+        });
+
+        // Dynamically resize iframes to fit content (registered early to avoid race condition)
+        window.addEventListener('message', function(e) {
+            if (e.data && e.data.type === 'news-resize') {
+                var frame = document.getElementById('news-frame');
+                if (frame) frame.style.height = e.data.height + 'px';
+            }
+            if (e.data && e.data.type === 'publications-resize') {
+                var frame = document.getElementById('publications-frame');
+                if (frame) frame.style.height = e.data.height + 'px';
+            }
+        });
+    </script>
+    <script src="evolving_cursor.js?v=20260921b" defer></script>
+    <script src="life_cursor.js?v=20260921c" defer></script>
+</head>
+<body>
+    <!-- SVG filter definitions for organic brushstroke dividers -->
+    <svg style="position:absolute;width:0;height:0" aria-hidden="true">
+        <defs>
+            <filter id="roughen" x="-5%" y="-5%" width="110%" height="110%">
+                <feTurbulence type="turbulence" baseFrequency="0.035" numOctaves="4" result="noise" seed="2"/>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+            </filter>
+        </defs>
+    </svg>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PNX89M4H" 
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->    
+    <nav class="top-nav" aria-label="Top navigation">
+        <a href="index.html">Home</a>
+        <span class="divider">•</span>
+        <a href="#news-section">News</a>
+        <span class="divider">•</span>
+        <a href="personal.html">Personal</a>
+        <span class="divider">•</span>
+        <a href="mailto:ktiwary@mit.edu">Contact</a>
+    </nav>
+    <div class="cursor-controls">
+        <div class="cursor-control-stack">
+            <button id="cursor-toggle" class="cursor-toggle" aria-pressed="true" type="button">Cursor: Life</button>
+            <button class="cursor-toggle theme-toggle" type="button" aria-pressed="false">Dark Mode</button>
+        </div>
+        <div id="cursor-info" class="cursor-info" role="dialog" aria-modal="false" aria-labelledby="cursor-info-title">
+            <div class="cursor-info-content">
+                <h3 id="cursor-info-title">Cursor Modes</h3>
+                <p class="cursor-info-intro">Click to cycle through two living cursors and off:</p>
+                <dl>
+                    <dt>Life</dt>
+                    <dd>Each time you move after a pause, a new colony is seeded under a rule drawn at random (Life, HighLife, Day &amp; Night, Maze, Coral, and more). Colonies live for about a minute in the margins beside the page, never over the text, and then let go and fall.</dd>
+                    <dt>Evolve</dt>
+                    <dd>A flock of shapes with speed-triggered morphs, orbital satellites, and noise-seeded jitter. Fast, engaged movement keeps traits alive; idle time culls the flock.</dd>
+                    <dt>Off</dt>
+                    <dd>A plain shape that simply follows you.</dd>
+                </dl>
+                <p class="cursor-info-note">Your choice is remembered in this browser.</p>
+            </div>
+        </div>
+    </div>
+    <canvas id="cursor-canvas" class="cursor-canvas" aria-hidden="true"></canvas>
+    <div class="container">
+
+        <div class="hero-canvas-wrap">
+            <img id="hero-painting" src="images/hero_painting.jpg" alt="" aria-hidden="true">
+        </div>
+
+        <div class="profile-image-container">
+            <img src="images/kush.jpeg" alt="Kushagra Tiwary" class="profile-image original-image">
+            <div class="hover-image-container">
+                <img src="images/art.jpg" alt="Indian miniature painting style transfer" class="profile-image hover-image">
+            </div>
+        </div>
+        <h1>Kushagra "Kush" Tiwary</h1>
+        <h4>
+            <!-- <p>  -->
+                Office: <a href="https://whereis.mit.edu/?go=32" target="_blank">32-G482</a> & <a href="https://whereis.mit.edu/?go=E14" target="_blank">E14-374H</a>
+                <br>
+                <a href="mailto:ktiwary@mit.edu" target="_blank">ktiwary [at] mit [dot] edu</a> | 
+                <!-- <br> -->
+                <a href="https://www.linkedin.com/in/ktiwary-mit/" target="_blank">LinkedIn</a> |
+                <a href="https://github.com/ktiwary" target="_blank">GitHub</a> |
+                <a href="https://x.com/ktiwarylab" target="_blank">X</a> |
+                <a href="https://scholar.google.com/citations?user=XNiV8qIAAAAJ&hl=en" target="_blank">Google Scholar</a> |
+                <a href="files/KushagraTiwaryCV_Apr2026.pdf" target="_blank">CV</a> |
+                <a href="images/kush.jpeg" download>Photo</a>
+        </h4>
+
+        <svg class="brushstroke-divider" viewBox="0 0 800 18" preserveAspectRatio="none">
+            <path d="M0,8 C130,14 280,3 420,10 C560,17 690,5 800,9"/>
+        </svg>
+
+        <div class="bio">
+        <p>I'm a 3rd year PhD Student at MIT co-advised by <a href="https://people.csail.mit.edu/boris/boris.html" target="_blank">Boris Katz</a>, <a href="https://web.media.mit.edu/~raskar/" target="_blank">Ramesh Raskar</a>, and <a href="https://poggio-lab.mit.edu/people/tomaso-poggio/" target="_blank">Tomaso Poggio</a>. 
+            I also work closely with <a href="https://briancheung.github.io/" target="_blank">Brian Cheung</a> at UCSF and at the Frontier Intelligence Group at <a href="https://sakana.ai" target="_blank">Sakana.ai</a> where 
+            I was a research scientist intern working with <a href="https://sebastianrisi.com" target="_blank">Sebastian Risi</a>. I was also a Teaching Assistant at <a href="https://bmm.mit.edu" target="_blank">Brains, Minds, and Machines</a> summer course at the <a href="https://www.mbl.edu" target="_blank">Marine Biological Laboratory</a> in Woods Hole, MA.
+            <br>
+            <br>
+            The overarching research interest is to understand the computational principles that enable intelligence to create new forms of intelligence, uncover scientific principles, and invent new technologies.
+            I use simulations to study how intelligence (LLMs, embodied agents, etc.) can discover new things (scientific principles, inventions, etc.) through evolution, sensorimotor learning, and open-ended processes. 
+            <br>
+            <br>
+            I received my S.M. in 2023 from MIT, where I worked on 3D vision and imaging, specifically on incorporating realistic physics of light propagation to improve neural rendering.
+            I received my B.S.'19 in ECE from the University of Illinois at Urbana-Champaign where I worked on computer vision and robotics.
+            <!-- <br> -->
+            <!-- <br> -->
+            Before MIT, I worked on vision and robotics at <a href="https://techcrunch.com/2022/01/11/magna-acquires-autonomous-vehicle-startup-optimus-ride/" target="_blank"></a>Optimus Ride</a>, a self-driving startup, where I built the <a href="https://karpathy.medium.com/software-2-0-a64152b37c35" target="_blank">Software 2.0</a> stack.
+        </p>
+
+        <p>I've exhibited work at the <a href="https://www.eyes.mit.edu/exhibitions/mit-museum/" target="_blank">MIT Museum</a> and the <a href="https://www.eyes.mit.edu/exhibitions/mos/" target="_blank">Museum of Science</a>, and I'm grateful to be the first in my extended family to be in a PhD program. Reach out to chat or collaborate.</p>
+        </div>
+
+        <div id="writings-section">
+            <p class="writings-label">Writings:</p>
+            <ul class="evidence-list">
+                <!-- <li>Artifact is the evidence of cognitive ability [<a href="https://artifactarena.ai/blog" target="_blank">link</a>]</li> -->
+                <li>What Project Hail Mary Teaches Us About Intelligence [<a href="https://computingserendipity.substack.com/p/what-project-hail-mary-teaches-us" target="_blank">link</a>]</li>
+                <li>Can we computationally recreate vision evolution? [<a href="https://eyes.mit.edu/what-if/" target="_blank">link</a>]</li>
+                <li>Designing Visual Intelligence for Science and Engineering [<a href="https://mit-genai.pubpub.org/pub/bcfcb6lu/release/3" target="_blank">link</a>]</li>
+                <li>Computer Vision 2.0: Light as the First-Class Citizen [<a href="https://www.kushagratiwary.com/blogs/cv2_0.html" target="_blank">link</a>]</li>
+                <li>Ingredients of Modern Perception [<a href="https://computingserendipity.substack.com/p/ingredients-of-modern-perception" target="_blank">link</a>]</li>
+                <li>Generators vs. Verifiers for Scientific Discovery (thread on X) [<a href="https://x.com/ktiwarylab/status/1934353061201199171" target="_blank">link</a>]</li>
+            </ul>
+            <p class="writings-more"><a href="writings.html">More writings &rarr;</a></p>
+        </div>
+
+        <div id="research-section">
+            <ul class="evidence-list">
+                <li>
+                    <div class="evidence-video">
+                        <div class="video-facade video-facade-sm" style="background-image:url('https://archive.org/services/img/Redwood_Center_2025_06_25_Kushagra_Tiwary');" onclick="this.innerHTML='<iframe src=\'https://archive.org/embed/Redwood_Center_2025_06_25_Kushagra_Tiwary\' width=\'140\' height=\'79\' frameborder=\'0\' allowfullscreen><\/iframe>'">
+                            <div class="video-play-btn video-play-btn-sm"></div>
+                        </div>
+                        <span><strong>Embodied Eyes For Scientific Discovery</strong> — Redwood Center, UC Berkeley [<a href="https://redwood.berkeley.edu/seminars/kushagra-tiwary-june-2025/" target="_blank">Seminar Page</a>]</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="evidence-video">
+                        <div class="video-facade video-facade-sm" style="background-image:url('https://img.youtube.com/vi/sUkcgYKBTr8/hqdefault.jpg');" onclick="this.innerHTML='<iframe width=\'140\' height=\'79\' src=\'https://www.youtube.com/embed/sUkcgYKBTr8?autoplay=1\' frameborder=\'0\' allowfullscreen><\/iframe>'">
+                            <div class="video-play-btn video-play-btn-sm"></div>
+                        </div>
+                        <span><strong>What-If Machines for Vision</strong> — MIT Imagination in Action [<a href="https://www.youtube.com/watch?v=sUkcgYKBTr8" target="_blank">Youtube</a>]</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="evidence-video">
+                        <div class="video-facade video-facade-sm" style="background-image:url('https://img.youtube.com/vi/OuPwGkzh6nM/hqdefault.jpg');" onclick="this.innerHTML='<iframe width=\'140\' height=\'79\' src=\'https://www.youtube.com/embed/OuPwGkzh6nM?autoplay=1\' frameborder=\'0\' allowfullscreen><\/iframe>'">
+                            <div class="video-play-btn video-play-btn-sm"></div>
+                        </div>
+                        <span><strong>TEDx Boston</strong> — Can AI Recreate 500 Million Years of Vision Evolution? [<a href="https://www.youtube.com/watch?v=OuPwGkzh6nM" target="_blank">Youtube</a>]</span>
+                    </div>
+                </li>
+            </ul>
+        </div>                    
+        
+        <svg class="brushstroke-divider" viewBox="0 0 800 18" preserveAspectRatio="none">
+            <path d="M0,10 C120,3 300,16 450,7 C600,-1 700,14 800,8"/>
+        </svg>
+
+        <div id="news-section" class="section">
+            <h2 class="section-heading">News</h2>
+            <div id="news-content">
+                <iframe src="news.html?v=20260921b" name="news-frame" id="news-frame" scrolling="no" style="width: 100%; border: none; overflow: hidden; height: 600px;"></iframe>
+            </div>
+        </div>
+
+        <svg class="brushstroke-divider" viewBox="0 0 800 18" preserveAspectRatio="none">
+            <path d="M0,7 C200,14 350,2 500,10 C650,18 750,4 800,9"/>
+        </svg>
+
+        <div id="publications-section" class="section">
+            <h2 class="section-heading">My Works</h2>
+            <div id="papers-content">
+                <iframe src="publications.html?v=20260921b" name="publications-frame" id="publications-frame" scrolling="no" style="width: 100%; border: none; overflow: hidden; height: 800px;"></iframe>
+            </div>
+        </div>
+
+
+        <footer class="site-footer">
+            <a href="#">Back to top</a>
+            <p>&copy; Kushagra Tiwary. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

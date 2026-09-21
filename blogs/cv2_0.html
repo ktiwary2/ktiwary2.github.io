@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Vision 2.0: Light as the First-Class Citizen - Kushagra "Kush" Tiwary</title>
+    <link rel="stylesheet" href="../styles.css?v=20260921b">
+    <link rel="stylesheet" href="blog_styles.css?v=20260921b">
+    <script>
+        function applyTheme(theme) {
+            document.body.classList.toggle('dark-mode', theme === 'dark');
+            const toggleButtons = document.querySelectorAll('.theme-toggle');
+            toggleButtons.forEach(function(btn) {
+                btn.textContent = theme === 'dark' ? 'Light Mode' : 'Dark Mode';
+                btn.setAttribute('aria-pressed', theme === 'dark');
+            });
+        }
+
+        function toggleTheme() {
+            const nextTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+            localStorage.setItem('preferred-theme', nextTheme);
+            applyTheme(nextTheme);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const darkQuery = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+            const savedTheme = localStorage.getItem('preferred-theme');
+            const preferredTheme = savedTheme || 'dark';
+            applyTheme(preferredTheme);
+
+            if (darkQuery) {
+                darkQuery.addEventListener('change', function(e) {
+                    if (!localStorage.getItem('preferred-theme')) {
+                        applyTheme(e.matches ? 'dark' : 'light');
+                    }
+                });
+            }
+
+            const themeToggleButtons = document.querySelectorAll('.theme-toggle');
+            themeToggleButtons.forEach(function(btn) { btn.addEventListener('click', toggleTheme); });
+        });
+    </script>
+</head>
+<body>
+    <nav class="top-nav" aria-label="Top navigation">
+        <a href="../index.html">Home</a>
+        <span class="divider">•</span>
+        <a href="../index.html#research-section">Research</a>
+        <span class="divider">•</span>
+        <a href="../index.html#news-section">News</a>
+        <span class="divider">•</span>
+        <a href="../writings.html">Writings</a>
+        <span class="divider">•</span>
+        <a href="../personal.html">Personal</a>
+        <span class="divider">•</span>
+        <a href="mailto:ktiwary@mit.edu">Contact</a>
+    </nav>
+
+    <div class="cursor-controls">
+        <div class="cursor-control-stack">
+            <button class="cursor-toggle theme-toggle" type="button" aria-pressed="false">Dark Mode</button>
+        </div>
+    </div>
+
+    <div class="container">
+        
+        <p class="back-link"><a href="../index.html" onclick="if (history.length > 1) { history.back(); return false; }">&larr; Back</a></p>
+        <article class="blog-post">
+            <h1>Computer Vision 2.0: Light as the First-Class Citizen</h1>
+            <p class="blog-subtitle">Computation over memory: from collected pixels to simulated light.</p>
+            <p class="blog-byline"><a href="../index.html">Kushagra Tiwary</a><span class="sep">&middot;</span><time datetime="2023-11-15">November 15, 2023</time></p>
+            
+            <div class="blog-content">
+                <p>With thousands of open-source datasets for almost every task, and millions of dollars spent on annotating the longest of long-tail cases, Computer Vision is now in our Roombas, vehicles, and phones. The enabling advance was that instead of hand-writing logic to detect pedestrians, we specify the program's behavior and leave the logic to a trainable network. In that paradigm, large datasets of pixels are the first-class citizens.</p>
+
+                <p>But pixels are a poor substrate: they are a low-dimensional projection of the path light actually takes through the scene. As simulation becomes ubiquitous and its marginal cost falls, a shift is underway: light, not pixels, is becoming the first-class citizen.</p>
+
+                <figure class="tufte-figure" id="fig-pixels-vs-light">
+                    <p class="fig-title"><span class="fig-num">Figure 1.</span> Where the pixels come from: collected versus simulated</p>
+                    <svg viewBox="0 0 720 400" role="img" aria-labelledby="fig1-title">
+                        <title id="fig1-title">Two parallel loops. CV 1.0: a camera collects frames of pixels into a frozen dataset, humans label them, the AI trains on them and is deployed; new events in the field mean another round of collection and labelling. CV 2.0: the world lives inside a light simulation whose sensor produces pixels with labels attached, the AI trains on them and is deployed, and the events it meets update the world inside the simulation.</title>
+                        <defs>
+                            <marker id="f1-arrow-ink" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="fig-ink-fill"/></marker>
+                            <marker id="f1-arrow-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="fig-accent-fill"/></marker>
+                            <marker id="f1-arrow-accent-sm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="fig-accent-fill"/></marker>
+                            <marker id="f1-arrow-muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="fig-muted-fill"/></marker>
+                        </defs>
+
+                        <!-- ===== Row 1: CV 1.0 ===== -->
+                        <text x="0" y="96" class="fig-label fig-strong">CV 1.0</text>
+                        <text x="0" y="112" class="fig-note">memory:<tspan x="0" dy="14">collect and label</tspan></text>
+                        <!-- Collect box: pixels into a dataset -->
+                        <rect x="108" y="40" width="204" height="124" rx="4" class="fig-ink" stroke-width="1" fill="none"/>
+                        <text x="120" y="58" class="fig-label">Collect</text>
+                        <text x="120" y="74" class="fig-note">pixels into a dataset</text>
+                        <!-- camera -->
+                        <g class="fig-ink" stroke-width="1" fill="none">
+                            <rect x="124" y="102" width="28" height="20" rx="2"/>
+                            <path d="M131,102 V98 H141 V102"/>
+                            <circle cx="138" cy="112" r="5"/>
+                        </g>
+                        <text x="138" y="138" text-anchor="middle" class="fig-note">camera</text>
+                        <path d="M154,112 H168" class="fig-ink" stroke-width="1" fill="none" marker-end="url(#f1-arrow-ink)"/>
+                        <!-- one frame of pixels -->
+                        <g class="fig-ink" stroke-width="1"><rect x="172" y="97" width="30" height="30" class="fig-surface-fill"/><path d="M178,97 V127 M184,97 V127 M190,97 V127 M196,97 V127 M172,103 H202 M172,109 H202 M172,115 H202 M172,121 H202"/></g>
+                        <text x="187" y="142" text-anchor="middle" class="fig-note">pixels</text>
+                        <path d="M204,112 H218" class="fig-ink" stroke-width="1" fill="none" marker-end="url(#f1-arrow-ink)"/>
+                        <!-- the dataset: a stack of frames -->
+                        <g class="fig-ink" stroke-width="1"><rect x="240" y="88" width="30" height="30" class="fig-surface-fill"/><path d="M246,88 V118 M252,88 V118 M258,88 V118 M264,88 V118 M240,94 H270 M240,100 H270 M240,106 H270 M240,112 H270"/></g>
+                        <g class="fig-ink" stroke-width="1"><rect x="232" y="95" width="30" height="30" class="fig-surface-fill"/><path d="M238,95 V125 M244,95 V125 M250,95 V125 M256,95 V125 M232,101 H262 M232,107 H262 M232,113 H262 M232,119 H262"/></g>
+                        <g class="fig-ink" stroke-width="1"><rect x="224" y="102" width="30" height="30" class="fig-surface-fill"/><path d="M230,102 V132 M236,102 V132 M242,102 V132 M248,102 V132 M224,108 H254 M224,114 H254 M224,120 H254 M224,126 H254"/></g>
+                        <text x="252" y="148" text-anchor="middle" class="fig-note">dataset, frozen</text>
+                        <path d="M312,102 H338" class="fig-ink" stroke-width="1" fill="none" marker-end="url(#f1-arrow-ink)"/>
+                        <rect x="340" y="82" width="104" height="40" rx="3" class="fig-ink" stroke-width="1" fill="none"/>
+                        <g class="fig-ink" stroke-width="1"><rect x="346" y="92" width="20" height="20" class="fig-surface-fill"/><path d="M351,92 V112 M356,92 V112 M361,92 V112 M346,97 H366 M346,102 H366 M346,107 H366"/></g>
+                        <text x="404" y="98" text-anchor="middle" class="fig-label">Pixels<tspan x="404" dy="15">no labels</tspan></text>
+                        <path d="M444,102 H462" class="fig-ink" stroke-width="1" fill="none" marker-end="url(#f1-arrow-ink)"/>
+                        <text x="453" y="76" text-anchor="middle" class="fig-note">labelled by hand</text>
+                        <rect x="464" y="82" width="64" height="40" rx="3" class="fig-ink" stroke-width="1" fill="none"/>
+                        <text x="496" y="107" text-anchor="middle" class="fig-label">AI</text>
+                        <path d="M528,102 H554" class="fig-muted" stroke-width="1.25" fill="none" stroke-dasharray="2 3" marker-end="url(#f1-arrow-muted)"/>
+                        <!-- Deploy box: the AI acts in the world -->
+                        <rect x="556" y="40" width="156" height="124" rx="4" class="fig-ink" stroke-width="1" fill="none"/>
+                        <text x="568" y="58" class="fig-label">Deploy</text>
+                        <text x="568" y="74" class="fig-note">the AI acts in the world</text>
+                        <line x1="568" y1="148" x2="700" y2="148" class="fig-muted" stroke-width="1"/>
+                        <g class="fig-ink" stroke-width="1" fill="none">
+                            <rect x="596" y="124" width="56" height="16" rx="2"/>
+                            <path d="M608,124 L614,114 H638 L644,124"/>
+                            <circle cx="608" cy="142" r="5"/>
+                            <circle cx="640" cy="142" r="5"/>
+                            <rect x="622" y="108" width="8" height="6" rx="1"/>
+                        </g>
+                        <text x="624" y="136" text-anchor="middle" class="fig-note">AI</text>
+                        <path d="M630,111 L694,122 M630,111 L694,138" class="fig-accent" stroke-width="1" fill="none" stroke-dasharray="2 2"/>
+                        <g class="fig-ink" stroke-width="1" fill="none">
+                            <circle cx="694" cy="128" r="3"/>
+                            <path d="M694,131 V141 M694,141 L690,148 M694,141 L698,148 M689,135 L699,135"/>
+                        </g>
+                        <text x="694" y="117" text-anchor="middle" class="fig-note">event</text>
+                        <path d="M634,164 V180 H210 V166" class="fig-muted" stroke-width="1" fill="none" marker-end="url(#f1-arrow-muted)"/>
+                        <text x="430" y="196" text-anchor="middle" class="fig-note">new events mean another round of collection and labelling</text>
+
+                        <!-- ===== Row 2: CV 2.0 ===== -->
+                        <text x="0" y="286" class="fig-label fig-strong fig-accent-text">CV 2.0</text>
+                        <text x="0" y="302" class="fig-note">simulate,<tspan x="0" dy="14">act,</tspan><tspan x="0" dy="14">update</tspan></text>
+                        <!-- Light simulation box: the world lives inside the simulator -->
+                        <rect x="108" y="230" width="204" height="124" rx="4" class="fig-accent" stroke-width="1.25" fill="none"/>
+                        <text x="120" y="248" class="fig-label fig-accent-text">Light simulation</text>
+                        <text x="120" y="264" class="fig-note">the world inside the simulator</text>
+                        <line x1="120" y1="338" x2="300" y2="338" class="fig-muted" stroke-width="1"/>
+                        <circle cx="140" cy="288" r="5" class="fig-accent-fill"/>
+                        <text x="140" y="279" text-anchor="middle" class="fig-note">light</text>
+                        <rect x="162" y="318" width="34" height="20" class="fig-ink" stroke-width="1"/>
+                        <text x="179" y="333" text-anchor="middle" class="fig-note">world</text>
+                        <rect x="276" y="284" width="16" height="12" rx="1" class="fig-ink" stroke-width="1"/>
+                        <line x1="276" y1="290" x2="271" y2="290" class="fig-ink" stroke-width="1"/>
+                        <text x="284" y="310" text-anchor="middle" class="fig-note">sensor</text>
+                        <g class="fig-accent" stroke-width="1" fill="none" marker-end="url(#f1-arrow-accent-sm)">
+                            <path d="M144,292 L176,318 L272,290"/>
+                            <path d="M143,293 L240,338 L272,292"/>
+                            <path d="M146,287 L272,288"/>
+                        </g>
+                        <path d="M312,292 H338" class="fig-accent" stroke-width="1.25" fill="none" marker-end="url(#f1-arrow-accent)"/>
+                        <rect x="340" y="272" width="104" height="40" rx="3" class="fig-accent" stroke-width="1.25" fill="none"/>
+                        <g class="fig-accent" stroke-width="1"><rect x="346" y="282" width="20" height="20" class="fig-surface-fill"/><path d="M351,282 V302 M356,282 V302 M361,282 V302 M346,287 H366 M346,292 H366 M346,297 H366"/></g>
+                        <text x="404" y="288" text-anchor="middle" class="fig-label">Pixels<tspan x="404" dy="15">with labels</tspan></text>
+                        <path d="M444,292 H462" class="fig-accent" stroke-width="1.25" fill="none" marker-end="url(#f1-arrow-accent)"/>
+                        <text x="453" y="266" text-anchor="middle" class="fig-note">trains</text>
+                        <rect x="464" y="272" width="64" height="40" rx="3" class="fig-accent" stroke-width="1.25" fill="none"/>
+                        <text x="496" y="297" text-anchor="middle" class="fig-label">AI</text>
+                        <path d="M528,292 H554" class="fig-muted" stroke-width="1.25" fill="none" stroke-dasharray="2 3" marker-end="url(#f1-arrow-muted)"/>
+                        <!-- Deploy box: the AI acts in the world -->
+                        <rect x="556" y="230" width="156" height="124" rx="4" class="fig-ink" stroke-width="1" fill="none"/>
+                        <text x="568" y="248" class="fig-label">Deploy</text>
+                        <text x="568" y="264" class="fig-note">the AI acts in the world</text>
+                        <line x1="568" y1="338" x2="700" y2="338" class="fig-muted" stroke-width="1"/>
+                        <g class="fig-ink" stroke-width="1" fill="none">
+                            <rect x="596" y="314" width="56" height="16" rx="2"/>
+                            <path d="M608,314 L614,304 H638 L644,314"/>
+                            <circle cx="608" cy="332" r="5"/>
+                            <circle cx="640" cy="332" r="5"/>
+                            <rect x="622" y="298" width="8" height="6" rx="1"/>
+                        </g>
+                        <text x="624" y="326" text-anchor="middle" class="fig-note">AI</text>
+                        <path d="M630,301 L694,312 M630,301 L694,328" class="fig-accent" stroke-width="1" fill="none" stroke-dasharray="2 2"/>
+                        <g class="fig-ink" stroke-width="1" fill="none">
+                            <circle cx="694" cy="318" r="3"/>
+                            <path d="M694,321 V331 M694,331 L690,338 M694,331 L698,338 M689,325 L699,325"/>
+                        </g>
+                        <text x="694" y="307" text-anchor="middle" class="fig-note">event</text>
+                        <path d="M634,354 V370 H210 V356" class="fig-muted" stroke-width="1" fill="none" marker-end="url(#f1-arrow-muted)"/>
+                        <text x="430" y="386" text-anchor="middle" class="fig-note">events in the field update the world inside the simulation</text>
+                    </svg>
+                    <figcaption>CV 1.0 collects frames of pixels from a camera into a dataset, pays humans to label them, and freezes the result. When the deployed AI meets something new, the answer is another round of collecting and labelling. In CV 2.0 the world lives inside a light simulation: rays leave a source, bounce off the scene, and land on a simulated sensor, so the pixels arrive with their labels attached. Those pixels train the AI, the AI is deployed to act in the real world, and the events it meets there update the world inside the simulation.</figcaption>
+                </figure>
+
+                <h2>Light as a First-Class Citizen</h2>
+                <p>The insight of Computer Vision 2.0 is treating light as the fundamental unit of visual understanding. Instead of learning patterns in pixels, we model how light interacts with the environment. Three developments made this viable:</p>
+
+                <ol>
+                    <li>GPU compute costs have dropped below $0.50 per hour for high-end cards</li>
+                    <li>Physics engines can now simulate complex light interactions in real-time</li>
+                    <li>Neural networks can efficiently learn from simulated data</li>
+                </ol>
+
+                <p>This solves problems pixel-based systems cannot. A traditional system needs thousands of images to learn how reflections work on different surfaces. A physics-based system understands reflection from first principles and needs only the material properties and the lighting.</p>
+
+                <h2>Computation over Memory: From Datasets to Simulations</h2>
+                <p>Treating light as a first-class citizen means simulating it and how it interacts with the world. Pixels were the simulation we had before. With access to individual photons, you can simulate whatever you want. The physics of light-matter interaction is well known, and for most scenes the marginal cost per ray is near zero. So instead of collecting data with a specific sensor, we simulate it with physics engines, and more realistically still with AI-based physics engines.</p>
+
+                <blockquote>
+                    The transition to simulation is the largest shift in computer vision since deep learning. It was not possible a decade ago: the simulation-to-reality gap was too large.
+                </blockquote>
+
+                <p>CV 2.0 integrates simulation into the stack itself, rather than using it as a tool to bolster performance in the real world. Instead of storing terabytes of real-world data, we generate scenarios with a simulation engine.</p>
+
+                <p>The bitter lesson echoes this change: move from datasets that humans tediously collect, and scenarios that humans think up, to scenarios generated by computation. An accurate simulation is a general-purpose method for dataset collection, because it improves as compute increases. AI still learns from data; the data is now unbounded.</p>
+
+                <figure class="tufte-figure" id="fig-long-tail">
+                    <p class="fig-title"><span class="fig-num">Figure 2.</span> Computation over memory: filling the long tail</p>
+                    <svg viewBox="0 0 720 250" role="img" aria-labelledby="fig2-title">
+                        <title id="fig2-title">A long-tail curve of scenarios: collected datasets cover the frequent head; simulation generates the rare tail.</title>
+                        <path d="M60,200 60,50.0 L68,55.5 L76,60.8 L84,65.9 L92,70.9 L100,75.6 L108,80.2 L116,84.6 L124,88.8 L132,92.9 L140,96.8 L148,100.6 L156,104.3 L164,107.8 L172,111.2 L180,114.5 L188,117.6 L196,120.6 L204,123.5 L212,126.4 L220,129.1 L220,129.1 L220,200 Z" class="fig-muted-fill"/>
+                        <path d="M220,200 L220,129.1 220,129.1 L228,131.7 L236,134.2 L244,136.6 L252,138.9 L260,141.2 L268,143.3 L276,145.4 L284,147.4 L292,149.4 L300,151.2 L308,153.0 L316,154.7 L324,156.4 L332,158.0 L340,159.5 L348,161.0 L356,162.5 L364,163.8 L372,165.2 L380,166.5 L388,167.7 L396,168.9 L404,170.0 L412,171.1 L420,172.2 L428,173.2 L436,174.2 L444,175.1 L452,176.0 L460,176.9 L468,177.8 L476,178.6 L484,179.4 L492,180.1 L500,180.9 L508,181.6 L516,182.2 L524,182.9 L532,183.5 L540,184.1 L548,184.7 L556,185.3 L564,185.8 L572,186.3 L580,186.8 L588,187.3 L596,187.8 L604,188.2 L612,188.7 L620,189.1 L628,189.5 L636,189.9 L644,190.2 L652,190.6 L660,191.0 L668,191.3 L676,191.6 L684,191.9 L692,192.2 L700,192.5 L700,200 Z" class="fig-accent-fill-soft"/>
+                        <path d="M60,50.0 L68,55.5 L76,60.8 L84,65.9 L92,70.9 L100,75.6 L108,80.2 L116,84.6 L124,88.8 L132,92.9 L140,96.8 L148,100.6 L156,104.3 L164,107.8 L172,111.2 L180,114.5 L188,117.6 L196,120.6 L204,123.5 L212,126.4 L220,129.1 L228,131.7 L236,134.2 L244,136.6 L252,138.9 L260,141.2 L268,143.3 L276,145.4 L284,147.4 L292,149.4 L300,151.2 L308,153.0 L316,154.7 L324,156.4 L332,158.0 L340,159.5 L348,161.0 L356,162.5 L364,163.8 L372,165.2 L380,166.5 L388,167.7 L396,168.9 L404,170.0 L412,171.1 L420,172.2 L428,173.2 L436,174.2 L444,175.1 L452,176.0 L460,176.9 L468,177.8 L476,178.6 L484,179.4 L492,180.1 L500,180.9 L508,181.6 L516,182.2 L524,182.9 L532,183.5 L540,184.1 L548,184.7 L556,185.3 L564,185.8 L572,186.3 L580,186.8 L588,187.3 L596,187.8 L604,188.2 L612,188.7 L620,189.1 L628,189.5 L636,189.9 L644,190.2 L652,190.6 L660,191.0 L668,191.3 L676,191.6 L684,191.9 L692,192.2 L700,192.5" class="fig-ink" stroke-width="1.5" fill="none"/>
+                        <line x1="60" y1="200" x2="700" y2="200" class="fig-muted" stroke-width="1"/>
+                        <line x1="220" y1="200" x2="220" y2="129.1" class="fig-muted" stroke-width="1"/>
+                        <text x="62" y="42" class="fig-note">how often it happens</text>
+                        <text x="700" y="218" text-anchor="end" class="fig-note">scenarios, ordered from common to rare &#8594;</text>
+                        <text x="140" y="236" text-anchor="middle" class="fig-note">the head: collected</text>
+                        <text x="460" y="236" text-anchor="middle" class="fig-note fig-accent-text">the tail: simulated</text>
+                        <g>
+                            <circle cx="310" cy="153.4" r="4.5" class="fig-dot"/>
+                            <circle cx="470" cy="178.0" r="4.5" class="fig-dot"/>
+                            <circle cx="640" cy="190.1" r="4.5" class="fig-dot"/>
+                        </g>
+                        <text x="310" y="140.4" text-anchor="middle" class="fig-label">rain at dusk</text>
+                        <text x="470" y="165.0" text-anchor="middle" class="fig-label">unprotected left turn in fog</text>
+                        <text x="640" y="177.1" text-anchor="middle" class="fig-label">once in years</text>
+                    </svg>
+                    <figcaption>Collected datasets are dense where the world is repetitive and thin where it is not. A simulation engine fills the tail on demand, and its coverage grows with compute rather than with the fleet.</figcaption>
+                </figure>
+
+                <h3>Quantifiable advantages</h3>
+                <ol>
+                    <li>Storage: a trillion-parameter vision model can generate more unique scenarios than have been collected in history. This is a simplification, but the point stands: we can generate more data than we can collect, and all we have to do is ask.</li>
+                    <li>Edge cases: simulation generates millions of rare scenarios that real-world collection would see once in years</li>
+                    <li>Cost: a million synthetic images of rain cost about $1,000; collecting and annotating real ones costs $10,000 or more</li>
+                </ol>
+
+                <h2>Practical Implementation</h2>
+                <p>CV 2.0 changes how teams are built. The traditional team, split across data collection, sensing, annotation, and ML, is replaced by a leaner, more specialized team at 30 to 40% of the original size.</p>
+
+                <h3>The New Team Structure</h3>
+                <p>Instead of large data collection and annotation teams, a CV 2.0 organization is built around three groups:</p>
+
+                <figure class="tufte-figure" id="fig-team-structure">
+                    <p class="fig-title"><span class="fig-num">Figure 3.</span> The new org structure for CV robotics</p>
+                    <svg viewBox="0 0 720 300" role="img" aria-labelledby="fig3-title">
+                        <title id="fig3-title">The CV 2.0 team loop: simulation engineering feeds ML engineering, which ships to the real world; operations finds the missing scenarios and sends them back to event simulation.</title>
+                        <defs>
+                            <marker id="f3-arrow-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="fig-accent-fill"/></marker>
+                            <marker id="f3-arrow-muted" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="fig-muted-fill"/></marker>
+                        </defs>
+                        <!-- Simulation Engineering group -->
+                        <rect x="20" y="40" width="250" height="220" rx="4" class="fig-accent" stroke-width="1.25" fill="none"/>
+                        <text x="34" y="62" class="fig-label fig-strong fig-accent-text">Simulation Engineering</text>
+                        <g class="fig-ink" stroke-width="1">
+                            <rect x="40" y="82" width="210" height="44" rx="3"/>
+                            <rect x="40" y="140" width="210" height="44" rx="3"/>
+                            <rect x="40" y="198" width="210" height="44" rx="3"/>
+                        </g>
+                        <text x="52" y="100" class="fig-label">Physics accuracy</text>
+                        <text x="52" y="116" class="fig-note">light transport and rendering</text>
+                        <text x="52" y="158" class="fig-label">Event simulation</text>
+                        <text x="52" y="174" class="fig-note">scenarios and edge cases</text>
+                        <text x="52" y="216" class="fig-label">Data engineering</text>
+                        <text x="52" y="232" class="fig-note">validates against real data</text>
+                        <!-- ML Engineering -->
+                        <rect x="362" y="82" width="140" height="44" rx="3" class="fig-ink" stroke-width="1" fill="none"/>
+                        <text x="432" y="100" text-anchor="middle" class="fig-label">ML Engineering</text>
+                        <text x="432" y="116" text-anchor="middle" class="fig-note">sim-to-real transfer</text>
+                        <!-- Real world -->
+                        <rect x="572" y="82" width="128" height="44" rx="3" class="fig-ink" stroke-width="1" fill="none"/>
+                        <text x="636" y="100" text-anchor="middle" class="fig-label">Real world</text>
+                        <text x="636" y="116" text-anchor="middle" class="fig-note">deployed system</text>
+                        <!-- Operations -->
+                        <rect x="362" y="198" width="140" height="44" rx="3" class="fig-ink" stroke-width="1" fill="none"/>
+                        <text x="432" y="216" text-anchor="middle" class="fig-label">Operations</text>
+                        <text x="432" y="232" text-anchor="middle" class="fig-note">finds what is missing</text>
+                        <!-- arrows -->
+                        <path d="M270,104 H360" class="fig-accent" stroke-width="1.25" fill="none" marker-end="url(#f3-arrow-accent)"/>
+                        <text x="315" y="96" text-anchor="middle" class="fig-note fig-accent-text">simulated data</text>
+                        <path d="M502,104 H570" class="fig-muted" stroke-width="1" fill="none" marker-end="url(#f3-arrow-muted)"/>
+                        <text x="536" y="96" text-anchor="middle" class="fig-note">models</text>
+                        <path d="M636,126 V220 H504" class="fig-muted" stroke-width="1" fill="none" marker-end="url(#f3-arrow-muted)"/>
+                        <text x="584" y="236" text-anchor="middle" class="fig-note">gaps observed in the field</text>
+                        <path d="M362,220 H310 V162 H252" class="fig-muted" stroke-width="1" fill="none" marker-end="url(#f3-arrow-muted)"/>
+                        <text x="316" y="190" class="fig-note">scenario requests</text>
+                    </svg>
+                    <figcaption>The team is a loop. Simulation engineering replaces data collection and annotation; operations is a small team whose job is to notice what the simulator does not yet contain and send it back to event simulation.</figcaption>
+                </figure>
+
+                <h4>1. Simulation Engineering</h4>
+                <p>This team has three units:</p>
+                <ul>
+                    <li><strong>Physics accuracy:</strong> n-th order light simulation, rendering models, and computational efficiency. This is the team building the simulation engine: physically based, but increasingly ML-driven.</li>
+                    <li><strong>Event simulation:</strong> test scenarios and edge cases, plus the validation frameworks around them. This is high-level work (an unprotected left turn in fog at Harvard Square) rather than light-matter interaction (how fog scatters light), so LLMs can drive much of it.</li>
+                    <li><strong>Data engineering:</strong> validates the simulator against real-world data, owns its quality metrics, and is the interface to ML engineering.</li>
+                </ul>
+
+                <h4>2. Operations Team</h4>
+                <p>A small team that identifies the real-world scenarios the simulator is missing. It replaces the data collection team: someone still has to go out and find the event the simulator does not yet contain.</p>
+
+                <h4>3. ML Engineering</h4>
+                <p>These engineers work across simulation and the real world, and own the transfer between the two. This group looks most like today's CV teams. Its focus is accurate real-time ML systems.</p>
+
+                <h2>Future Implications</h2>
+                <p>CV 2.0 is not an efficiency improvement. It is a different way to build visual systems. Organizations that go simulation-first will build more reliable systems at a fraction of today's cost and time. The question is not whether this happens, but who leads it.</p>
+
+                <p>If you build computer vision systems today, start integrating simulation into how you build your stack. The difference is launching in 2 months instead of 12.</p>
+            </div>
+        </article>
+    </div>
+</body>
+</html>
