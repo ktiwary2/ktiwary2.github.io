@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>News – Kushagra Tiwary</title>
+    <!-- SEO -->
+    <meta name="description" content="News, talks, media coverage, and awards for Kushagra Tiwary, PhD student at MIT working on AI, computer vision, and the evolution of vision.">
+    <meta name="author" content="Kushagra Tiwary">
+    <link rel="canonical" href="https://www.kushagratiwary.com/news.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Kushagra Tiwary">
+    <meta property="og:title" content="News – Kushagra Tiwary">
+    <meta property="og:description" content="News, talks, media coverage, and awards for Kushagra Tiwary, PhD student at MIT working on AI, computer vision, and the evolution of vision.">
+    <meta property="og:url" content="https://www.kushagratiwary.com/news.html">
+    <meta property="og:image" content="https://www.kushagratiwary.com/images/kush.jpeg">
+    <meta property="og:image:alt" content="Kushagra Tiwary">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@ktiwarylab">
+    <meta name="twitter:creator" content="@ktiwarylab">
+    <meta name="twitter:title" content="News – Kushagra Tiwary">
+    <meta name="twitter:description" content="News, talks, media coverage, and awards for Kushagra Tiwary, PhD student at MIT working on AI, computer vision, and the evolution of vision.">
+    <meta name="twitter:image" content="https://www.kushagratiwary.com/images/kush.jpeg">
+    <!-- End SEO -->
+  <link rel="stylesheet" href="styles.css?v=20260929a">
+  <style>
+    .tag {
+      display: inline-block;
+      margin: 0 0 0 0.45em;
+      font-size: 0.72em;
+      font-weight: normal;
+      letter-spacing: 0.03em;
+      color: var(--muted-color);
+      white-space: nowrap;
+    }
+    .tag::before { content: '\00b7\00a0'; }
+
+    .filter-menu {
+      margin: 0 0 1.1em;
+      font-size: 0.82em;
+      line-height: 1.9;
+      letter-spacing: 0.03em;
+    }
+
+    .filter-menu span {
+      display: inline-block;
+      cursor: pointer;
+      color: var(--muted-color);
+      text-underline-offset: 0.22em;
+      text-decoration-thickness: 1px;
+    }
+
+    .filter-menu span:not(:last-child)::after {
+      content: '\00b7';
+      display: inline-block;
+      margin: 0 0.6em;
+      color: var(--muted-color);
+    }
+
+    .filter-menu span:hover { color: var(--primary-color); }
+
+    .filter-menu span.is-active {
+      color: var(--primary-color);
+      text-decoration: underline;
+    }
+
+    .news-item {
+      margin: 0 0 0.75em;
+      line-height: 1.5;
+      padding-left: 8.2em;
+      text-indent: -8.2em;
+    }
+
+    .news-item .tag,
+    .news-date { text-indent: 0; }
+
+    .news-date {
+      display: inline-block;
+      min-width: 8.2em;
+      color: var(--muted-color);
+      font-style: italic;
+    }
+
+    .news-container {
+      max-width: 680px;
+    }
+
+  </style>
+  <script>
+    (function () {
+      const resolveTheme = () => {
+        const savedTheme = localStorage.getItem('preferred-theme');
+        if (savedTheme) {
+          return savedTheme;
+        }
+        return 'dark';
+      };
+
+      const applyTheme = (theme) => {
+        const body = document.body;
+        if (!body) {
+          return;
+        }
+        body.classList.toggle('dark-mode', theme === 'dark');
+      };
+
+      const setInitialTheme = () => applyTheme(resolveTheme());
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setInitialTheme, { once: true });
+      } else {
+        setInitialTheme();
+      }
+
+      window.addEventListener('message', (event) => {
+        if (event.data && event.data.type === 'theme-change') {
+          applyTheme(event.data.theme);
+        }
+      });
+
+      window.addEventListener('storage', (event) => {
+        if (event.key === 'preferred-theme') {
+          const nextTheme = event.newValue ? event.newValue : resolveTheme();
+          applyTheme(nextTheme);
+        }
+      });
+    })();
+  </script>
+  <script src="evolving_cursor.js?v=20260921b" defer></script>
+</head>
+<body>
+  <div class="news-container">
+    <h1 class="visually-hidden">News – Kushagra Tiwary</h1>
+
+    <div class="filter-menu">
+      <span class="filter-all" data-filter="all" onclick="filterNews('all')">All</span>
+      <span class="filter-talk" data-filter="talk-tag" onclick="filterNews('talk-tag')">Talks</span>
+      <span class="filter-media" data-filter="media-tag" onclick="filterNews('media-tag')">Media</span>
+      <span class="filter-paper" data-filter="paper-tag" onclick="filterNews('paper-tag')">Papers</span>
+      <span class="filter-award" data-filter="award-tag" onclick="filterNews('award-tag')">Awards</span>
+      <span class="filter-workshop" data-filter="workshop-tag" onclick="filterNews('workshop-tag')">Workshops</span>
+      <span class="filter-recent" data-filter="recent-news" onclick="filterNews('recent-news')">Recent</span>
+    </div>
+
+
+    <div class="news-archive">
+
+      <div class="news-item recent-news">
+        <div class="news-name"><span class="news-date">August 2026</span>Teaching Assistant at the <strong>Brains, Minds and Machines Summer Course</strong> at the <strong>Marine Biological Laboratory (MBL)</strong> in Woods Hole. [<a href="https://bmm.mit.edu/" target="_blank">BMM</a>]
+          <span class="tag workshop-tag">Workshop</span>
+        </div>
+      </div>
+
+      <div class="news-item recent-news">
+        <div class="news-name"><span class="news-date">July 2026</span><strong>Paper at the ICML 2026 AI for Science Workshop</strong>: "Agent Systems for Academic Research Automation." [<a href="https://openreview.net/forum?id=iAfYyiCzev" target="_blank">Paper</a>]
+          <span class="tag paper-tag">Paper</span>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-name"><span class="news-date">July 2026</span>Invited talks at <strong>Mitsubishi</strong> and <strong>Panasonic</strong> in Japan.
+          <span class="tag talk-tag">Talk</span>
+        </div>
+      </div>
+
+      <div class="news-item recent-news">
+        <div class="news-name"><span class="news-date">June 2026</span>Started as a research intern at the <strong>Frontier Intelligence Group at <a href="https://sakana.ai" target="_blank">Sakana AI</a></strong>.
+        </div>
+      </div>
+
+      <div class="news-item recent-news">
+        <div class="news-name"><span class="news-date">December 2025</span><strong>Paper published in Science Advances</strong>: "What if Eye...? Computationally Recreating Vision Evolution." [<a href="https://www.science.org/doi/epdf/10.1126/sciadv.ady2888" target="_blank">Paper</a>, <a href="https://news.mit.edu/2025/scientific-sandbox-lets-researchers-explore-evolution-vision-systems-1217" target="_blank">MIT News</a>, <a href="https://www.science.org/content/article/why-have-so-many-different-eyes-evolved-gamelike-simulation-could-provide-answers" target="_blank">Science News</a>, <a href="https://eyes.mit.edu" target="_blank">Project</a>, <a href="https://news.ycombinator.com/item?id=43043063" target="_blank">Hacker News</a>]
+          <span class="tag paper-tag">Paper</span>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-name"><span class="news-date">December 2025</span>Invited talk at the <strong>Kempner Institute, Harvard</strong>.
+          <span class="tag talk-tag">Talk</span>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-name"><span class="news-date">June 2025</span>Invited talk at the <strong>Redwood Center for Theoretical Neuroscience, UC Berkeley</strong>. [<a href="https://redwood.berkeley.edu/seminars/kushagra-tiwary-june-2025/" target="_blank">Seminar page</a>]
+          <span class="tag talk-tag">Talk</span>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-name"><span class="news-date">June 2025</span>Invited talk at the <strong>Caltech Vision Seminar</strong>.
+          <span class="tag talk-tag">Talk</span>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-name"><span class="news-date">June 2025</span>Attended the <strong>Brains, Minds and Machines Summer Course</strong> in Woods Hole. [<a href="https://bmm.mit.edu/2025-2/" target="_blank">BMM</a>]
+          <span class="tag workshop-tag">Workshop</span>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-name"><span class="news-date">April 2025</span>Invited talk at <strong>MIT Imagination in Action</strong>: "How can AI aid scientific discovery?" [<a href="https://www.youtube.com/watch?v=sUkcgYKBTr8" target="_blank">Video</a>]
+          <span class="tag talk-tag">Talk</span>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-name"><span class="news-date">March 2025</span>Invited talk at <strong>Harvard Medical School</strong>.
+          <span class="tag talk-tag">Talk</span>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-name"><span class="news-date">February 2025</span>Invited talk at the <strong>MIT CSAIL Vision Seminar</strong>: "What if Eye...? Computationally Recreating Vision Evolution."
+          <span class="tag talk-tag">Talk</span>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-name"><span class="news-date">January 2025</span>Co-organized the <strong>Accelerating Discovery</strong> workshop at MIT. [<a href="https://discovery.media.mit.edu/" target="_blank">Website</a>]
+          <span class="tag workshop-tag">Workshop</span>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-name"><span class="news-date">December 2024</span>Our data provenance work was featured in <strong>MIT Technology Review</strong>. [<a href="https://www.technologyreview.com/2024/12/18/1108796/this-is-where-the-data-to-build-ai-comes-from/" target="_blank">Article</a>]
+          <span class="tag media-tag">Media</span>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-name"><span class="news-date">December 2024</span>Interviewed by <strong>The Globe and Mail</strong> about AI training data. [<a href="https://www.theglobeandmail.com/business/article-ai-generated-video-has-come-a-long-way-can-you-spot-the-difference/" target="_blank">Article</a>]
+          <span class="tag media-tag">Media</span>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-name"><span class="news-date">November 2024</span>Oral talk on the eye evolution paper at the <strong>New England Computer Vision Workshop</strong>. [<a href="https://necv2024.github.io/" target="_blank">Website</a>]
+          <span class="tag talk-tag">Talk</span>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-name"><span class="news-date">September 2024</span><strong>TEDx Boston</strong> talk: "Can AI Recreate 500 Million Years of Vision Evolution?" [<a href="https://www.youtube.com/watch?v=OuPwGkzh6nM" target="_blank">Video</a>]
+          <span class="tag talk-tag">Talk</span>
+          <span class="tag media-tag">Media</span>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-name"><span class="news-date">September 2024</span>Co-organized the <strong>Neural Fields Beyond Conventional Cameras</strong> workshop at ECCV 2024. [<a href="https://neural-fields-beyond-cams.github.io/" target="_blank">Website</a>]
+          <span class="tag workshop-tag">Workshop</span>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-name"><span class="news-date">August 2024</span>"Consent in Crisis" was covered by <strong>The New York Times, 404 Media, Vox, and Yahoo! Finance</strong>. [<a href="https://arxiv.org/pdf/2407.14933" target="_blank">Paper</a>, <a href="https://www.nytimes.com/2024/07/19/technology/ai-data-restrictions.html" target="_blank">NYT</a>, <a href="https://www.404media.co/the-backlash-against-ai-scraping-is-real-and-measurable/" target="_blank">404 Media</a>, <a href="https://www.vox.com/future-perfect/364384/its-practically-impossible-to-run-a-big-ai-company-ethically" target="_blank">Vox</a>, <a href="https://finance.yahoo.com/video/data-train-ai-models-becoming-220005477.html" target="_blank">Yahoo! Finance</a>]
+          <span class="tag media-tag">Media</span>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-name"><span class="news-date">June 2024</span><strong>DecentNeRFs</strong> accepted at ECCV 2024. [<a href="https://arxiv.org/abs/2403.13199" target="_blank">Paper</a>]
+          <span class="tag paper-tag">Paper</span>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-name"><span class="news-date">April 2024</span>Panelist at <strong>MIT Imagination in Action</strong>: "Frontiers of AI Research from Current MIT PhDs." [<a href="https://www.youtube.com/watch?v=EyHIzwwI9Uc" target="_blank">Video</a>]
+          <span class="tag talk-tag">Talk</span>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-name"><span class="news-date">February 2024</span>My UROP student <strong>Bhavya Agrawalla</strong> was admitted to the CMU PhD program. [<a href="https://bhavyaagrawalla.github.io/" target="_blank">Website</a>]
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-name"><span class="news-date">January 2024</span>Awarded an <strong>MIT Generative AI seed grant</strong> for "Artificial Cambrian Intelligence." [<a href="https://news.mit.edu/2024/mit-scholars-awarded-second-round-seed-grants-generative-ai-0328" target="_blank">MIT News</a>]
+          <span class="tag award-tag">Award</span>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-name"><span class="news-date">September 2023</span>Invited talk at the <strong>MIT CSAIL Graphics Seminar</strong>: "Neural Rendering and Secondary Cues: Learning Hidden Neural Radiance Fields using Reflections and Shadows."
+          <span class="tag talk-tag">Talk</span>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-name"><span class="news-date">August 2023</span>Presented our 3D reconstruction work at the <strong>Hyundai Vision Conference</strong> in South Korea.
+          <span class="tag talk-tag">Talk</span>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-name"><span class="news-date">July 2023</span>Awarded the <strong>Qualcomm Innovation Fellowship</strong>. [<a href="https://www.eecs.mit.edu/four-mit-students-selected-for-qualcomm-innovation-fellowship-2023/" target="_blank">EECS News</a>, <a href="https://www.media.mit.edu/posts/two-media-lab-students-selected-for-qualcomm-innovation-fellowship-2023/" target="_blank">MIT Media Lab News</a>, <a href="https://www.qualcomm.com/research/university-relations/innovation-fellowship/2023-north-america" target="_blank">QIF list</a>]
+          <span class="tag award-tag">Award</span>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-name"><span class="news-date">July 2023</span><strong>DISeR</strong> (Designing Imaging Systems with Reinforcement Learning) accepted at ICCV 2023. [<a href="https://tzofi.github.io/diser/" target="_blank">Project</a>]
+          <span class="tag paper-tag">Paper</span>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-name"><span class="news-date">May 2023</span>Graduated from MIT with an <strong>S.M.</strong>
+        </div>
+      </div>
+
+      <div class="news-item">
+        <div class="news-name"><span class="news-date">May 2023</span><strong>ORCa</strong>, which turns shiny objects into cameras, was featured on the mit.edu homepage and in MIT News. [<a href="https://ktiwary2.github.io/objectsascam/" target="_blank">Project</a>, <a href="https://news.mit.edu/2023/using-reflections-shiny-objects-camera-0510" target="_blank">MIT News</a>, <a href="https://web.mit.edu/archive/spotlight/reflection-based-camera/" target="_blank">MIT Spotlight</a>]
+          <span class="tag media-tag">Media</span>
+        </div>
+      </div>
+
+    </div>
+
+    <script>
+        function filterNews(tag) {
+          setActiveFilter(tag);
+          const items = document.querySelectorAll('.news-item');
+          items.forEach(item => {
+            const tags = item.querySelectorAll('.tag');
+            const hasTag = item.classList.contains(tag) ||
+                           [...tags].some(t => t.classList.contains(tag));
+            item.style.display = (tag === 'all' || hasTag) ? 'block' : 'none';
+          });
+          requestAnimationFrame(notifyParentHeight);
+        }
+
+        function setActiveFilter(tag) {
+          document.querySelectorAll('.filter-menu span').forEach(span => {
+            span.classList.toggle('is-active', span.dataset.filter === tag);
+          });
+        }
+      
+        function notifyParentHeight() {
+          const container = document.querySelector('.news-container');
+          const height = container ? container.offsetHeight : document.documentElement.scrollHeight;
+          window.parent.postMessage({ type: 'news-resize', height: height }, '*');
+        }
+
+        // Show recent by default
+        document.addEventListener("DOMContentLoaded", () => {
+          filterNews('recent-news');
+          notifyParentHeight();
+        });
+
+        window.addEventListener('load', notifyParentHeight);
+
+        window.addEventListener('message', (e) => {
+          if (e.data && e.data.type === 'recalc-height') {
+            requestAnimationFrame(notifyParentHeight);
+          }
+        });
+      </script>
+      
+
+</body>
+</html>
